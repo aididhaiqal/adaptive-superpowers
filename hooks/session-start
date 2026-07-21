@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PLUGIN_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+ROUTER="$PLUGIN_ROOT/skills/using-superpowers/SKILL.md"
+
+if [[ ! -f "$ROUTER" ]]; then
+  echo '{"error":"adaptive-superpowers router is missing"}' >&2
+  exit 1
+fi
+
+escape_for_json() {
+  local value="$1"
+  value="${value//\\/\\\\}"
+  value="${value//\"/\\\"}"
+  value="${value//$'\n'/\\n}"
+  value="${value//$'\r'/\\r}"
+  value="${value//$'\t'/\\t}"
+  printf '%s' "$value"
+}
+
+router_content="$(escape_for_json "$(<"$ROUTER")")"
+context="<ADAPTIVE_SUPERPOWERS>\\n${router_content}\\n</ADAPTIVE_SUPERPOWERS>"
+printf '{"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"%s"}}\n' "$context"

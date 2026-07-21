@@ -1,0 +1,15 @@
+{
+  "name": "adaptive-superpowers-dev",
+  "description": "Local development marketplace for Adaptive Superpowers.",
+  "owner": {
+    "name": "Adaptive Superpowers contributors"
+  },
+  "plugins": [
+    {
+      "name": "adaptive-superpowers",
+      "description": "Risk-adaptive engineering workflows for capable coding models.",
+      "version": "0.1.0",
+      "source": "./"
+    }
+  ]
+}
