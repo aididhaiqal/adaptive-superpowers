@@ -16,6 +16,8 @@ A plan's existence or approval to plan does not authorize implementation. Withou
 
 Treat the plan as an outcome contract, not a transcript. Adapt mechanics when repository reality differs while preserving scope and acceptance. Update a durable plan before continuing only when a material requirement, design, or verification strategy changes.
 
+Do not narrow conversation-level acceptance to match an easier implementation. Stop and obtain explicit approval before deferring or substituting a core outcome; update the governing plan only after that decision.
+
 Later relevant mutations invalidate only affected evidence; rerun those checks before claiming completion.
 
 Resolve recoverable failures with safe diagnostics and alternatives. Ask the user only when missing authority, an architectural choice, or ambiguous requirements would change the result.

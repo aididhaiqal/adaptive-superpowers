@@ -41,7 +41,7 @@ if grep -Eq '^max_(threads|depth) = ' "$ROOT/README.md"; then
   exit 1
 fi
 grep -Fq '```mermaid' "$ROOT/README.md"
-grep -Fq '150-word adaptive gate' "$ROOT/README.md"
+grep -Fq '200-word adaptive gate' "$ROOT/README.md"
 
 install_line="$(grep -n '^## Install$' "$ROOT/README.md" | cut -d: -f1)"
 why_line="$(grep -n '^## Why$' "$ROOT/README.md" | cut -d: -f1)"

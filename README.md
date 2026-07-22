@@ -152,11 +152,11 @@ Precise work stays direct; consequential work receives proportional planning and
 
 ## How it routes
 
-A 150-word gate is always loaded and classifies the request before implementation. Read-only work remains read-only. A precise, low-risk change can take a fast path, while uncertainty or risk loads the full router.
+A 200-word gate is always loaded and classifies the request before implementation. Read-only work remains read-only. A precise, low-risk change can take a fast path, while uncertainty or risk loads the full router. The gate also prevents bounded workers from restarting brainstorming or silently narrowing accepted outcomes.
 
 ```mermaid
 flowchart LR
-    R[User request] --> G{150-word adaptive gate}
+    R[User request] --> G{200-word adaptive gate}
     G -->|Inspect or explain| RO[Read-only]
     G -->|Precise and low-risk| FP[Fast path]
     G -->|Ambiguous, broad, or risky| FR[Full router]

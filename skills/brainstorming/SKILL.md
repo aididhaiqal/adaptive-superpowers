@@ -1,19 +1,28 @@
 ---
 name: brainstorming
-description: "Resolve ambiguous product or system work before implementation. Use when materially different interpretations would change scope, architecture, or consequential outcomes; skip precise tasks."
+description: "Resolve ambiguous work before implementation when interpretations materially change scope, architecture, or consequential outcomes; skip precise tasks."
 ---
 
 # Brainstorming
 
-Skip precise tasks, approved specifications, mechanical changes, and questions answerable from repository context.
+Scale depth to decision consequence. Skip precise tasks, approved specifications, mechanical changes, and repository-answerable questions. Dispatched agents follow bounded briefs and return material ambiguity to the parent; they do not restart brainstorming.
 
-1. Inspect only the relevant instructions, files, and current behavior.
-2. State the goal, constraints, success criteria, and safe assumptions.
-3. Ask one blocking question only when the answer materially changes the result.
-4. Recommend one approach first; include only genuinely viable, materially different alternatives.
-5. Describe the smallest useful design: ownership, interfaces, data flow, failure behavior, and verification where relevant.
-6. Request approval only for a material scope, architecture, irreversible, or externally visible decision.
+1. Inspect instructions, files, and behavior.
+2. State the goal, constraints, acceptance, and safe assumptions.
+3. Ask one focused question as soon as its answer materially changes the result; otherwise state a safe assumption.
+4. Recommend one approach; include viable, different alternatives.
+5. Describe the smallest useful design: ownership, interfaces, data flow, failure behavior, and verification.
+6. Reconcile the design with all core outcomes promised in the conversation. Any exclusion or deferral that weakens a core outcome requires explicit approval.
+
+For complex work, close scope:
+
+- **Must deliver**
+- **Explicitly deferred**
+- **Open decisions**
+- **Acceptance**
+
+Material adjacent suggestions require evidence of improved viability, safety, or value; label them optional and non-authorizing.
 
 Decompose independent subsystems only when it clarifies ownership. Pause for missing authority or consequential choices.
 
-For later implementation, pass forward the chosen approach, assumptions, and acceptance. Select durable planning only if its description independently matches the work.
+Stop brainstorming once consequential decisions and acceptance are clear. Pass the chosen approach, assumptions, approved deferrals, and acceptance to implementation. Use durable planning only when independently triggered.

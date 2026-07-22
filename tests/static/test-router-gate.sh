@@ -52,8 +52,8 @@ if grep -Fq 'repeat batch 3' "$GATE"; then
 fi
 
 gate_words="$(wc -w < "$GATE" | tr -d ' ')"
-if (( gate_words != 150 )); then
-  echo "router gate has $gate_words words (expected exactly 150)" >&2
+if (( gate_words != 200 )); then
+  echo "router gate has $gate_words words (expected exactly 200)" >&2
   exit 1
 fi
 require_text "$ROOT/README.md" "A ${gate_words}-word gate is always loaded"

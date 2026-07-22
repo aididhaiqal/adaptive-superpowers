@@ -9,6 +9,12 @@ Choose the highest tier. Escalate uncertainty only when it could change behavior
 
 For direct completion reviews, supported Critical and Important findings block completion; recommendations remain optional and authorize no work. Require evidence, expected value, and relevant cost or trade-off; do not invent recommendations.
 
+## Dynamic planning
+
+Use the smallest sufficient planning surface. Precise work stays in the direct phases. Standard work uses brief inline outcomes and acceptance; use native session tracking when several dependent outcomes need coordination. Create a durable plan only when `writing-plans` independently matches. Escalate as uncertainty, dependency, risk, or interruption exposure grows. Do not invent microtasks, repeat acceptance at every update, or bind delegation to planning depth.
+
+The parent owns brainstorming, architecture, scope, and user decisions. A dispatched worker treats its bounded brief as approved, returns material ambiguity to the parent, and still tests and verifies its assignment. Explorers and reviewers stay read-only and do not broaden scope or delegate further.
+
 ## Test retention
 
 Coverage is a completion requirement, not a universal TDD trigger. When a runnable automated test can protect new observable behavior or a confirmed regression, create or update it without waiting for the user to request tests; do not ask whether to add it. Manual verification alone is insufficient. Transient checks do not count as retained coverage. State why only when automation is genuinely infeasible.

@@ -12,4 +12,6 @@
 - Require isolation for material plan execution, concurrent or resumable implementation, and editing delegation unless the checkout is already isolated.
 - Revalidate live checkout identity after resume and before mutations or branch operations, overriding stale summaries and retired progress workflows.
 - Add an executable stale-resume scenario that preserves another session's dirty feature branch.
+- Scale brainstorming by decision consequence, preserve conversation-level promises, and require explicit approval for material deferrals.
+- Expand the mandatory gate to 200 words with a parent-owned delegation boundary, while keeping dynamic planning detail conditional.
 - Put verified Codex and Claude installation, verification, update, and removal paths at the top of the README.
