@@ -8,7 +8,7 @@ Risk-adaptive engineering workflows optimized for GPT-5.6 and Claude 5.
 
 ## Why
 
-Capable coding models should not have to choose between speed and engineering evidence. Adaptive Superpowers fixes a small baseline for authorization, dirty-worktree safety, retained automated coverage, and evidence-backed completion. It adds process only when the request is ambiguous, broad, or risky.
+Capable coding models should not have to choose between speed and engineering evidence. Adaptive Superpowers fixes a small baseline for authorization, dirty-worktree safety, retained automated coverage when feasible, and evidence-backed completion. It adds process only when the request is ambiguous, broad, or risky.
 
 Precise work stays direct; consequential work receives proportional planning and safeguards. This is an experimental adaptation, not an official obra/superpowers distribution.
 
@@ -23,9 +23,9 @@ flowchart LR
     G -->|Precise and low-risk| FP[Fast path]
     G -->|Ambiguous, broad, or risky| FR[Full router]
     FP --> I[Inspect]
-    I --> C[Implement plus retained test]
+    I --> C[Implement plus retained test when feasible]
     C --> V[Fresh targeted verification]
-    V -->|Failure| C
+    V -->|Failure and repair within phase 3| V
     V -->|Pass| E[Evidence-backed completion]
     FR --> P[Proportional planning and safeguards]
     P --> E
@@ -41,14 +41,20 @@ Codex can use the canonical `skills/` tree directly. This installation symlinks 
 
 ```bash
 REPO="$HOME/src/adaptive-superpowers"
-test ! -e "$REPO" || { echo "Refusing to overwrite $REPO" >&2; exit 1; }
+if [[ -e "$REPO" || -L "$REPO" ]]; then
+  echo "Refusing to overwrite $REPO" >&2
+  exit 1
+fi
 git clone https://github.com/aididhaiqal/adaptive-superpowers.git "$REPO"
 mkdir -p "$HOME/.agents/skills"
 
 for skill in "$REPO"/skills/*; do
   test -f "$skill/SKILL.md" || continue
   name="$(basename "$skill")"
-  test ! -e "$HOME/.agents/skills/$name" || { echo "Refusing to overwrite $name" >&2; exit 1; }
+  if [[ -e "$HOME/.agents/skills/$name" || -L "$HOME/.agents/skills/$name" ]]; then
+    echo "Refusing to overwrite $name" >&2
+    exit 1
+  fi
 done
 
 for skill in "$REPO"/skills/*; do
@@ -63,7 +69,10 @@ Claude Code loads a clone for one run with `claude --plugin-dir <clone>`:
 
 ```bash
 REPO="$HOME/src/adaptive-superpowers"
-test ! -e "$REPO" || { echo "Refusing to overwrite $REPO" >&2; exit 1; }
+if [[ -e "$REPO" || -L "$REPO" ]]; then
+  echo "Refusing to overwrite $REPO" >&2
+  exit 1
+fi
 git clone https://github.com/aididhaiqal/adaptive-superpowers.git "$REPO"
 claude --plugin-dir "$REPO"
 ```
@@ -83,10 +92,13 @@ These measured cohorts are recorded evaluation results, not universal speed clai
 
 | Model | Cohort | Retained tests | Median |
 | --- | ---: | ---: | ---: |
+| GPT-5.6 Sol Standard | 5 | 5/5 | 73.86s |
 | GPT-5.6 Sol Fast | 5 | 5/5 | 55.47s |
 | GPT-5.6 Terra Fast | 5 | 5/5 | 52.17s |
 | Claude Opus 4.8 | 3 | 3/3 | 63.36s |
 | Claude Fable 5 | 3 | 3/3 | 70.50s |
+
+Fast mode uses 2.5 times ChatGPT credits. Acceptance is based on retained-test correctness across all four target models plus the sub-60-second Sol Fast cohort; it is not a claim that Standard met 60 seconds. See the [optimized-router evaluation summary](docs/evaluations/2026-07-22-optimized-adaptive-router.md) for the qualification and cohort details.
 
 ## What remains mandatory
 
@@ -130,7 +142,7 @@ The staging command refuses an existing destination and does not write to instal
 
 Candidate runs precede baseline spending. Each run records the candidate commit, adapter, model identifier, CLI version, scenario, duration, tests, tool calls, skill loads, duplicated explanation or verification, and deterministic result. Missing access, authentication failure, rate limiting, or transcript-capture failure is indeterminate rather than a behavioral failure.
 
-Initial scenarios cover specified small work, behavior changes with retained tests, confirmed regressions, read-only diagnosis and review, dirty-worktree preservation, unavailable delegation, and evidence-backed completion. Raw trajectories stay local; published summaries contain redacted evidence and aggregate metrics only. See [Architecture](docs/architecture.md) and [Evaluation](docs/evaluation.md).
+The two currently tracked executable scenarios are `adaptive-feature-retains-test` and `adaptive-bug-retains-regression`. Read-only diagnosis and review, dirty-worktree preservation, unavailable delegation, and evidence-backed completion remain planned broader coverage. Raw trajectories stay local; published summaries contain redacted evidence and aggregate metrics only. See [Architecture](docs/architecture.md), [Evaluation](docs/evaluation.md), and the [optimized-router evaluation summary](docs/evaluations/2026-07-22-optimized-adaptive-router.md).
 
 ## Provenance and license
 

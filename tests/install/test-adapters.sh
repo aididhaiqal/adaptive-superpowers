@@ -38,4 +38,49 @@ if bash "$ROOT/scripts/stage-adapter.sh" codex "$TMP_ROOT/nonempty" >/dev/null 2
   exit 1
 fi
 
+ln -s "$TMP_ROOT/missing-stage-target" "$TMP_ROOT/dangling-stage"
+if dangling_output="$(bash "$ROOT/scripts/stage-adapter.sh" codex "$TMP_ROOT/dangling-stage" 2>&1)"; then
+  echo 'staging unexpectedly accepted a dangling destination symlink' >&2
+  exit 1
+fi
+if [[ "$dangling_output" != *'refusing to overlay existing destination'* ]]; then
+  echo "staging did not reject a dangling symlink during preflight: $dangling_output" >&2
+  exit 1
+fi
+test -L "$TMP_ROOT/dangling-stage"
+
+mkdir -p \
+  "$TMP_ROOT/readme-repo/skills/alpha" \
+  "$TMP_ROOT/readme-repo/skills/zeta" \
+  "$TMP_ROOT/readme-home/.agents/skills"
+touch \
+  "$TMP_ROOT/readme-repo/skills/alpha/SKILL.md" \
+  "$TMP_ROOT/readme-repo/skills/zeta/SKILL.md"
+ln -s "$TMP_ROOT/missing-installed-skill" "$TMP_ROOT/readme-home/.agents/skills/zeta"
+
+readme_install="$(awk '
+  /^mkdir -p "\$HOME\/\.agents\/skills"$/ { capture = 1 }
+  capture && /^```$/ { exit }
+  capture { print }
+' "$ROOT/README.md")"
+if [[ -z "$readme_install" ]]; then
+  echo 'could not locate the public Codex link-installation snippet' >&2
+  exit 1
+fi
+if readme_output="$(REPO="$TMP_ROOT/readme-repo" HOME="$TMP_ROOT/readme-home" \
+    bash -euo pipefail -c "$readme_install" 2>&1)"; then
+  echo 'public Codex preflight unexpectedly accepted a dangling skill symlink' >&2
+  exit 1
+fi
+if [[ "$readme_output" != *'Refusing to overwrite zeta'* ]]; then
+  echo "public Codex preflight did not reject the dangling skill during preflight: $readme_output" >&2
+  exit 1
+fi
+if [[ -e "$TMP_ROOT/readme-home/.agents/skills/alpha" || \
+      -L "$TMP_ROOT/readme-home/.agents/skills/alpha" ]]; then
+  echo 'public Codex preflight created links before rejecting a dangling symlink' >&2
+  exit 1
+fi
+test -L "$TMP_ROOT/readme-home/.agents/skills/zeta"
+
 echo 'adapter contract passed'

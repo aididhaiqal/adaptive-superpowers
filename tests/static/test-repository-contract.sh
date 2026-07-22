@@ -19,9 +19,23 @@ test -x "$ROOT/scripts/validate.sh"
 grep -Fq 'd884ae04edebef577e82ff7c4e143debd0bbec99' "$ROOT/README.md"
 grep -Fq 'aa973775906c8761a78019aaa21e4f0ccd987925' "$ROOT/README.md"
 grep -Fq 'GPT-5.6 Sol' "$ROOT/README.md"
+grep -Fq 'GPT-5.6 Sol Standard' "$ROOT/README.md"
 grep -Fq 'Claude Opus 4.8' "$ROOT/README.md"
 grep -Fq 'Claude Fable 5' "$ROOT/README.md"
 grep -Fq 'observable behavior' "$ROOT/README.md"
+grep -Fq 'Fast mode uses 2.5 times ChatGPT credits' "$ROOT/README.md"
+grep -Fq 'sub-60-second Sol Fast cohort' "$ROOT/README.md"
+grep -Fq 'adaptive-feature-retains-test' "$ROOT/README.md"
+grep -Fq 'adaptive-bug-retains-regression' "$ROOT/README.md"
+grep -Fq 'planned broader coverage' "$ROOT/README.md"
+grep -Fq 'docs/evaluations/2026-07-22-optimized-adaptive-router.md' "$ROOT/README.md"
+grep -Fq 'evaluations/2026-07-22-optimized-adaptive-router.md' "$ROOT/docs/evaluation.md"
+grep -Fq '**Candidate commit:** `0a62f38`' \
+  "$ROOT/docs/evaluations/2026-07-22-optimized-adaptive-router.md"
+grep -Fq '**Verdict:** Approved for experimental release under the 2026-07-22 Fast-mode feasibility qualification.' \
+  "$ROOT/docs/evaluations/2026-07-22-optimized-adaptive-router.md"
+grep -Fq '**Status:** Approved for experimental release under the 2026-07-22 Fast-mode feasibility qualification.' \
+  "$ROOT/docs/superpowers/specs/2026-07-22-optimized-adaptive-router-design.md"
 grep -Fq 'MIT License' "$ROOT/LICENSE"
 
 bash "$ROOT/scripts/validate.sh"

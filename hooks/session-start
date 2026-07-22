@@ -4,9 +4,14 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PLUGIN_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 ROUTER="$PLUGIN_ROOT/skills/using-superpowers/SKILL.md"
+FULL_ROUTER="$PLUGIN_ROOT/skills/using-superpowers/references/full-router.md"
 
 if [[ ! -f "$ROUTER" ]]; then
   echo '{"error":"adaptive-superpowers router is missing"}' >&2
+  exit 1
+fi
+if [[ ! -f "$FULL_ROUTER" ]]; then
+  echo '{"error":"adaptive-superpowers full router is missing"}' >&2
   exit 1
 fi
 
@@ -21,5 +26,6 @@ escape_for_json() {
 }
 
 router_content="$(escape_for_json "$(<"$ROUTER")")"
-context="<ADAPTIVE_SUPERPOWERS>\\n${router_content}\\n</ADAPTIVE_SUPERPOWERS>"
+full_router_path="$(escape_for_json "$FULL_ROUTER")"
+context="<ADAPTIVE_SUPERPOWERS>\\n${router_content}\\n</ADAPTIVE_SUPERPOWERS>\\n<ADAPTIVE_SUPERPOWERS_FULL_ROUTER>${full_router_path}</ADAPTIVE_SUPERPOWERS_FULL_ROUTER>"
 printf '{"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"%s"}}\n' "$context"

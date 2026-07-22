@@ -1,22 +1,23 @@
 # Optimized Adaptive Router Evaluation
 
-**Candidate commit:** `0c3ca8a`  
-**Verdict:** Retain as the optimized Adaptive candidate; do not merge into `main` yet.
+**Candidate commit:** `0a62f38`
+**Verdict:** Approved for experimental release under the 2026-07-22 Fast-mode feasibility qualification.
 
 ## Candidate
 
-The final candidate keeps `using-superpowers` mandatory with a 150-word entry file. Precise low-risk implementations use three task batches after the Codex skill read:
+The final evaluated runtime candidate keeps `using-superpowers` mandatory with a 150-word entry file. Precise low-risk implementations use three task phases after the Codex skill read:
 
 1. inspect instructions, relevant file contents, conventions, and repository status;
-2. write the implementation and retained runnable test together; and
-3. run targeted verification and inspect the diff, repairing and repeating this batch when verification fails.
+2. write the implementation and, when feasible, a retained runnable test; and
+3. run targeted verification and inspect the diff, remaining within phase 3 while repairing failures.
 
 Detailed tier and high-risk policy lives in `skills/using-superpowers/references/full-router.md` and is loaded only when the fast-path predicate fails. Strict TDD no longer auto-triggers merely because a cheap test is possible. The host-required skill announcement is the only pre-work update; explicit acceptance is not restated.
 
 ## Method
 
 - Exact greeting prompt from `adaptive-feature-retains-test`.
-- Sol, Opus 4.8, and Fable 5 at max effort.
+- Primary matrix: Sol, Opus 4.8, and Fable 5 at max effort.
+- Fast-mode follow-up: Sol and Terra at max effort.
 - Fresh Git task repository for every sample.
 - Task workspaces created under `/tmp` so parent repository instructions cannot leak into the run.
 - Isolated Codex and Claude homes with exact staged adapters.
@@ -42,7 +43,7 @@ Sol result:
 - Tool-batch range: **4-6**
 - Median tokens: 100,673 input; 82,432 cached input; 2,807 output; 1,328 reasoning output
 
-The candidate meets retention and used five or fewer tool batches in three of five samples. It misses the release requirement of a Sol median under 60 seconds.
+The candidate retained effective tests in 5/5 samples and used five or fewer tool batches in three of five. Its 73.86-second Standard median missed the original sub-60-second target; the 2026-07-22 release decision superseded that Standard-only gate rather than claiming it was met.
 
 ## Claude evidence
 
@@ -69,17 +70,18 @@ Three fresh samples per model used the 150-word gate through the Claude SessionS
 | Opus 4.8 | 3/3 | 63.36s | 57.54-63.54s | $0.306347 | 5-6 |
 | Fable 5 | 3/3 | 70.50s | 62.33-84.20s | $0.659776 | 3 |
 
-All six workspaces passed independent `node --test` verification. Removing `.trim()` from one disposable Opus copy and one Fable copy made each retained test fail. Several runs first invoked `node --test test/`, which Node 22 rejected; the new repair clause correctly kept the model in batch 3 until the explicit test-file invocation passed.
+All six workspaces passed independent `node --test` verification. Removing `.trim()` from one disposable Opus copy and one Fable copy made each retained test fail. Several runs first invoked `node --test test/`, which Node 22 rejected; the repair clause correctly kept the model within phase 3 until the explicit test-file invocation passed.
 
 The quality contract passed, but the communication contract did not fully converge. Opus narrated conventions and batch transitions in all three runs; Fable emitted a routine batch-3 update in all three. These are materially leaner than the original workflow chain, but only Codex consistently reached the intended two-message shape. Treat reduced Claude chatter as the remaining optimization target rather than adding more shared policy text without a tested wording change.
 
 ## Mutation result
 
-One retained V4 test from each model was run against a copy with `.trim()` removed:
+One retained test from each target model was run against a copy with `.trim()` removed:
 
 | Model | Baseline | Mutation | Restored |
 | --- | ---: | ---: | ---: |
 | Sol | Pass | Fail | Pass |
+| Terra Fast | Pass | Fail | Pass |
 | Opus 4.8 | Pass | Fail | Pass |
 | Fable 5 | Pass | Fail | Pass |
 
@@ -101,7 +103,7 @@ Two Terra setup cohorts are excluded:
 - Samples 1-5 checked out stale marketplace commit `e62e9bb`; they are original-V4 evidence, not hardened-candidate evidence.
 - Samples 6-10 downloaded the renamed marketplace during the timed Codex invocation, after the session skill inventory was built. They never read the gate and retained no tests. Their 24.13-27.03s timings are driver failures, not performance wins.
 
-Terra Fast was 3.30 seconds faster than Sol Fast at the median in this synthetic task, but its 4-7 tool-batch range still misses the existing expectation of normally no more than five. Fast mode improves wall time at higher credit consumption; it does not replace Standard-mode acceptance or broader behavioral scenarios.
+Terra Fast was 3.30 seconds faster than Sol Fast at the median in this synthetic task, but its 4-7 tool-batch range remains an optimization concern. Fast mode improves wall time at higher credit consumption; approved acceptance rests on four-model retained-test correctness plus the sub-60-second Sol Fast cohort, while broader behavioral scenarios remain follow-up work.
 
 ## Historical comparison
 
@@ -116,9 +118,6 @@ The optimized candidate removes most visible workflow overhead and recovers reli
 
 ## Decision
 
-Do not add more shared policy text. The remaining fixed Codex cost includes a mandatory skill-read round trip. Codex plugin manifests do not support plugin-level prompt injection or hooks, while Claude can inject the same gate through SessionStart. Removing the Codex read would require host/global configuration mutation, policy duplication in task repositories, or a future Codex plugin capability.
+On 2026-07-22, the user approved the candidate for experimental release after deciding that the 60-second Standard-mode target was not currently achievable. Acceptance is based on retained-test correctness across Sol, Terra, Opus, and Fable plus the Sol Fast median of 55.47 seconds. Sol Standard measured 73.86 seconds and did not meet 60 seconds; Fast mode uses 2.5 times ChatGPT credits.
 
-Keep the candidate branch for further evaluation. Merge only after either:
-
-- a native Codex injection mechanism removes the mandatory read; or
-- repeated product work shows that the 73.86-second synthetic median is acceptable and the release threshold is intentionally revised.
+This supersedes the earlier Standard-only release gate and blocking verdict. It does not convert the Standard result into a speed pass. Broader scenarios, Claude narration, and Terra's tool-batch spread remain evaluation and optimization follow-ups rather than release blockers. The remaining fixed Codex cost includes a mandatory skill-read round trip; removing it would require host/global configuration mutation, policy duplication, or a future Codex plugin capability.

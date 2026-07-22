@@ -13,7 +13,7 @@ if [[ -z "$DESTINATION" ]]; then
   echo 'destination is required' >&2
   exit 2
 fi
-if [[ -e "$DESTINATION" ]]; then
+if [[ -e "$DESTINATION" || -L "$DESTINATION" ]]; then
   echo "refusing to overlay existing destination: $DESTINATION" >&2
   exit 1
 fi

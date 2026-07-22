@@ -21,17 +21,23 @@ fi
 
 require_text "$GATE" 'description: "Use when starting any conversation."'
 require_text "$GATE" 'runnable automated test file'
+require_text "$GATE" 'when feasible'
 require_text "$GATE" 'fresh targeted verification'
-require_text "$GATE" 'After reading this gate, use exactly three task batches'
+require_text "$GATE" 'After reading this gate, use three task phases'
 require_text "$GATE" 'file contents'
 require_text "$GATE" 'sole pre-work update'
 require_text "$GATE" 'do not restate acceptance'
-require_text "$GATE" 'Repair failures, then repeat batch 3 until it passes.'
+require_text "$GATE" 'remaining in phase 3 while repairing failures'
 require_text "$GATE" 'references/full-router.md'
 
+if grep -Fq 'repeat batch 3' "$GATE"; then
+  echo 'router gate must keep repairs inside phase 3 instead of repeating a batch' >&2
+  exit 1
+fi
+
 gate_words="$(wc -w < "$GATE" | tr -d ' ')"
-if (( gate_words > 150 )); then
-  echo "router gate is too large: $gate_words words (maximum 150)" >&2
+if (( gate_words != 150 )); then
+  echo "router gate has $gate_words words (expected exactly 150)" >&2
   exit 1
 fi
 require_text "$ROOT/README.md" "A ${gate_words}-word gate is always loaded"
@@ -44,11 +50,22 @@ require_text "$FULL_ROUTER" 'Preserve user work'
 require_text "$ROOT/skills/test-driven-development/SKILL.md" \
   'Do not auto-trigger for a precise low-risk feature'
 
-hook_output="$("$ROOT/hooks/session-start")"
+HOOK_PROJECT="$(mktemp -d "${TMPDIR:-/tmp}/adaptive-superpowers-hook.XXXXXX")"
+trap 'rm -rf "$HOOK_PROJECT"' EXIT
+hook_output="$(cd "$HOOK_PROJECT" && "$ROOT/hooks/session-start")"
 require_text "$ROOT/hooks/session-start" 'skills/using-superpowers/SKILL.md'
 hook_context="$(printf '%s\n' "$hook_output" | python3 -c 'import json, sys; print(json.load(sys.stdin)["hookSpecificOutput"]["additionalContext"])')"
 if [[ "$hook_context" != *'description: "Use when starting any conversation."'* ]]; then
   echo 'Claude startup hook did not inject the mandatory gate' >&2
+  exit 1
+fi
+hook_router_path="$(printf '%s\n' "$hook_context" | sed -n 's#^<ADAPTIVE_SUPERPOWERS_FULL_ROUTER>\(.*\)</ADAPTIVE_SUPERPOWERS_FULL_ROUTER>$#\1#p')"
+if [[ "$hook_router_path" != "$FULL_ROUTER" ]]; then
+  echo "Claude startup hook did not identify the shared full router: $hook_router_path" >&2
+  exit 1
+fi
+if [[ ! -r "$hook_router_path" ]]; then
+  echo "Claude startup hook identified an unreadable full router: $hook_router_path" >&2
   exit 1
 fi
 if [[ "$hook_output" == *'**High-risk:**'* ]]; then

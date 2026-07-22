@@ -163,6 +163,8 @@ Expected: gate is at most 150 words; diff contains no adapter policy fork or run
 
 ### Task 5: Run the release evaluation gate
 
+> **Superseded on 2026-07-22:** The Standard-only sub-60-second gate below is preserved as the original evaluation plan. The approved release decision instead uses four-model retained-test correctness plus the sub-60-second Sol Fast cohort, with the Standard and Fast results and 2.5-times credit cost recorded in the [optimized-router evaluation](../../evaluations/2026-07-22-optimized-adaptive-router.md).
+
 **Files:**
 - Use: `evals/scenarios/adaptive-feature-retains-test/`
 - Create: ignored local result artifacts only
