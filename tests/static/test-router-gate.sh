@@ -26,6 +26,7 @@ require_text "$GATE" 'After reading this gate, use exactly three task batches'
 require_text "$GATE" 'file contents'
 require_text "$GATE" 'sole pre-work update'
 require_text "$GATE" 'do not restate acceptance'
+require_text "$GATE" 'Repair failures, then repeat batch 3 until it passes.'
 require_text "$GATE" 'references/full-router.md'
 
 gate_words="$(wc -w < "$GATE" | tr -d ' ')"
@@ -33,6 +34,7 @@ if (( gate_words > 150 )); then
   echo "router gate is too large: $gate_words words (maximum 150)" >&2
   exit 1
 fi
+require_text "$ROOT/README.md" "A ${gate_words}-word gate is always loaded"
 
 require_text "$FULL_ROUTER" 'add or update automated coverage for observable behavior changes unless infeasible'
 require_text "$FULL_ROUTER" 'verification-before-completion'
@@ -44,6 +46,11 @@ require_text "$ROOT/skills/test-driven-development/SKILL.md" \
 
 hook_output="$("$ROOT/hooks/session-start")"
 require_text "$ROOT/hooks/session-start" 'skills/using-superpowers/SKILL.md'
+hook_context="$(printf '%s\n' "$hook_output" | python3 -c 'import json, sys; print(json.load(sys.stdin)["hookSpecificOutput"]["additionalContext"])')"
+if [[ "$hook_context" != *'description: "Use when starting any conversation."'* ]]; then
+  echo 'Claude startup hook did not inject the mandatory gate' >&2
+  exit 1
+fi
 if [[ "$hook_output" == *'**High-risk:**'* ]]; then
   echo 'Claude startup hook injected the detailed router instead of only the gate' >&2
   exit 1

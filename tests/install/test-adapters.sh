@@ -28,6 +28,7 @@ done
 test -f "$TMP_ROOT/codex/.codex-plugin/plugin.json"
 test ! -e "$TMP_ROOT/codex/hooks"
 test -f "$TMP_ROOT/claude/.claude-plugin/plugin.json"
+test -f "$TMP_ROOT/claude/hooks/hooks.json"
 test -f "$TMP_ROOT/claude/hooks/session-start"
 
 mkdir -p "$TMP_ROOT/nonempty"

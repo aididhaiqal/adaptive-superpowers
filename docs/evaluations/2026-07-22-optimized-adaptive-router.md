@@ -5,11 +5,11 @@
 
 ## Candidate
 
-The final candidate keeps `using-superpowers` mandatory but reduces its entry file to 147 words. Precise low-risk implementations use three task batches after the Codex skill read:
+The final candidate keeps `using-superpowers` mandatory with a 150-word entry file. Precise low-risk implementations use three task batches after the Codex skill read:
 
 1. inspect instructions, relevant file contents, conventions, and repository status;
 2. write the implementation and retained runnable test together; and
-3. run targeted verification and inspect the diff.
+3. run targeted verification and inspect the diff, repairing and repeating this batch when verification fails.
 
 Detailed tier and high-risk policy lives in `skills/using-superpowers/references/full-router.md` and is loaded only when the fast-path predicate fails. Strict TDD no longer auto-triggers merely because a cheap test is possible. The host-required skill announcement is the only pre-work update; explicit acceptance is not restated.
 
@@ -42,7 +42,7 @@ Sol result:
 - Tool-batch range: **4-6**
 - Median tokens: 100,673 input; 82,432 cached input; 2,807 output; 1,328 reasoning output
 
-The candidate meets retention and normally stays at five or fewer tool batches. It misses the release requirement of a Sol median under 60 seconds.
+The candidate meets retention and used five or fewer tool batches in three of five samples. It misses the release requirement of a Sol median under 60 seconds.
 
 ## Claude evidence
 
@@ -71,6 +71,24 @@ One retained V4 test from each model was run against a copy with `.trim()` remov
 | Fable 5 | Pass | Fail | Pass |
 
 The retained files protect the requested whitespace behavior; they are not ceremonial tests.
+
+## Fast-mode follow-up
+
+Codex Fast mode was enabled with `service_tier="fast"` and `features.fast_mode=true` while keeping max reasoning effort. Fast mode consumes GPT-5.6 ChatGPT credits at 2.5 times the Standard rate.
+
+| Model | Candidate | Retained effective test | Median | Range | Tool batches | Visible messages |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Sol Fast | Original V4 gate | 5/5 | 55.47s | 44.39-68.26s | 4-5 | 2 |
+| Terra Fast | Hardened 150-word gate | 5/5 | 52.17s | 48.36-58.57s | 4-7 | 2 |
+
+The final Terra samples explicitly preinstalled marketplace commit `172f8f3` before the timed model process. Every trace used `gpt-5.6-terra` at max effort, read `using-superpowers` first, retained a runnable JavaScript test, and passed independent verification. Removing `.trim()` from one disposable copy made the retained test fail.
+
+Two Terra setup cohorts are excluded:
+
+- Samples 1-5 checked out stale marketplace commit `e62e9bb`; they are original-V4 evidence, not hardened-candidate evidence.
+- Samples 6-10 downloaded the renamed marketplace during the timed Codex invocation, after the session skill inventory was built. They never read the gate and retained no tests. Their 24.13-27.03s timings are driver failures, not performance wins.
+
+Terra Fast was 3.30 seconds faster than Sol Fast at the median in this synthetic task, but its 4-7 tool-batch range still misses the existing expectation of normally no more than five. Fast mode improves wall time at higher credit consumption; it does not replace Standard-mode acceptance or broader behavioral scenarios.
 
 ## Historical comparison
 

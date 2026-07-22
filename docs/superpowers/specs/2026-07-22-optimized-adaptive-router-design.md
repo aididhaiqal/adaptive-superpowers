@@ -33,7 +33,7 @@ The fast path is allowed only when acceptance is explicit, one local implementat
 
 ## Verification policy
 
-Fast-path completion uses the smallest fresh targeted command that exercises the changed behavior. Broaden verification only when required by repository policy, affected dependency surface, or a named risk. A full suite is not an automatic extra step.
+Fast-path completion uses the smallest fresh targeted command that exercises the changed behavior. Failed verification is repaired and the verification batch repeats until it passes. Broaden verification only when required by repository policy, affected dependency surface, or a named risk. A full suite is not an automatic extra step.
 
 For observable behavior changes, transient assertions do not satisfy the contract: a runnable automated test file must remain in the workspace unless automation is genuinely infeasible. Confirmed bugs should retain a focused regression; strict RED-before-GREEN remains situational rather than universally mandatory.
 

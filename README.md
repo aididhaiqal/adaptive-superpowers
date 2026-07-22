@@ -7,7 +7,7 @@ Adaptive Superpowers sits between two extremes:
 - **Model autonomy alone:** fast, but important testing or safety steps may be inconsistent.
 - **Official Superpowers:** strong discipline, but fixed workflow chains can add planning, approval, delegation, and verification overhead to small tasks.
 
-This project defines a mandatory engineering baseline and allows the model to add process only when task evidence or risk justifies it. A 145-word gate is always loaded; detailed routing policy is loaded only when a task is not precise and low-risk.
+This project defines a mandatory engineering baseline and allows the model to add process only when task evidence or risk justifies it. A 150-word gate is always loaded; detailed routing policy is loaded only when a task is not precise and low-risk.
 
 > **Status:** experimental and under evaluation. The repository is not an official obra/superpowers distribution and is not ready to replace an installed plugin yet.
 
@@ -68,7 +68,7 @@ The 12 shared skills contain no required bundle-owned subagent workflow. `using-
 
 Target evaluation models:
 
-- Codex with **GPT-5.6 Sol**
+- Codex with **GPT-5.6 Sol** and **GPT-5.6 Terra**
 - Claude Code with **Claude Opus 4.8**
 - Claude Code with **Claude Fable 5**
 
