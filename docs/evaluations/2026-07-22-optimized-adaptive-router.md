@@ -60,6 +60,19 @@ Current V4 smoke results also retained effective tests:
 | Opus 4.8 | 1/1 | 87.94s | $0.392559 |
 | Fable 5 | 1/1 | 36.43s | $0.519309 |
 
+### Hardened V4 Claude matrix
+
+Three fresh samples per model used the 150-word gate through the Claude SessionStart hook at max effort:
+
+| Model | Retained effective test | Median | Range | Median reported cost | Visible text blocks |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Opus 4.8 | 3/3 | 63.36s | 57.54-63.54s | $0.306347 | 5-6 |
+| Fable 5 | 3/3 | 70.50s | 62.33-84.20s | $0.659776 | 3 |
+
+All six workspaces passed independent `node --test` verification. Removing `.trim()` from one disposable Opus copy and one Fable copy made each retained test fail. Several runs first invoked `node --test test/`, which Node 22 rejected; the new repair clause correctly kept the model in batch 3 until the explicit test-file invocation passed.
+
+The quality contract passed, but the communication contract did not fully converge. Opus narrated conventions and batch transitions in all three runs; Fable emitted a routine batch-3 update in all three. These are materially leaner than the original workflow chain, but only Codex consistently reached the intended two-message shape. Treat reduced Claude chatter as the remaining optimization target rather than adding more shared policy text without a tested wording change.
+
 ## Mutation result
 
 One retained V4 test from each model was run against a copy with `.trim()` removed:
