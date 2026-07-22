@@ -17,6 +17,12 @@ Use a product-first narrative:
 
 The README will describe version 0.1.0 as experimental but usable. It will not claim endorsement by the official Superpowers project or universal performance improvements.
 
+## Visual system
+
+Use a campaign-style hero image with the message “Move fast. Keep the proof.” and the subtitle “Optimized for GPT-5.6 and Claude 5.” The hero establishes a recognizable identity without embedding technical behavior or benchmark numbers that may become stale.
+
+Follow the hero with a Mermaid decision-flow diagram showing the request entering the 150-word adaptive gate and routing to read-only, fast-path, or fuller workflow behavior. Images communicate identity; Mermaid communicates evolving behavior. Keep the diagram legible in both GitHub light and dark themes, and provide descriptive alt text for the hero.
+
 ## Publication
 
 Keep the current `eval/optimized-adaptive-router` history, commit the README revision, create the public GitHub repository, add it as `origin`, and push the current branch. Because this is a new standalone repository with no existing default branch, publish the validated current branch as `main` rather than opening a pull request against a nonexistent base.
