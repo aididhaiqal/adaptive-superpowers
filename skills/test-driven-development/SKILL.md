@@ -1,11 +1,11 @@
 ---
 name: test-driven-development
-description: "Use test-first red-green-refactor for authorized work when requested or required, or when a cheap focused red test disambiguates implementation or captures a confirmed regression."
+description: "Use when the user requests TDD or test-first work, when a confirmed bug needs a focused regression before the fix, or when a focused failing test is needed to resolve material implementation ambiguity."
 ---
 
 # Test-Driven Development
 
-The user need not know or request TDD, but loading this skill does not authorize implementation. Expected behavior must be clear. Auto-trigger only when a cheap focused red test distinguishes plausible implementations or captures a confirmed regression at a public boundary. A test being possible or useful later is not enough.
+The user need not know or request TDD, but loading this skill does not authorize implementation. Expected behavior must be clear. Auto-trigger only when a focused red test resolves material ambiguity between plausible implementations or captures a confirmed regression at a public boundary. Do not auto-trigger for a precise low-risk feature merely because a cheap test is possible.
 
 The router's coverage requirement is broader than this workflow's activation rule: an observable behavior change normally retains an automated test even when strict test-first execution adds no useful discrimination. This skill governs red-green order only when its trigger matches.
 

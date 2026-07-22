@@ -22,6 +22,7 @@ fi
 require_text "$GATE" 'description: "Use when starting any conversation."'
 require_text "$GATE" 'runnable automated test file'
 require_text "$GATE" 'fresh targeted verification'
+require_text "$GATE" 'exactly three tool batches'
 require_text "$GATE" 'references/full-router.md'
 
 gate_words="$(wc -w < "$GATE" | tr -d ' ')"
@@ -34,6 +35,9 @@ require_text "$FULL_ROUTER" 'add or update automated coverage for observable beh
 require_text "$FULL_ROUTER" 'verification-before-completion'
 require_text "$FULL_ROUTER" 'Manual verification alone is insufficient'
 require_text "$FULL_ROUTER" 'Preserve user work'
+
+require_text "$ROOT/skills/test-driven-development/SKILL.md" \
+  'Do not auto-trigger for a precise low-risk feature'
 
 hook_output="$("$ROOT/hooks/session-start")"
 require_text "$ROOT/hooks/session-start" 'skills/using-superpowers/SKILL.md'
