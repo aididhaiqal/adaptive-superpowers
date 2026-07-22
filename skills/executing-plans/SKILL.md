@@ -10,7 +10,9 @@ A plan's existence or approval to plan does not authorize implementation. Withou
 1. Read the plan, nearest `AGENTS.md`, and relevant repository state.
 2. Map unfinished outcomes into lightweight session tracking. Before tools, announce the first outcome; update the user only at material phase changes with the result and next outcome.
 3. Implement the minimum change per outcome; batch checks when they prove the same behavior.
-4. After the final change, run required checks and compare the diff with acceptance.
+4. After the final change, run required technical checks.
+5. Compare the complete result with the plan and surrounding integration; perform the final completion review after technical verification, resolve blocking findings, and preserve optional recommendations for the user.
+6. After the completion gate passes, use `finishing-a-development-branch` only when delivery is requested or already authorized.
 
 Treat the plan as an outcome contract, not a transcript. Adapt mechanics when repository reality differs while preserving scope and acceptance. Update a durable plan before continuing only when a material requirement, design, or verification strategy changes.
 
@@ -18,4 +20,4 @@ Later relevant mutations invalidate only affected evidence; rerun those checks b
 
 Resolve recoverable failures with safe diagnostics and alternatives. Ask the user only when missing authority, an architectural choice, or ambiguous requirements would change the result.
 
-Do not invoke another workflow skill solely because a plan exists.
+A plan alone does not authorize commit, push, merge, PR creation, or cleanup.

@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 GATE="$ROOT/skills/using-superpowers/SKILL.md"
 FULL_ROUTER="$ROOT/skills/using-superpowers/references/full-router.md"
+EXPLORER_HANDOFF="$ROOT/skills/using-superpowers/references/explorer-handoff.md"
 
 require_text() {
   local file="$1"
@@ -18,6 +19,10 @@ if [[ ! -f "$FULL_ROUTER" ]]; then
   echo 'router contract missing conditional reference: skills/using-superpowers/references/full-router.md' >&2
   exit 1
 fi
+if [[ ! -f "$EXPLORER_HANDOFF" ]]; then
+  echo 'router contract missing conditional reference: skills/using-superpowers/references/explorer-handoff.md' >&2
+  exit 1
+fi
 
 require_text "$GATE" 'description: "Use when starting any conversation."'
 require_text "$GATE" 'runnable automated test file'
@@ -27,8 +32,18 @@ require_text "$GATE" 'After reading this gate, use three task phases'
 require_text "$GATE" 'file contents'
 require_text "$GATE" 'sole pre-work update'
 require_text "$GATE" 'do not restate acceptance'
-require_text "$GATE" 'remaining in phase 3 while repairing failures'
+require_text "$GATE" 'Remain in phase 3 while repairing failures'
 require_text "$GATE" 'references/full-router.md'
+require_text "$GATE" 'For bulky independent investigation, use one available read-only explorer'
+require_text "$GATE" 'otherwise inspect locally'
+require_text "$GATE" 'Keep coupled work here'
+require_text "$GATE" 'references/explorer-handoff.md'
+
+require_text "$EXPLORER_HANDOFF" 'Keep decisions and coupled implementation in the parent.'
+require_text "$EXPLORER_HANDOFF" 'would materially burden the parent context'
+require_text "$EXPLORER_HANDOFF" 'Never claim runtime behavior from inspection alone.'
+require_text "$EXPLORER_HANDOFF" 'Measure elapsed time in the parent'
+require_text "$EXPLORER_HANDOFF" 'If no explorer is available'
 
 if grep -Fq 'repeat batch 3' "$GATE"; then
   echo 'router gate must keep repairs inside phase 3 instead of repeating a batch' >&2

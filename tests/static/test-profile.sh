@@ -55,6 +55,12 @@ grep -Fq 'For diagnosis-only requests' \
   "$ROOT/skills/systematic-debugging/SKILL.md"
 grep -Fq 'If no independent reviewer is available' \
   "$ROOT/skills/requesting-code-review/SKILL.md"
+grep -Fq 'Use a bounded feature reviewer for a material feature change' \
+  "$ROOT/skills/requesting-code-review/SKILL.md"
+grep -Fq 'Use the strongest available final reviewer for a substantial branch or release' \
+  "$ROOT/skills/requesting-code-review/SKILL.md"
+grep -Fq 'Do not automatically run both reviews.' \
+  "$ROOT/skills/requesting-code-review/SKILL.md"
 grep -Fq 'Reuse fresh evidence' \
   "$ROOT/skills/verification-before-completion/SKILL.md"
 

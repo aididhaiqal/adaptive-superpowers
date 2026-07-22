@@ -10,3 +10,4 @@ Recorded evaluations:
 
 - [2026-07-21 cross-model sentinel](evaluations/2026-07-21-cross-model-sentinel.md)
 - [2026-07-22 optimized adaptive router](evaluations/2026-07-22-optimized-adaptive-router.md)
+- [2026-07-22 Codex Terra explorer POC](evaluations/2026-07-22-codex-terra-explorer-poc.md)

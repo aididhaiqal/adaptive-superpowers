@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+REVIEW="$ROOT/skills/requesting-code-review/SKILL.md"
+EXECUTE="$ROOT/skills/executing-plans/SKILL.md"
+FINISH="$ROOT/skills/finishing-a-development-branch/SKILL.md"
+ROUTER="$ROOT/skills/using-superpowers/references/full-router.md"
+GATE="$ROOT/skills/using-superpowers/SKILL.md"
+README="$ROOT/README.md"
+
+require_text() {
+  local file="$1"
+  local text="$2"
+  if ! grep -Fq "$text" "$file"; then
+    echo "completion contract missing from ${file#"$ROOT/"}: $text" >&2
+    exit 1
+  fi
+}
+
+require_text "$ROUTER" 'final completion review after technical verification'
+require_text "$REVIEW" 'anything missing, incorrect, incomplete, or poorly integrated'
+require_text "$REVIEW" 'Blocking findings'
+require_text "$REVIEW" 'Material recommendations'
+require_text "$REVIEW" 'Recommendations do not block completion or authorize more implementation.'
+require_text "$REVIEW" 'Do not invent recommendations merely to fill the section.'
+require_text "$EXECUTE" 'perform the final completion review after technical verification'
+require_text "$EXECUTE" 'use `finishing-a-development-branch` only when delivery is requested or already authorized'
+require_text "$FINISH" 'required completion review has no unresolved blocking findings'
+require_text "$GATE" 'review the final diff against acceptance for omissions'
+require_text "$GATE" 'Supported Critical/Important findings block completion'
+require_text "$GATE" 'Material, evidence-backed recommendations stay optional/non-authorizing; never invent them'
+require_text "$ROUTER" 'recommendations remain optional and authorize no work'
+require_text "$README" 'Separate supported blocking findings from material recommendations.'
+require_text "$README" 'For each recommendation, cite evidence, expected value, and relevant cost or trade-off.'
+require_text "$README" 'P --> C'
+
+if grep -Fq 'P --> CR' "$README"; then
+  echo 'full-router diagram must not skip implementation and verification' >&2
+  exit 1
+fi
+
+echo 'completion lifecycle contract passed'
