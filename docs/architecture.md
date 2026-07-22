@@ -6,9 +6,11 @@ Adaptive Superpowers separates three concerns.
 
 The root `skills/` tree defines task classification, diagnosis, testing, planning, worktree safety, review, verification, and delivery behavior. These rules should remain invariant across capable coding models.
 
+The router uses two stages. `skills/using-superpowers/SKILL.md` is an always-triggered gate capped at 150 words. It directly handles read-only requests and precise low-risk implementations, including retained automated coverage and targeted verification. If any fast-path predicate fails or scope grows, the gate requires `skills/using-superpowers/references/full-router.md` before implementation or consequential action. The reference owns detailed tiers, named risks, authorization, and broader evidence rules.
+
 ## Host adapters
 
-Codex and Claude Code discover skills differently. Root plugin manifests, the Claude session-start hook, and `scripts/stage-adapter.sh` translate those mechanics without restating behavioral policy. A complete stage is created only at a new path, so stale or fork-only skills cannot survive an update.
+Codex and Claude Code discover skills differently. Root plugin manifests, the Claude session-start hook, and `scripts/stage-adapter.sh` translate those mechanics without restating behavioral policy. Claude SessionStart injects only the small shared gate; Codex discovers the same gate through skill metadata. A complete stage is created only at a new path, so stale or fork-only skills cannot survive an update.
 
 ## Model profiles
 

@@ -1,21 +1,14 @@
 ---
 name: using-superpowers
-description: "Mandatory newcomer-safe router for every conversation. Classify by action, impact, and named risk; add workflows only when their descriptions match."
+description: "Use when starting any conversation."
 ---
 
-# Router
+# Adaptive Gate
 
-Choose the highest tier. Escalate uncertainty only when it could change behavior, scope, authority, or named risk.
+Classify before acting.
 
-- **Read-only:** answer or inspect without implementation artifacts; subject risk alone does not escalate.
-- **Mechanical:** provably non-behavioral changes without data, dependency, security, public-contract, or external-state impact. Inspect, edit, check, review the diff, report.
-- **Standard:** every non-mechanical implementation. Inspect state; state a brief plan and acceptance; implement minimally; add or update automated coverage for observable behavior changes unless infeasible; run the strongest focused checks; review the final diff; report evidence. For a confirmed bug, diagnose first and retain a focused failing regression before the fix when practical.
-- **High-risk:** follow Standard. Security-sensitive, destructive, production-data, migration, public-contract, cross-system, or consequential external-state work requires `writing-plans` before implementation or consequential action and `verification-before-completion`.
+- **Read-only:** inspect and answer without implementation artifacts.
+- **Precise low-risk implementation:** use this path only when acceptance is explicit, one local locus is clear, scope is at most two production files plus tests, no blocking choice remains, and no security, destructive, production-data, migration, public-contract, cross-system, or external-state risk exists. Use one bounded inspection batch. State plan and acceptance together. Implement minimally and leave the smallest relevant runnable automated test file for observable behavior; transient checks do not count. Run fresh targeted verification and inspect the final diff. Broaden only for repository policy, dependency impact, or named risk.
+- **Otherwise:** before implementation or consequential action, read `references/full-router.md` and follow it.
 
-**Test retention:** coverage is a completion requirement, not a TDD trigger. When a runnable automated test can protect new observable behavior or a confirmed regression, create or update it without waiting for the user to request tests; do not ask whether to add it. Manual verification alone is insufficient. State why only when automation is genuinely infeasible.
-
-User silence never waives Standard. Files or tools alone never escalate. Native plans need no durable file.
-
-Reclassify when new scope or risk appears and before consequential external action. Reuse fresh evidence unless state changed or a claim remains unproved.
-
-Preserve user work; require authority for destructive or external actions.
+If scope grows or a predicate fails, switch immediately. Preserve user work; require authority for destructive or external actions.

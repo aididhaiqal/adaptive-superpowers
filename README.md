@@ -7,7 +7,7 @@ Adaptive Superpowers sits between two extremes:
 - **Model autonomy alone:** fast, but important testing or safety steps may be inconsistent.
 - **Official Superpowers:** strong discipline, but fixed workflow chains can add planning, approval, delegation, and verification overhead to small tasks.
 
-This project defines a mandatory engineering baseline and allows the model to add process only when task evidence or risk justifies it.
+This project defines a mandatory engineering baseline and allows the model to add process only when task evidence or risk justifies it. A 145-word gate is always loaded; detailed routing policy is loaded only when a task is not precise and low-risk.
 
 > **Status:** experimental and under evaluation. The repository is not an official obra/superpowers distribution and is not ready to replace an installed plugin yet.
 
@@ -55,7 +55,7 @@ High-risk details still raise the workflow. Exporting sensitive production recor
 ## Shared core, host adapters, model profiles
 
 ```text
-skills/                 shared behavior and safety policy
+skills/                 mandatory gate, conditional router, and shared behavior policy
 .codex-plugin/          Codex discovery metadata
 .claude-plugin/         Claude Code discovery metadata
 hooks/                  Claude Code router bootstrap
@@ -64,7 +64,7 @@ profiles/               initially no model-specific overrides
 tests/                  static, packaging, and behavioral contracts
 ```
 
-The 12 shared skills contain no required bundle-owned subagent workflow. Native delegation is used only when the host exposes it, current policy permits it, and the task benefits from it.
+The 12 shared skills contain no required bundle-owned subagent workflow. `using-superpowers/SKILL.md` is the always-triggered cross-host gate, while its `references/full-router.md` is read only when the fast-path predicate fails or scope grows. Native delegation is used only when the host exposes it, current policy permits it, and the task benefits from it.
 
 Target evaluation models:
 
