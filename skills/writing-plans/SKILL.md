@@ -26,6 +26,8 @@ Use a repository file only when the High-risk tier requires it or for cross-sess
 
 Keep outcomes dependency-ordered and omit code, routine mechanics, predicted output, and artificial microsteps. Update the same plan only after a material requirement, scope, design, or verification-strategy change.
 
+Do not duplicate supplied incidents or specifications in the plan, and do not create companion incident, specification, implementation-log, or progress-ledger artifacts unless requested or repository-required. Approval to plan or implement does not authorize commits or shared-checkout branch switching.
+
 Create it before implementation. For destructive or consequential external-state work, put recovery, stop conditions, and pre-execution checks in acceptance. For production-data work, include target, approvals, dry-run counts, backup/restore evidence, integrity checks, batch/abort thresholds, and sensitive-output hygiene. For production deployment, include target revision, approvals, rollout, health evidence, rollback, and monitoring stop conditions.
 
 If the current mode forbids writes, name the intended path and create it only after writes are authorized. A durable plan does not automatically require a log, review, worktree, or separate completion gate; select each independently.

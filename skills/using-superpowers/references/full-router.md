@@ -13,6 +13,12 @@ For direct completion reviews, supported Critical and Important findings block c
 
 Coverage is a completion requirement, not a universal TDD trigger. When a runnable automated test can protect new observable behavior or a confirmed regression, create or update it without waiting for the user to request tests; do not ask whether to add it. Manual verification alone is insufficient. Transient checks do not count as retained coverage. State why only when automation is genuinely infeasible.
 
+## Checkout safety
+
+Current installed skills and live repository state override stale session summaries, prior plans, and progress artifacts. Removed workflows must not reactivate from memory.
+
+Before Material or High-risk plan execution, concurrent or resumable implementation, or an editing delegation, use `using-git-worktrees` unless the current checkout already provides appropriate isolation. Capture the repository root, worktree path, branch, HEAD, and status. Revalidate after a resume or compaction and before mutation, editing delegation, commit, or branch operations. Stop when checkout identity changed, unrelated work appeared, or ownership is unclear; preserve the live state and coordinate instead of switching or cleaning it.
+
 ## Verification and authority
 
 Broaden beyond fresh targeted verification only when repository policy, dependency impact, or named risk requires it. User silence never waives Standard. Files or tools alone never escalate. Native plans need no durable file.

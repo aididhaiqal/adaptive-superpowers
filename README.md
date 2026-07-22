@@ -148,7 +148,7 @@ These commands leave the clone intact. Delete it separately only if you no longe
 
 Capable coding models should not have to choose between speed and engineering evidence. Adaptive Superpowers fixes a small baseline for authorization, dirty-worktree safety, retained automated coverage when feasible, and evidence-backed completion. It adds process only when the request is ambiguous, broad, or risky.
 
-Precise work stays direct; consequential work receives proportional planning and safeguards. This is an experimental adaptation, not an official obra/superpowers distribution.
+Precise work stays direct; consequential work receives proportional planning and safeguards. Material plan execution, concurrent or resumed implementation, and editing subagents use an isolated worktree unless the current checkout is already isolated. This is an experimental adaptation, not an official obra/superpowers distribution.
 
 ## How it routes
 
@@ -282,7 +282,7 @@ Fast mode uses 2.5 times ChatGPT credits. Acceptance is based on retained-test c
 
 ## What remains mandatory
 
-Every task is classified to the highest applicable tier. Review-only and diagnosis-only requests are read-only; destructive or externally visible actions require authority. Behavior-changing work normally retains automated coverage for observable behavior, receives fresh targeted verification, and then receives a final review for missed requirements, integration gaps, and material recommendations before evidence-backed completion.
+Every task is classified to the highest applicable tier. Review-only and diagnosis-only requests are read-only; destructive or externally visible actions require authority. Behavior-changing work normally retains automated coverage for observable behavior, receives fresh targeted verification, and then receives a final review for missed requirements, integration gaps, and material recommendations before evidence-backed completion. Live checkout identity overrides stale summaries: the agent records repository root, worktree, branch, HEAD, and status, then revalidates after resume and before edits, editing delegation, commits, or branch operations.
 
 The model may choose proportional planning, strict red-green TDD, a worktree, independent review, or delegation when those add value. It may not skip authorization boundaries, dirty-worktree protection, applicable automated coverage, or honest reporting of review independence.
 
@@ -322,7 +322,7 @@ The staging command refuses an existing destination and does not write to instal
 
 Candidate runs precede baseline spending. Each run records the candidate commit, adapter, model identifier, CLI version, scenario, duration, tests, tool calls, skill loads, duplicated explanation or verification, and deterministic result. Missing access, authentication failure, rate limiting, or transcript-capture failure is indeterminate rather than a behavioral failure.
 
-The two currently tracked executable scenarios are `adaptive-feature-retains-test` and `adaptive-bug-retains-regression`. Read-only diagnosis and review, dirty-worktree preservation, unavailable delegation, and evidence-backed completion remain planned broader coverage. Raw trajectories stay local; published summaries contain redacted evidence and aggregate metrics only. See [Architecture](docs/architecture.md), [Evaluation](docs/evaluation.md), and the [optimized-router evaluation summary](docs/evaluations/2026-07-22-optimized-adaptive-router.md).
+The three currently tracked executable scenarios are `adaptive-feature-retains-test`, `adaptive-bug-retains-regression`, and `adaptive-resume-preserves-checkout`. Read-only diagnosis and review, unavailable delegation, and evidence-backed completion remain planned broader coverage. Raw trajectories stay local; published summaries contain redacted evidence and aggregate metrics only. See [Architecture](docs/architecture.md), [Evaluation](docs/evaluation.md), and the [optimized-router evaluation summary](docs/evaluations/2026-07-22-optimized-adaptive-router.md).
 
 ## Provenance and license
 

@@ -7,8 +7,8 @@ description: Execute an existing plan when implementation is authorized and depe
 
 A plan's existence or approval to plan does not authorize implementation. Without implementation authority, inspect and report only.
 
-1. Read the plan, nearest `AGENTS.md`, and relevant repository state.
-2. Map unfinished outcomes into lightweight session tracking. Before tools, announce the first outcome; update the user only at material phase changes with the result and next outcome.
+1. Read the plan, nearest `AGENTS.md`, and relevant repository state. For Material or High-risk execution, concurrent or resumable work, or editing delegation, use `using-git-worktrees` unless already appropriately isolated. Capture the repository root, worktree path, branch, HEAD, and status.
+2. Map unfinished outcomes into lightweight session tracking. Before tools, announce the first outcome; update the user only at material phase changes with the result and next outcome. Revalidate the live checkout identity after resume or compaction and before mutation, editing delegation, commit, or branch operations; stop on drift or unrelated work.
 3. Implement the minimum change per outcome; batch checks when they prove the same behavior.
 4. After the final change, run required technical checks.
 5. Compare the complete result with the plan and surrounding integration; perform the final completion review after technical verification, resolve blocking findings, and preserve optional recommendations for the user.
@@ -20,4 +20,4 @@ Later relevant mutations invalidate only affected evidence; rerun those checks b
 
 Resolve recoverable failures with safe diagnostics and alternatives. Ask the user only when missing authority, an architectural choice, or ambiguous requirements would change the result.
 
-A plan alone does not authorize commit, push, merge, PR creation, or cleanup.
+A plan alone does not authorize commit, push, merge, PR creation, shared-checkout branch switching, or cleanup.

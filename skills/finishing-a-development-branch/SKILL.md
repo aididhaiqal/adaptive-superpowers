@@ -5,7 +5,7 @@ description: Complete an authorized commit, push, integration, PR, branch, or wo
 
 # Finishing a Development Branch
 
-Inspect status, branch, and worktree state with read-only commands. Preserve unrelated user changes.
+Inspect and record repository root, worktree path, status, branch, and HEAD with read-only commands. Revalidate that identity immediately before commit, push, integration, branch, or cleanup operations. If it changed or unrelated work appeared, stop and preserve the live state. Preserve unrelated user changes.
 
 Confirm the task diff is understood, relevant required checks are fresh for the state to deliver, and any required completion review has no unresolved blocking findings. Preserve optional recommendations for the user; they do not prevent authorized delivery. Do not require a separate plan, log, or reconciliation artifact unless the user or repository does.
 

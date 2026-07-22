@@ -1,6 +1,6 @@
 # Behavioral evaluations
 
-These scenarios are consumed by the pinned Superpowers Quorum harness. They avoid assertions tied to the official plugin namespace and instead measure the resulting code, retained tests, investigation order, verification, and delegation count.
+These scenarios are consumed by the pinned Superpowers Quorum harness. They avoid assertions tied to the official plugin namespace and instead measure the resulting code, retained tests, investigation order, verification, delegation count, and preservation of a live checkout when resumed context is stale.
 
 From the eval-harness checkout:
 
