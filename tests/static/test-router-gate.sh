@@ -24,6 +24,8 @@ require_text "$GATE" 'runnable automated test file'
 require_text "$GATE" 'fresh targeted verification'
 require_text "$GATE" 'After reading this gate, use exactly three task batches'
 require_text "$GATE" 'file contents'
+require_text "$GATE" 'sole pre-work update'
+require_text "$GATE" 'do not restate acceptance'
 require_text "$GATE" 'references/full-router.md'
 
 gate_words="$(wc -w < "$GATE" | tr -d ' ')"

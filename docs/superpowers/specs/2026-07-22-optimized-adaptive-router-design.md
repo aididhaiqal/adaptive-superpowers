@@ -24,7 +24,7 @@ Reduce the routine latency and repeated workflow narration of Adaptive Superpowe
 `skills/using-superpowers/SKILL.md` remains the mandatory entry point for every conversation and is limited to 150 words including frontmatter. It handles three outcomes:
 
 - **Read-only:** inspect and answer without creating implementation artifacts.
-- **Precise low-risk implementation:** use one bounded inspection batch; state a concise plan and acceptance; implement narrowly; leave the smallest relevant runnable automated test file; run fresh targeted verification; inspect the diff; report evidence.
+- **Precise low-risk implementation:** use the host-required skill announcement as the sole pre-work plan update without restating explicit acceptance; use one bounded inspection batch; implement narrowly; leave the smallest relevant runnable automated test file; run fresh targeted verification; inspect the diff; report evidence.
 - **Everything else:** load `references/full-router.md` before implementation or consequential action.
 
 The fast path is allowed only when acceptance is explicit, one local implementation locus is clear, expected scope is no more than two production files plus tests, no blocking choice remains, and no named high-risk condition applies. Scope growth immediately routes to the full reference.

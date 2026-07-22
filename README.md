@@ -46,7 +46,7 @@ Adaptive Superpowers normally does this:
 
 1. Inspect existing report and export conventions.
 2. Ask only if a material choice remains unresolved.
-3. State a short plan and observable acceptance criteria.
+3. State a short plan in the required skill announcement; do not restate acceptance already explicit in the request.
 4. Implement the smallest coherent change and retain an automated CSV behavior test.
 5. Run focused checks, inspect the final diff, and report current evidence.
 
