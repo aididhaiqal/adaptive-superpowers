@@ -1,134 +1,136 @@
 # Adaptive Superpowers
 
-Risk-adaptive engineering workflows for capable coding models.
+![Adaptive Superpowers: Move fast. Keep the proof. Risk-adaptive workflows optimized for GPT-5.6 and Claude 5.](assets/adaptive-superpowers-hero.svg)
 
-Adaptive Superpowers sits between two extremes:
+Risk-adaptive engineering workflows optimized for GPT-5.6 and Claude 5.
 
-- **Model autonomy alone:** fast, but important testing or safety steps may be inconsistent.
-- **Official Superpowers:** strong discipline, but fixed workflow chains can add planning, approval, delegation, and verification overhead to small tasks.
+> Experimental 0.1.0: usable and tested across the target model matrix, but not an official obra/superpowers distribution.
 
-This project defines a mandatory engineering baseline and allows the model to add process only when task evidence or risk justifies it. A 150-word gate is always loaded; detailed routing policy is loaded only when a task is not precise and low-risk.
+## Why
 
-> **Status:** experimental and under evaluation. The repository is not an official obra/superpowers distribution and is not ready to replace an installed plugin yet.
+Capable coding models should not have to choose between speed and engineering evidence. Adaptive Superpowers fixes a small baseline for authorization, dirty-worktree safety, retained automated coverage, and evidence-backed completion. It adds process only when the request is ambiguous, broad, or risky.
 
-## The idea in one table
+Precise work stays direct; consequential work receives proportional planning and safeguards. This is an experimental adaptation, not an official obra/superpowers distribution.
 
-| Model autonomy alone | Adaptive Superpowers | Official Superpowers |
-| --- | --- | --- |
-| Model chooses nearly everything | Policy fixes the minimum; model chooses proportional extras | Applicable workflows are mandatory |
-| Fast but variable | Fast for precise work, stricter for risky work | Consistent but process-heavy |
-| Tests may be skipped | Observable behavior normally retains automated coverage | Strict test-first workflow |
-| Host behavior is implicit | Host adapters are explicit | Multi-host package with custom workflows |
-| Review may be self-review without disclosure | Independence is named honestly | Fresh-agent review is central |
+## How it routes
+
+A 150-word gate is always loaded and classifies the request before implementation. Read-only work remains read-only. A precise, low-risk change can take a fast path, while uncertainty or risk loads the full router.
+
+```mermaid
+flowchart LR
+    R[User request] --> G{150-word adaptive gate}
+    G -->|Inspect or explain| RO[Read-only]
+    G -->|Precise and low-risk| FP[Fast path]
+    G -->|Ambiguous, broad, or risky| FR[Full router]
+    FP --> I[Inspect]
+    I --> C[Implement plus retained test]
+    C --> V[Fresh targeted verification]
+    V -->|Failure| C
+    V -->|Pass| E[Evidence-backed completion]
+    FR --> P[Proportional planning and safeguards]
+    P --> E
+```
+
+## Install
+
+Clone from [aididhaiqal/adaptive-superpowers](https://github.com/aididhaiqal/adaptive-superpowers). The commands below refuse existing targets, so they never overwrite an installed skill or clone.
+
+### Codex
+
+Codex can use the canonical `skills/` tree directly. This installation symlinks every direct child that contains `SKILL.md` into `$HOME/.agents/skills`.
+
+```bash
+REPO="$HOME/src/adaptive-superpowers"
+test ! -e "$REPO" || { echo "Refusing to overwrite $REPO" >&2; exit 1; }
+git clone https://github.com/aididhaiqal/adaptive-superpowers.git "$REPO"
+mkdir -p "$HOME/.agents/skills"
+
+for skill in "$REPO"/skills/*; do
+  test -f "$skill/SKILL.md" || continue
+  name="$(basename "$skill")"
+  test ! -e "$HOME/.agents/skills/$name" || { echo "Refusing to overwrite $name" >&2; exit 1; }
+done
+
+for skill in "$REPO"/skills/*; do
+  test -f "$skill/SKILL.md" || continue
+  ln -s "$skill" "$HOME/.agents/skills/$(basename "$skill")"
+done
+```
+
+### Claude Code
+
+Claude Code loads a clone for one run with `claude --plugin-dir <clone>`:
+
+```bash
+REPO="$HOME/src/adaptive-superpowers"
+test ! -e "$REPO" || { echo "Refusing to overwrite $REPO" >&2; exit 1; }
+git clone https://github.com/aididhaiqal/adaptive-superpowers.git "$REPO"
+claude --plugin-dir "$REPO"
+```
+
+The repository also ships marketplace metadata in `.claude-plugin/marketplace.json` for local development:
+
+```bash
+claude plugin marketplace add /path/to/adaptive-superpowers
+claude plugin install adaptive-superpowers@adaptive-superpowers-dev
+```
+
+Fable uses the Claude adapter with `--model claude-fable-5`; it is not a separate integration.
+
+## Tested models
+
+These measured cohorts are recorded evaluation results, not universal speed claims:
+
+| Model | Cohort | Retained tests | Median |
+| --- | ---: | ---: | ---: |
+| GPT-5.6 Sol Fast | 5 | 5/5 | 55.47s |
+| GPT-5.6 Terra Fast | 5 | 5/5 | 52.17s |
+| Claude Opus 4.8 | 3 | 3/3 | 63.36s |
+| Claude Fable 5 | 3 | 3/3 | 70.50s |
 
 ## What remains mandatory
 
-The model does not receive unlimited discretion. Every task is classified into the highest applicable tier:
+Every task is classified to the highest applicable tier. Review-only and diagnosis-only requests are read-only; destructive or externally visible actions require authority. Behavior-changing work normally retains automated coverage for observable behavior, receives fresh targeted verification, and ends with evidence-backed completion.
 
-| Tier | Required behavior |
-| --- | --- |
-| Read-only | Inspect and report without implementation artifacts or external mutation. |
-| Mechanical | Inspect, make a provably non-behavioral edit, run a narrow check, review the diff, report. |
-| Standard | State a brief plan and acceptance, implement narrowly, add or update automated coverage for observable behavior changes unless infeasible, run focused checks, review the diff, report evidence. |
-| High-risk | Follow Standard and add a durable plan plus explicit claim-to-evidence verification before consequential action. |
+The model may choose proportional planning, strict red-green TDD, a worktree, independent review, or delegation when those add value. It may not skip authorization boundaries, dirty-worktree protection, applicable automated coverage, or honest reporting of review independence.
 
-The model may decide whether brainstorming, strict red-green TDD, a worktree, independent review, or delegation adds value. It may not skip authorization boundaries, dirty-worktree protection, applicable automated coverage, or evidence-backed completion.
-
-## Same request, different workflow
-
-Request:
-
-> Add CSV export to the existing report page.
-
-Official Superpowers can route this through brainstorming, multiple approaches, design approval, a committed specification, detailed planning, test-first implementation, review, and a separate completion gate.
-
-Adaptive Superpowers normally does this:
-
-1. Inspect existing report and export conventions.
-2. Ask only if a material choice remains unresolved.
-3. State a short plan in the required skill announcement; do not restate acceptance already explicit in the request.
-4. Implement the smallest coherent change and retain an automated CSV behavior test.
-5. Run focused checks, inspect the final diff, and report current evidence.
-
-High-risk details still raise the workflow. Exporting sensitive production records, for example, requires a durable plan, target checks, recovery controls, and explicit verification.
-
-## Shared core, host adapters, model profiles
+## Repository structure
 
 ```text
-skills/                 mandatory gate, conditional router, and shared behavior policy
+skills/                 shared gate, conditional router, and workflow policy
 .codex-plugin/          Codex discovery metadata
-.claude-plugin/         Claude Code discovery metadata
+.claude-plugin/         Claude Code plugin and marketplace metadata
 hooks/                  Claude Code router bootstrap
 adapters/               host-specific operating notes
-profiles/               initially no model-specific overrides
+profiles/               no model-specific overrides initially
 tests/                  static, packaging, and behavioral contracts
 ```
 
-The 12 shared skills contain no required bundle-owned subagent workflow. `using-superpowers/SKILL.md` is the always-triggered cross-host gate, while its `references/full-router.md` is read only when the fast-path predicate fails or scope grows. Native delegation is used only when the host exposes it, current policy permits it, and the task benefits from it.
+There are 12 shared runtime skills. `skills/using-superpowers/SKILL.md` is the always-triggered gate; its full-router reference is loaded only when the fast-path predicate fails or scope grows.
 
-Target evaluation models:
+## Development and verification
 
-- Codex with **GPT-5.6 Sol** and **GPT-5.6 Terra**
-- Claude Code with **Claude Opus 4.8**
-- Claude Code with **Claude Fable 5**
-
-Fable uses the Claude Code adapter with `--model claude-fable-5`; it is not a separate host integration. Model profiles remain empty until repeated evidence demonstrates a model-specific failure.
-
-## Safety decisions
-
-- Review-only and diagnosis-only requests remain read-only.
-- Destructive and externally visible actions require authority.
-- Fresh verification evidence is reused when relevant state has not changed.
-- A self-review is never described as independent review.
-- Staging refuses to overlay an existing destination, preventing hybrid skill sets.
-- The inherited browser visual companion is intentionally omitted until its state-file writes reject symlink targets and have automated security coverage.
-
-## Local development
-
-Run all repository checks:
+Run the complete repository suite before sharing a change:
 
 ```bash
 bash tests/run-all.sh
+git diff --check
 ```
 
-Validate the skill profile and packaging metadata:
-
-```bash
-bash scripts/validate.sh
-```
-
-Create a clean isolated adapter tree:
+For isolated host-adapter checks, stage into a new directory only:
 
 ```bash
 bash scripts/stage-adapter.sh codex /tmp/adaptive-superpowers-codex
 bash scripts/stage-adapter.sh claude /tmp/adaptive-superpowers-claude
 ```
 
-The staging command refuses an existing destination. It never writes to installed skills or user configuration.
+The staging command refuses an existing destination and does not write to installed skills or user configuration.
 
-Claude Code can load a staged Claude adapter for a single run:
+## Evaluation methodology
 
-```bash
-claude --plugin-dir /tmp/adaptive-superpowers-claude --model claude-opus-4-8
-```
+Candidate runs precede baseline spending. Each run records the candidate commit, adapter, model identifier, CLI version, scenario, duration, tests, tool calls, skill loads, duplicated explanation or verification, and deterministic result. Missing access, authentication failure, rate limiting, or transcript-capture failure is indeterminate rather than a behavioral failure.
 
-Codex installation and marketplace publication remain intentionally undocumented until isolated adapter and behavior evaluations pass.
-
-## Evaluation policy
-
-The candidate is tested before comparison with the baselines. Initial scenarios cover:
-
-- fully specified small work without unnecessary ceremony;
-- a behavior-changing feature that must retain a runnable test;
-- a confirmed bug that must retain a regression test;
-- diagnosis-only and review-only non-mutation;
-- dirty-worktree preservation;
-- unavailable delegation;
-- evidence-backed completion.
-
-Unavailable model access, expired credentials, and rate limits are reported as indeterminate rather than behavioral failures. Raw trajectories remain local.
-
-See [Architecture](docs/architecture.md) and [Evaluation](docs/evaluation.md).
+Initial scenarios cover specified small work, behavior changes with retained tests, confirmed regressions, read-only diagnosis and review, dirty-worktree preservation, unavailable delegation, and evidence-backed completion. Raw trajectories stay local; published summaries contain redacted evidence and aggregate metrics only. See [Architecture](docs/architecture.md) and [Evaluation](docs/evaluation.md).
 
 ## Provenance and license
 

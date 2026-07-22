@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="720" viewBox="0 0 1600 720" role="img" aria-labelledby="title desc">
+  <title id="title">Adaptive Superpowers</title>
+  <desc id="desc">Move fast. Keep the proof. Risk-adaptive workflows optimized for GPT-5.6 and Claude 5.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#120b2e"/><stop offset="52%" stop-color="#29185c"/><stop offset="100%" stop-color="#09071d"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#b8a4ff"/><stop offset="100%" stop-color="#72e0d1"/></linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1600" height="720" fill="url(#background)"/>
+  <g fill="none" stroke="#a89afb" stroke-width="2" opacity=".23">
+    <path d="M0 144h212l58 58h188l76-76h220"/><path d="M1600 558h-188l-68-68h-212l-78-78H836"/>
+    <path d="M128 630v-88h110l64-64h174"/><path d="M1452 78v106h-114l-62 62h-202"/>
+  </g>
+  <g fill="#72e0d1" opacity=".75" filter="url(#glow)"><circle cx="270" cy="202" r="5"/><circle cx="534" cy="126" r="5"/><circle cx="1338" cy="184" r="5"/><circle cx="1132" cy="490" r="5"/><circle cx="238" cy="542" r="5"/><circle cx="1276" cy="246" r="5"/></g>
+  <g font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="152" y="194" fill="#b8a4ff" font-size="25" font-weight="700" letter-spacing="5">ADAPTIVE SUPERPOWERS</text>
+    <text x="152" y="317" fill="#ffffff" font-size="88" font-weight="750" letter-spacing="-3">Move fast.</text>
+    <text x="152" y="412" fill="url(#accent)" font-size="88" font-weight="750" letter-spacing="-3">Keep the proof.</text>
+    <text x="156" y="470" fill="#d7d1f2" font-size="27">Risk-adaptive engineering workflows optimized for GPT-5.6 and Claude 5.</text>
+    <g transform="translate(152 536)">
+      <rect width="160" height="54" rx="27" fill="#ffffff" fill-opacity=".11" stroke="#b8a4ff" stroke-opacity=".65"/><text x="29" y="35" fill="#ffffff" font-size="21" font-weight="650">GPT-5.6</text>
+      <rect x="180" width="138" height="54" rx="27" fill="#ffffff" fill-opacity=".11" stroke="#b8a4ff" stroke-opacity=".65"/><text x="207" y="35" fill="#ffffff" font-size="21" font-weight="650">Claude 5</text>
+      <rect x="338" width="200" height="54" rx="27" fill="#72e0d1" fill-opacity=".13" stroke="#72e0d1" stroke-opacity=".75"/><text x="367" y="35" fill="#d9fff9" font-size="21" font-weight="650">Tests retained</text>
+    </g>
+  </g>
+</svg>
