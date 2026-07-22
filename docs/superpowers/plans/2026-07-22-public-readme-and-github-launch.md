@@ -22,16 +22,18 @@
 
 ---
 
-### Task 1: Define the public README contract
+### Task 1: Build the public README and visual system
 
 **Files:**
 - Modify: `.gitignore`
 - Modify: `tests/static/test-repository-contract.sh`
+- Create: `assets/adaptive-superpowers-hero.svg`
+- Modify: `README.md`
 - Test: `tests/static/test-repository-contract.sh`
 
 **Interfaces:**
 - Consumes: the existing static repository contract and approved README design.
-- Produces: executable requirements for the hero, public positioning, installation, Mermaid routing, and public repository URL.
+- Produces: a tested GitHub-renderable hero and canonical public documentation for installation, routing, evaluation, architecture, and provenance.
 
 - [ ] **Step 1: Ignore visual-companion state**
 
@@ -61,25 +63,7 @@ Run: `bash tests/static/test-repository-contract.sh`
 
 Expected: non-zero exit because `assets/adaptive-superpowers-hero.svg` does not exist.
 
-- [ ] **Step 4: Commit the failing contract**
-
-```bash
-git add .gitignore tests/static/test-repository-contract.sh
-git commit -m "test: define public README contract"
-```
-
-### Task 2: Build the public README and visual system
-
-**Files:**
-- Create: `assets/adaptive-superpowers-hero.svg`
-- Modify: `README.md`
-- Test: `tests/static/test-repository-contract.sh`
-
-**Interfaces:**
-- Consumes: the exact strings and asset path enforced by Task 1.
-- Produces: a GitHub-renderable hero and canonical documentation for installation, routing, evaluation, architecture, and provenance.
-
-- [ ] **Step 1: Create the branded SVG hero**
+- [ ] **Step 4: Create the branded SVG hero**
 
 Create a 1600×720 SVG with `role="img"`, descriptive `<title>` and `<desc>`, a dark violet gradient, restrained circuit lines, the exact hero message, the positioning line, and pills for `GPT-5.6`, `Claude 5`, and `Tests retained`. Use system sans-serif fonts so the text renders without an external font dependency.
 
@@ -90,7 +74,7 @@ The accessible text must be:
 <desc id="desc">Move fast. Keep the proof. Risk-adaptive workflows optimized for GPT-5.6 and Claude 5.</desc>
 ```
 
-- [ ] **Step 2: Rewrite the README product-first**
+- [ ] **Step 5: Rewrite the README product-first**
 
 Use this exact section order:
 
@@ -146,13 +130,13 @@ Report these measured results without presenting them as universal speed claims:
 
 Preserve the three pinned provenance hashes and the phrase `observable behavior` required by the existing contract.
 
-- [ ] **Step 3: Verify the focused contract passes**
+- [ ] **Step 6: Verify the focused contract passes**
 
 Run: `bash tests/static/test-repository-contract.sh`
 
 Expected: `repository contract passed` and exit 0.
 
-- [ ] **Step 4: Run all repository checks and review the diff**
+- [ ] **Step 7: Run all repository checks and review the diff**
 
 ```bash
 bash tests/run-all.sh
@@ -163,21 +147,21 @@ git diff -- README.md assets/adaptive-superpowers-hero.svg .gitignore tests/stat
 
 Expected: 12 skills, 150-word gate, 2,586 runtime words, all repository tests passed, no whitespace errors, and only intended files changed.
 
-- [ ] **Step 5: Commit the public documentation**
+- [ ] **Step 8: Commit the public documentation**
 
 ```bash
-git add README.md assets/adaptive-superpowers-hero.svg
+git add .gitignore tests/static/test-repository-contract.sh README.md assets/adaptive-superpowers-hero.svg
 git commit -m "docs: launch Adaptive Superpowers"
 ```
 
-### Task 3: Audit and publish the repository
+### Task 2: Audit and publish the repository
 
 **Files:**
 - Inspect: all paths from `git ls-files`
 - External target: `https://github.com/aididhaiqal/adaptive-superpowers`
 
 **Interfaces:**
-- Consumes: the clean validated commit from Task 2 and authenticated GitHub CLI.
+- Consumes: the clean validated commit from Task 1 and authenticated GitHub CLI.
 - Produces: a public GitHub repository whose default branch is `main`, with `origin` configured locally.
 
 - [ ] **Step 1: Audit tracked publication contents**
