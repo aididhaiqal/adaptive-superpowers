@@ -4,7 +4,7 @@
 
 Risk-adaptive engineering workflows optimized for GPT-5.6 and Claude 5.
 
-> Experimental 0.1.0: usable and tested across the target model matrix, but not an official obra/superpowers distribution.
+> Experimental 0.2.0: usable and tested across the target model matrix, but not an official obra/superpowers distribution.
 
 ## Install
 
@@ -152,11 +152,11 @@ Precise work stays direct; consequential work receives proportional planning and
 
 ## How it routes
 
-A 200-word gate is always loaded and classifies the request before implementation. Read-only work remains read-only. A precise, low-risk change can take a fast path, while uncertainty or risk loads the full router. The gate also prevents bounded workers from restarting brainstorming or silently narrowing accepted outcomes.
+A compact gate is always loaded and classifies the request before implementation. Read-only work remains read-only. A precise, low-risk change can take a fast path, while uncertainty or risk loads the full router. The gate also prevents bounded workers from restarting brainstorming or silently narrowing accepted outcomes.
 
 ```mermaid
 flowchart LR
-    R[User request] --> G{200-word adaptive gate}
+    R[User request] --> G{Compact adaptive gate}
     G -->|Inspect or explain| RO[Read-only]
     G -->|Precise and low-risk| FP[Fast path]
     G -->|Ambiguous, broad, or risky| FR[Full router]
@@ -268,17 +268,27 @@ Subagents can reduce main-context pollution and wall time for independent work, 
 
 ## Tested models
 
-These measured cohorts are recorded evaluation results, not universal speed claims:
+The latest precision cohort used the immediately preceding 333-word gate for
+feature runs; the final 347-word revision changes only the ambiguity guard and
+passed its focused Fable forward test. These are recorded results, not universal
+speed claims:
 
 | Model | Cohort | Retained tests | Median |
 | --- | ---: | ---: | ---: |
-| GPT-5.6 Sol Standard | 5 | 5/5 | 73.86s |
-| GPT-5.6 Sol Fast | 5 | 5/5 | 55.47s |
-| GPT-5.6 Terra Fast | 5 | 5/5 | 52.17s |
-| Claude Opus 4.8 | 3 | 3/3 | 63.36s |
-| Claude Fable 5 | 3 | 3/3 | 70.50s |
+| GPT-5.6 Sol Standard | 3 | 3/3 | 70.50s |
+| GPT-5.6 Terra Standard | 3 | 3/3 | 81.95s |
+| GPT-5.6 Sol Fast | 3 | 3/3 | 54.48s |
+| GPT-5.6 Terra Fast | 3 | 3/3 | 60.28s |
+| Claude Opus 5 | 3 | 3/3 | 49.52s |
+| Claude Fable 5 | 3 | 3/3 | 51.89s |
 
-Fast mode uses 2.5 times ChatGPT credits. Acceptance is based on retained-test correctness across all four target models plus the sub-60-second Sol Fast cohort; it is not a claim that Standard met 60 seconds. See the [optimized-router evaluation summary](docs/evaluations/2026-07-22-optimized-adaptive-router.md) for the qualification and cohort details.
+All six untreated controls produced working behavior but no retained test. Five
+initial ambiguity cases stopped safely; the focused guard then changed Fable's
+failure into the sixth safe outcome. Fast reduced median Codex wall time by
+22.7% for Sol and 26.4% for Terra in this fixture, without consistently reducing
+tokens. See the
+[Opus 5 precision benchmark](docs/evaluations/2026-07-25-opus5-precision-benchmark.md)
+for controls, ranges, token caveats, and the Fable before/after result.
 
 ## What remains mandatory
 
@@ -322,7 +332,7 @@ The staging command refuses an existing destination and does not write to instal
 
 Candidate runs precede baseline spending. Each run records the candidate commit, adapter, model identifier, CLI version, scenario, duration, tests, tool calls, skill loads, duplicated explanation or verification, and deterministic result. Missing access, authentication failure, rate limiting, or transcript-capture failure is indeterminate rather than a behavioral failure.
 
-The three currently tracked executable scenarios are `adaptive-feature-retains-test`, `adaptive-bug-retains-regression`, and `adaptive-resume-preserves-checkout`. Read-only diagnosis and review, unavailable delegation, and evidence-backed completion remain planned broader coverage. Raw trajectories stay local; published summaries contain redacted evidence and aggregate metrics only. See [Architecture](docs/architecture.md), [Evaluation](docs/evaluation.md), and the [optimized-router evaluation summary](docs/evaluations/2026-07-22-optimized-adaptive-router.md).
+The repository-tracked executable scenarios are `adaptive-feature-retains-test`, `adaptive-bug-retains-regression`, and `adaptive-resume-preserves-checkout`. The 2026-07-25 external benchmark additionally covers a blocking ambiguity choice. Read-only diagnosis and review, unavailable delegation, and evidence-backed completion remain planned broader coverage. Raw trajectories stay local; published summaries contain redacted evidence and aggregate metrics only. See [Architecture](docs/architecture.md), [Evaluation](docs/evaluation.md), and the [Opus 5 precision benchmark](docs/evaluations/2026-07-25-opus5-precision-benchmark.md).
 
 ## Provenance and license
 

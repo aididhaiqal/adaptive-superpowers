@@ -64,6 +64,15 @@ grep -Fq 'Do not automatically run both reviews.' \
 grep -Fq 'Reuse fresh evidence' \
   "$ROOT/skills/verification-before-completion/SKILL.md"
 
+for manifest in \
+  "$ROOT/.claude-plugin/plugin.json" \
+  "$ROOT/.claude-plugin/marketplace.json" \
+  "$ROOT/.codex-plugin/plugin.json"; do
+  grep -Fq '"version": "0.2.0"' "$manifest"
+done
+grep -Fq 'Experimental 0.2.0' "$ROOT/README.md"
+grep -Fq '## 0.2.0 - 2026-07-25' "$ROOT/CHANGELOG.md"
+
 if grep -Eiq 'mandatory subagent|fresh subagent|spawn_agent|followup_task|fork_turns' "${SKILL_FILES[@]}"; then
   echo 'runtime skills contain bundle-owned delegation policy' >&2
   exit 1

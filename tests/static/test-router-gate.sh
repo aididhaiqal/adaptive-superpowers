@@ -26,19 +26,26 @@ fi
 
 require_text "$GATE" 'description: "Use when starting any conversation."'
 require_text "$GATE" 'runnable automated test file'
-require_text "$GATE" 'when feasible'
+require_text "$GATE" 'at most two production files plus tests'
+require_text "$GATE" 'When feasible'
 require_text "$GATE" 'fresh targeted verification'
-require_text "$GATE" 'After reading this gate, use three task phases'
+require_text "$GATE" 'For every fast-path implementation'
 require_text "$GATE" 'file contents'
-require_text "$GATE" 'sole pre-work update'
-require_text "$GATE" 'do not restate acceptance'
-require_text "$GATE" 'Remain in phase 3 while repairing failures'
+require_text "$GATE" 'Before working, send one concise update.'
+require_text "$GATE" 'Do not send another pre-work update or restate the acceptance criteria.'
+require_text "$GATE" 'Repair failures before moving beyond verification'
 require_text "$GATE" 'references/full-router.md'
-require_text "$GATE" 'resumed/compacted/concurrent/editing-delegated work'
+require_text "$GATE" 'resumed or compacted'
+require_text "$GATE" 'concurrent or delegated editing'
 require_text "$GATE" 'For bulky independent investigation, use one available read-only explorer'
 require_text "$GATE" 'otherwise inspect locally'
-require_text "$GATE" 'Keep coupled work here'
+require_text "$GATE" 'Keep decisions and tightly coupled work in the parent context.'
 require_text "$GATE" 'references/explorer-handoff.md'
+require_text "$GATE" 'If a user choice could materially change the requested result, ask one focused question before making the affected changes'
+require_text "$GATE" 'do not bypass it with provisional defaults, configuration, or multiple implementations.'
+require_text "$GATE" 'Unrelated safe inspection may continue.'
+require_text "$GATE" 'Offer material recommendations only when evidence supports them.'
+require_text "$GATE" 'Recommendations do not authorize additional work.'
 
 require_text "$EXPLORER_HANDOFF" 'Keep decisions and coupled implementation in the parent.'
 require_text "$EXPLORER_HANDOFF" 'would materially burden the parent context'
@@ -52,11 +59,18 @@ if grep -Fq 'repeat batch 3' "$GATE"; then
 fi
 
 gate_words="$(wc -w < "$GATE" | tr -d ' ')"
-if (( gate_words != 200 )); then
-  echo "router gate has $gate_words words (expected exactly 200)" >&2
+require_text "$ROOT/README.md" 'A compact gate is always loaded'
+
+exact_count_message='expected exactly 2''00'
+exact_count_comparison='gate_words != 2''00'
+if grep -Fq "$exact_count_message" "$0" || grep -Fq "$exact_count_comparison" "$0"; then
+  echo 'router gate contract must not enforce an exact 200-word target' >&2
   exit 1
 fi
-require_text "$ROOT/README.md" "A ${gate_words}-word gate is always loaded"
+if grep -Eq '200-word([[:space:]]+adaptive)?[[:space:]]+gate' "$GATE" "$ROOT/README.md" "$ROOT/docs/architecture.md"; then
+  echo 'active router documentation must describe behavior instead of a 200-word target' >&2
+  exit 1
+fi
 
 require_text "$FULL_ROUTER" 'add or update automated coverage for observable behavior changes unless infeasible'
 require_text "$FULL_ROUTER" 'verification-before-completion'
