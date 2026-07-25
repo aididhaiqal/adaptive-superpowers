@@ -2,9 +2,18 @@
 
 ![Adaptive Superpowers: Move fast. Keep the proof. Risk-adaptive workflows optimized for GPT-5.6 and Claude 5.](assets/adaptive-superpowers-hero.svg)
 
+<p align="center">
+  <a href="https://github.com/aididhaiqal/adaptive-superpowers/releases/tag/v0.2.0"><img alt="Release: v0.2.0 experimental" src="https://img.shields.io/badge/release-v0.2.0-b8a4ff?style=flat-square"></a>
+  <img alt="Runtime skills: 12" src="https://img.shields.io/badge/runtime_skills-12-29185c?style=flat-square">
+  <img alt="Feature benchmark: 18 out of 18" src="https://img.shields.io/badge/feature_benchmark-18%2F18-168f83?style=flat-square">
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-55506b?style=flat-square"></a>
+</p>
+
 Risk-adaptive engineering workflows optimized for GPT-5.6 and Claude 5.
 
 > Experimental 0.2.0: usable and tested across the target model matrix, but not an official obra/superpowers distribution.
+
+**Small task? Stay direct. Big task? Add safeguards. Every task? Keep the proof.**
 
 ## Install
 
@@ -17,6 +26,29 @@ Installation follows the app that runs the agent, not the model name:
 | Codex Desktop or Codex CLI | Codex user skills | GPT-5.6 Sol, Terra, and other Codex models |
 | Claude Code | Claude plugin marketplace | Claude Opus, Fable, and other Claude Code models |
 | Claude Code for one temporary run | `--plugin-dir` | Only that Claude process |
+
+#### One clone, two hosts
+
+```mermaid
+flowchart TB
+    R["One shared clone"] --> C["Codex skill links"]
+    C --> CT["New Codex task"]
+    R --> M["Claude marketplace"]
+    M --> CP["Claude plugin cache"]
+    CP --> CS["New Claude session"]
+    R --> T["Temporary --plugin-dir run"]
+    CT --> G["Same adaptive gate"]
+    CS --> G
+    T --> G
+    G --> S["12 shared runtime skills"]
+
+    classDef source fill:#29185c,stroke:#b8a4ff,color:#fff
+    classDef host fill:#f4f1ff,stroke:#8f79dd,color:#241a43
+    classDef gate fill:#d9fff9,stroke:#168f83,color:#123e39
+    class R source
+    class C,CT,M,CP,CS,T host
+    class G,S gate
+```
 
 You need Git plus a current Codex or Claude Code installation. The commands below use Bash or zsh on macOS/Linux; Windows users should run them inside WSL.
 
@@ -155,20 +187,52 @@ Precise work stays direct; consequential work receives proportional planning and
 A compact gate is always loaded and classifies the request before implementation. Read-only work remains read-only. A precise, low-risk change can take a fast path, while uncertainty or risk loads the full router. The gate also prevents bounded workers from restarting brainstorming or silently narrowing accepted outcomes.
 
 ```mermaid
-flowchart LR
-    R[User request] --> G{Compact adaptive gate}
-    G -->|Inspect or explain| RO[Read-only]
-    G -->|Precise and low-risk| FP[Fast path]
-    G -->|Ambiguous, broad, or risky| FR[Full router]
-    FP --> I[Inspect]
-    I --> C[Implement plus retained test when feasible]
-    C --> V[Fresh targeted verification]
-    V -->|Failure and repair within phase 3| V
-    V -->|Pass| CR[Final completion review]
-    CR -->|Blocking finding| C
-    CR -->|Approved plus optional recommendations| E[Evidence-backed completion]
-    FR --> P[Proportional planning and safeguards]
+flowchart TB
+    R["User request"] --> G{"Compact adaptive gate"}
+    G -->|"Inspect or explain"| RO["Read-only answer"]
+    G -->|"Precise + low risk"| FP["Fast path"]
+    G -->|"Unresolved choice"| Q["Ask one focused question"]
+    G -->|"Material, resumed, broad, or risky"| FR["Full router"]
+    Q --> A["User decides"]
+    A --> G
+    FP --> C["Implementation + proof"]
+    FR --> P["Proportional planning + safeguards"]
     P --> C
+
+    classDef request fill:#29185c,stroke:#b8a4ff,color:#fff
+    classDef decision fill:#fff4d6,stroke:#c49422,color:#4d3909
+    classDef direct fill:#d9fff9,stroke:#168f83,color:#123e39
+    classDef guarded fill:#f4f1ff,stroke:#8f79dd,color:#241a43
+    class R request
+    class G,Q,A decision
+    class RO,FP,C direct
+    class FR,P guarded
+```
+
+### The proof loop
+
+The route changes; the engineering finish line does not. Behavior-changing work keeps a runnable test when feasible, verification stays fresh, and supported blockers loop back into implementation.
+
+```mermaid
+flowchart LR
+    I["Inspect"] --> B["Implement"]
+    B --> T["Retain runnable test"]
+    T --> V{"Targeted verification"}
+    V -->|"Fails"| B
+    V -->|"Passes"| CR{"Completion review"}
+    CR -->|"Blocking finding"| B
+    CR -->|"Ready"| E["Evidence-backed completion"]
+    CR -.->|"Optional, supported"| O["Material recommendation"]
+    O -.-> E
+
+    classDef action fill:#f4f1ff,stroke:#8f79dd,color:#241a43
+    classDef proof fill:#d9fff9,stroke:#168f83,color:#123e39
+    classDef decision fill:#fff4d6,stroke:#c49422,color:#4d3909
+    classDef done fill:#29185c,stroke:#72e0d1,color:#fff
+    class I,B action
+    class T,O proof
+    class V,CR decision
+    class E done
 ```
 
 ## Optional Codex subagents
@@ -181,6 +245,22 @@ The core installation above does not require custom agents. Expand this section 
 <br>
 
 Adaptive Superpowers teaches the routing boundary: delegate one bounded read-only explorer only when bulky independent investigation would pollute the main context. Codex still owns orchestration and model selection. You can use its built-in agents without extra files, or make the explorer and reviewer deterministic with personal files under `~/.codex/agents/`. Project-only agents can instead live under `.codex/agents/` in that repository.
+
+```mermaid
+flowchart TB
+    P["Parent<br/>decisions · architecture · acceptance"]
+    P --> E["Explorer<br/>Terra High · read-only leaf"]
+    P --> F["Feature reviewer<br/>Terra XHigh · read-only leaf"]
+    P --> R["Final reviewer<br/>Sol High · read-only leaf"]
+    E --> O["Evidence · findings · verdicts<br/>return to the parent"]
+    F --> O
+    R --> O
+
+    classDef parent fill:#29185c,stroke:#b8a4ff,color:#fff
+    classDef leaf fill:#d9fff9,stroke:#168f83,color:#123e39
+    class P,O parent
+    class E,F,R leaf
+```
 
 These model assignments are an optional Codex POC profile, not shared cross-host policy. The shared skills select roles by scope and availability; other hosts may use equivalent native agents.
 

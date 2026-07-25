@@ -40,7 +40,14 @@ if grep -Eq '^max_(threads|depth) = ' "$ROOT/README.md"; then
   echo 'README must not prescribe global Codex thread or depth limits' >&2
   exit 1
 fi
-grep -Fq '```mermaid' "$ROOT/README.md"
+mermaid_count="$(grep -Fc '```mermaid' "$ROOT/README.md")"
+if [[ "$mermaid_count" -lt 4 ]]; then
+  echo "README must keep the four distinct visual explanations; found $mermaid_count" >&2
+  exit 1
+fi
+grep -Fq '#### One clone, two hosts' "$ROOT/README.md"
+grep -Fq '### The proof loop' "$ROOT/README.md"
+grep -Fq 'Parent<br/>decisions · architecture · acceptance' "$ROOT/README.md"
 grep -Fq 'A compact gate is always loaded' "$ROOT/README.md"
 
 install_line="$(grep -n '^## Install$' "$ROOT/README.md" | cut -d: -f1)"
