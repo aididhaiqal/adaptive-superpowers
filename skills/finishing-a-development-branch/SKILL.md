@@ -7,7 +7,7 @@ description: Complete an authorized commit, push, integration, PR, branch, or wo
 
 Inspect and record repository root, worktree path, status, branch, and HEAD with read-only commands. Revalidate that identity immediately before commit, push, integration, branch, or cleanup operations. If it changed or unrelated work appeared, stop and preserve the live state. Preserve unrelated user changes.
 
-Confirm the task diff is understood, relevant required checks are fresh for the state to deliver, and any required completion review has no unresolved blocking findings. Preserve optional recommendations for the user; they do not prevent authorized delivery. Do not require a separate plan, log, or reconciliation artifact unless the user or repository does.
+Confirm the task diff is understood, relevant required checks are fresh for the state to deliver, any required canonical progress or status record is reconciled from final evidence, and any required completion review has no unresolved blocking findings. Preserve optional recommendations for the user; they do not prevent authorized delivery. Do not require a separate plan, log, or reconciliation artifact unless the user or repository does.
 
 - If the user or repository policy already authorizes commit or push, perform it after verification.
 - Ask one concise question only when merge, PR, push, retention, or cleanup authority remains unresolved.

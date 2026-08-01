@@ -19,6 +19,14 @@ The parent owns brainstorming, architecture, scope, and user decisions. A dispat
 
 Coverage is a completion requirement, not a universal TDD trigger. When a runnable automated test can protect new observable behavior or a confirmed regression, create or update it without waiting for the user to request tests; do not ask whether to add it. Manual verification alone is insufficient. Transient checks do not count as retained coverage. State why only when automation is genuinely infeasible.
 
+## Durable progress
+
+Live source, Git, test, deployment, and runtime evidence are authoritative. Plans and task reports remain intent or supporting evidence; they never override current evidence.
+
+At the start of material or resumable project work, identify any repository-designated canonical progress, roadmap, or status record. If none exists, use or create one `docs/progress.md` for material or resumable project work. Skip a durable record for routine isolated work.
+
+Before completion, reconcile that canonical record in the same change from the final diff and fresh evidence. Record the capability and owning area; whether it is implemented, tested, committed, pushed, merged, deployed, and runtime-verified; remaining stubs, compatibility paths, flags, exclusions, failures, blockers, and the next concrete step. Never copy stale counts forward or use an unqualified `Complete`. Do not create per-task implementation logs or duplicate ledgers.
+
 ## Checkout safety
 
 Current installed skills and live repository state override stale session summaries, prior plans, and progress artifacts. Removed workflows must not reactivate from memory.

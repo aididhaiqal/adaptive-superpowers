@@ -28,7 +28,7 @@ Keep outcomes dependency-ordered and omit code, routine mechanics, predicted out
 
 Reconcile the plan with the original request and approved scope closure. Do not introduce an unapproved deferral, exclusion, or substitute outcome merely because it is easier to implement.
 
-Do not duplicate supplied incidents or specifications in the plan, and do not create companion incident, specification, implementation-log, or progress-ledger artifacts unless requested or repository-required. Approval to plan or implement does not authorize commits or shared-checkout branch switching.
+Do not duplicate supplied incidents or specifications in the plan, and do not create companion incident, specification, implementation-log, or progress-ledger artifacts for routine work. When durable progress is repository-required or selected by the router for material or resumable work, use one canonical project record rather than per-plan logs. Approval to plan or implement does not authorize commits or shared-checkout branch switching.
 
 Create it before implementation. For destructive or consequential external-state work, put recovery, stop conditions, and pre-execution checks in acceptance. For production-data work, include target, approvals, dry-run counts, backup/restore evidence, integrity checks, batch/abort thresholds, and sensitive-output hygiene. For production deployment, include target revision, approvals, rollout, health evidence, rollback, and monitoring stop conditions.
 
