@@ -3,7 +3,7 @@
 ![Adaptive Superpowers: Move fast. Keep the proof. Risk-adaptive workflows optimized for GPT-5.6 and Claude 5.](assets/adaptive-superpowers-hero.svg)
 
 <p align="center">
-  <a href="https://github.com/aididhaiqal/adaptive-superpowers/releases/tag/v0.2.0"><img alt="Release: v0.2.0 experimental" src="https://img.shields.io/badge/release-v0.2.0-b8a4ff?style=flat-square"></a>
+  <a href="CHANGELOG.md"><img alt="Version: v0.2.1 experimental" src="https://img.shields.io/badge/version-v0.2.1-b8a4ff?style=flat-square"></a>
   <img alt="Runtime skills: 12" src="https://img.shields.io/badge/runtime_skills-12-29185c?style=flat-square">
   <img alt="Feature benchmark: 18 out of 18" src="https://img.shields.io/badge/feature_benchmark-18%2F18-168f83?style=flat-square">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-55506b?style=flat-square"></a>
@@ -11,7 +11,7 @@
 
 Risk-adaptive engineering workflows optimized for GPT-5.6 and Claude 5.
 
-> Experimental 0.2.0: usable and tested across the target model matrix, but not an official obra/superpowers distribution.
+> Experimental 0.2.1: usable and tested across the target model matrix, but not an official obra/superpowers distribution.
 
 **Small task? Stay direct. Big task? Add safeguards. Every task? Keep the proof.**
 

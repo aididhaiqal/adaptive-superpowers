@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1 - 2026-08-01
+
+- Reconcile material or resumable work into one repository-designated canonical progress record.
+- Fall back to `docs/progress.md` when a project has no existing progress, roadmap, or status record.
+- Keep routine isolated work exempt and avoid per-task implementation logs or duplicate ledgers.
+
 ## 0.2.0 - 2026-07-25
 
 - Scale brainstorming by decision consequence, preserve conversation-level promises, and require explicit approval for material deferrals.

@@ -68,10 +68,10 @@ for manifest in \
   "$ROOT/.claude-plugin/plugin.json" \
   "$ROOT/.claude-plugin/marketplace.json" \
   "$ROOT/.codex-plugin/plugin.json"; do
-  grep -Fq '"version": "0.2.0"' "$manifest"
+  grep -Fq '"version": "0.2.1"' "$manifest"
 done
-grep -Fq 'Experimental 0.2.0' "$ROOT/README.md"
-grep -Fq '## 0.2.0 - 2026-07-25' "$ROOT/CHANGELOG.md"
+grep -Fq 'Experimental 0.2.1' "$ROOT/README.md"
+grep -Fq '## 0.2.1 - 2026-08-01' "$ROOT/CHANGELOG.md"
 
 if grep -Eiq 'mandatory subagent|fresh subagent|spawn_agent|followup_task|fork_turns' "${SKILL_FILES[@]}"; then
   echo 'runtime skills contain bundle-owned delegation policy' >&2
