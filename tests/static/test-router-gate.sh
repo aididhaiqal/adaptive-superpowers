@@ -46,6 +46,7 @@ require_text "$GATE" 'do not bypass it with provisional defaults, configuration,
 require_text "$GATE" 'Unrelated safe inspection may continue.'
 require_text "$GATE" 'Offer material recommendations only when evidence supports them.'
 require_text "$GATE" 'Recommendations do not authorize additional work.'
+require_text "$GATE" '`managing-project-state`'
 
 require_text "$EXPLORER_HANDOFF" 'Keep decisions and coupled implementation in the parent.'
 require_text "$EXPLORER_HANDOFF" 'would materially burden the parent context'

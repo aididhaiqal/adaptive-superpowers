@@ -1,10 +1,10 @@
 {
   "name": "adaptive-superpowers",
-  "description": "Risk-adaptive planning, testing, debugging, review, and verification skills.",
-  "version": "0.2.1",
+  "description": "Risk-adaptive planning, testing, debugging, review, verification, and project-state skills.",
+  "version": "0.3.0",
   "author": {
     "name": "Adaptive Superpowers contributors"
   },
   "license": "MIT",
-  "keywords": ["skills", "testing", "debugging", "planning", "verification"]
+  "keywords": ["skills", "testing", "debugging", "planning", "verification", "project-state"]
 }

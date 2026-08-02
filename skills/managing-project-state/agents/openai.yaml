@@ -1,0 +1,4 @@
+interface:
+  display_name: "Managing Project State"
+  short_description: "Keep durable project state concise and complete"
+  default_prompt: "Use $managing-project-state to reconcile this project’s canonical current state without weakening unresolved commitments."

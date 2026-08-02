@@ -3,15 +3,15 @@
 ![Adaptive Superpowers: Move fast. Keep the proof. Risk-adaptive workflows optimized for GPT-5.6 and Claude 5.](assets/adaptive-superpowers-hero.svg)
 
 <p align="center">
-  <a href="CHANGELOG.md"><img alt="Version: v0.2.1 experimental" src="https://img.shields.io/badge/version-v0.2.1-b8a4ff?style=flat-square"></a>
-  <img alt="Runtime skills: 12" src="https://img.shields.io/badge/runtime_skills-12-29185c?style=flat-square">
+  <a href="CHANGELOG.md"><img alt="Version: v0.3.0 experimental" src="https://img.shields.io/badge/version-v0.3.0-b8a4ff?style=flat-square"></a>
+  <img alt="Runtime skills: 13" src="https://img.shields.io/badge/runtime_skills-13-29185c?style=flat-square">
   <img alt="Feature benchmark: 18 out of 18" src="https://img.shields.io/badge/feature_benchmark-18%2F18-168f83?style=flat-square">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-55506b?style=flat-square"></a>
 </p>
 
 Risk-adaptive engineering workflows optimized for GPT-5.6 and Claude 5.
 
-> Experimental 0.2.1: usable and tested across the target model matrix, but not an official obra/superpowers distribution.
+> Experimental 0.3.0: usable and tested across the target model matrix, but not an official obra/superpowers distribution.
 
 **Small task? Stay direct. Big task? Add safeguards. Every task? Keep the proof.**
 
@@ -40,7 +40,7 @@ flowchart TB
     CT --> G["Same adaptive gate"]
     CS --> G
     T --> G
-    G --> S["12 shared runtime skills"]
+    G --> S["13 shared runtime skills"]
 
     classDef source fill:#29185c,stroke:#b8a4ff,color:#fff
     classDef host fill:#f4f1ff,stroke:#8f79dd,color:#241a43
@@ -134,7 +134,7 @@ For Claude Code, inspect the installed component inventory:
 claude plugin details adaptive-superpowers@adaptive-superpowers-dev
 ```
 
-The Claude output should show 12 skills and one `SessionStart` hook. Start a new Codex task or Claude session after installing or updating.
+The Claude output should show 13 skills and one `SessionStart` hook. Start a new Codex task or Claude session after installing or updating.
 
 ### Update
 
@@ -208,6 +208,30 @@ flowchart TB
     class RO,FP,C direct
     class FR,P guarded
 ```
+
+### Persistent goals
+
+For “keep going” or host-managed persistent goals, the agent establishes one goal contract: accepted outcomes, what may continue automatically, verification cadence, and the stopping condition. It infers a clear stopping point from the accepted request or governing record and asks only when materially different interpretations would change scope. When durable cross-turn state is useful, `managing-project-state` stores that boundary in the governing plan or canonical current record, resumes at the first unfinished accepted outcome after compaction, and stops when acceptance is met. Optional recommendations remain visible without silently becoming more implementation.
+
+One governing plan covers the authorized workstream. A separate plan is for a separately authorized objective with independent acceptance—not each implementation slice, review fix, or resumed turn. The durable project ledger records capability and delivery state; temporary host execution state may track mechanics, but never overrides or duplicates the canonical record. Consolidation may compress completed detail, but every unresolved blocker, external gate, accepted exclusion, pending outcome, and material watch item keeps an explicit disposition.
+
+### Project state without project-management theatre
+
+Routine isolated work creates no ledger, configuration, archive, or work item. Material, resumable, persistent, or already tracked work reconciles one compact current record at meaningful transitions. High-value evidence archives only when policy, operational safety, an external gate, or the user requires it.
+
+```mermaid
+flowchart LR
+    W["Accepted work"] --> T{"Needs durable state?"}
+    T -->|"No"| D["Implement and verify directly"]
+    T -->|"Yes"| C["One canonical current record"]
+    C --> P["Protect queued · active · blocked · future-watch"]
+    P --> V["Qualified delivery evidence"]
+    V --> A{"Evidence earns archival?"}
+    A -->|"No"| K["Compact current state + Git history"]
+    A -->|"Yes"| E["One bounded evidence entry"]
+```
+
+The default Convention profile follows an existing repository ledger. Repositories that want deterministic CI transition checks may opt into `.superpowers/project-state.yaml`; the managed profile cannot narrow the four protected states. `AGENTS.md` keeps repository facts and the canonical pointer, while `CLAUDE.md` remains a thin host adapter. Routine implementation does not rewrite either file.
 
 ### The proof loop
 
@@ -349,9 +373,10 @@ Subagents can reduce main-context pollution and wall time for independent work, 
 ## Tested models
 
 The latest precision cohort used the immediately preceding 333-word gate for
-feature runs; the final 347-word revision changes only the ambiguity guard and
-passed its focused Fable forward test. These are recorded results, not universal
-speed claims:
+feature runs; the final evaluated 347-word revision changes only the ambiguity
+guard and passed its focused Fable forward test. The current 423-word candidate
+adds unreleased persistent-goal and project-state routing and has not inherited
+those latency measurements. These are recorded results, not universal speed claims:
 
 | Model | Cohort | Retained tests | Median |
 | --- | ---: | ---: | ---: |
@@ -372,7 +397,7 @@ for controls, ranges, token caveats, and the Fable before/after result.
 
 ## What remains mandatory
 
-Every task is classified to the highest applicable tier. Review-only and diagnosis-only requests are read-only; destructive or externally visible actions require authority. Behavior-changing work normally retains automated coverage for observable behavior, receives fresh targeted verification, and then receives a final review for missed requirements, integration gaps, and material recommendations before evidence-backed completion. Live checkout identity overrides stale summaries: the agent records repository root, worktree, branch, HEAD, and status, then revalidates after resume and before edits, editing delegation, commits, or branch operations.
+Every task is classified to the highest applicable tier. Review-only and diagnosis-only requests are read-only; destructive or externally visible actions require authority. Behavior-changing work normally retains automated coverage for observable behavior, receives focused verification during implementation, broader verification at coherent milestones or the final gate, and then a proportional review before evidence-backed completion. Unchanged evidence is reused; known environment-blocked lanes wait for relevant state to change. Live checkout identity overrides stale summaries: the agent records repository root, worktree, branch, HEAD, and status, then revalidates after resume and before edits, editing delegation, commits, or branch operations.
 
 The model may choose proportional planning, strict red-green TDD, a worktree, independent review, or delegation when those add value. It may not skip authorization boundaries, dirty-worktree protection, applicable automated coverage, or honest reporting of review independence.
 
@@ -388,7 +413,7 @@ profiles/               no model-specific overrides initially
 tests/                  static, packaging, and behavioral contracts
 ```
 
-There are 12 shared runtime skills. `skills/using-superpowers/SKILL.md` is the always-triggered gate; its full-router reference is loaded only when the fast-path predicate fails or scope grows.
+There are 13 shared runtime skills. `skills/using-superpowers/SKILL.md` is the always-triggered gate; its full-router reference is loaded only when the fast-path predicate fails or scope grows. `skills/managing-project-state/SKILL.md` loads conditionally for durable work and owns canonical-state, protected-obligation, archival, and repository-instruction continuity.
 
 ## Development and verification
 
@@ -412,7 +437,7 @@ The staging command refuses an existing destination and does not write to instal
 
 Candidate runs precede baseline spending. Each run records the candidate commit, adapter, model identifier, CLI version, scenario, duration, tests, tool calls, skill loads, duplicated explanation or verification, and deterministic result. Missing access, authentication failure, rate limiting, or transcript-capture failure is indeterminate rather than a behavioral failure.
 
-The repository-tracked executable scenarios are `adaptive-feature-retains-test`, `adaptive-bug-retains-regression`, and `adaptive-resume-preserves-checkout`. The 2026-07-25 external benchmark additionally covers a blocking ambiguity choice. Read-only diagnosis and review, unavailable delegation, and evidence-backed completion remain planned broader coverage. Raw trajectories stay local; published summaries contain redacted evidence and aggregate metrics only. See [Architecture](docs/architecture.md), [Evaluation](docs/evaluation.md), and the [Opus 5 precision benchmark](docs/evaluations/2026-07-25-opus5-precision-benchmark.md).
+The repository-tracked executable scenarios are `adaptive-feature-retains-test`, `adaptive-bug-retains-regression`, `adaptive-resume-preserves-checkout`, `adaptive-persistent-goal-cadence`, `adaptive-routine-skips-project-state`, and `adaptive-protected-project-state`. The 2026-07-25 external benchmark additionally covers a blocking ambiguity choice. The persistent-goal and project-state fixtures await live cross-model Quorum runs; their repository contracts are validated locally. Read-only diagnosis and review, unavailable delegation, and evidence-backed completion remain planned broader coverage. Raw trajectories stay local; published summaries contain redacted evidence and aggregate metrics only. See [Architecture](docs/architecture.md), [Evaluation](docs/evaluation.md), and the [Opus 5 precision benchmark](docs/evaluations/2026-07-25-opus5-precision-benchmark.md).
 
 ## Provenance and license
 

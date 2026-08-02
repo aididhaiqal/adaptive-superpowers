@@ -1,7 +1,7 @@
 {
   "name": "adaptive-superpowers",
-  "version": "0.2.1",
-  "description": "Risk-adaptive engineering workflows for capable coding models.",
+  "version": "0.3.0",
+  "description": "Risk-adaptive engineering and durable project-state workflows for capable coding models.",
   "author": {
     "name": "Adaptive Superpowers contributors"
   },
@@ -11,14 +11,15 @@
     "testing",
     "debugging",
     "planning",
-    "verification"
+    "verification",
+    "project-state"
   ],
   "skills": "./skills/",
   "hooks": {},
   "interface": {
     "displayName": "Adaptive Superpowers",
-    "shortDescription": "Proportional planning, testing, debugging, and verification",
-    "longDescription": "A lean shared workflow core that enforces safety and evidence while allowing capable models to choose additional process by risk.",
+    "shortDescription": "Proportional engineering and durable project state",
+    "longDescription": "A lean shared workflow core that enforces safety, evidence, and protected project continuity while allowing capable models to choose additional process by risk.",
     "developerName": "Adaptive Superpowers contributors",
     "category": "Developer Tools",
     "capabilities": ["Interactive", "Read", "Write"]

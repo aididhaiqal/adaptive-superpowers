@@ -49,6 +49,12 @@ grep -Fq '#### One clone, two hosts' "$ROOT/README.md"
 grep -Fq '### The proof loop' "$ROOT/README.md"
 grep -Fq 'Parent<br/>decisions · architecture · acceptance' "$ROOT/README.md"
 grep -Fq 'A compact gate is always loaded' "$ROOT/README.md"
+grep -Fq 'The Claude output should show 13 skills and one `SessionStart` hook.' "$ROOT/README.md"
+grep -Fq 'Project state without project-management theatre' "$ROOT/README.md"
+grep -Fq 'There are 13 shared runtime skills.' "$ROOT/README.md"
+test -f "$ROOT/docs/superpowers/specs/2026-08-02-managing-project-state-design.md"
+grep -Fq '**Status:** Approved for implementation on 2026-08-02.' \
+  "$ROOT/docs/superpowers/specs/2026-08-02-managing-project-state-design.md"
 
 install_line="$(grep -n '^## Install$' "$ROOT/README.md" | cut -d: -f1)"
 why_line="$(grep -n '^## Why$' "$ROOT/README.md" | cut -d: -f1)"

@@ -1,5 +1,22 @@
 # Changelog
 
+## Unreleased
+
+## 0.3.0 - 2026-08-02
+
+- Add `managing-project-state` as the thirteenth conditional runtime skill inside Adaptive Superpowers.
+- Keep routine isolated work free of new ledgers, configuration, evidence archives, and instruction churn.
+- Protect queued, active, blocked, and future-watch obligations from silent downgrade, replacement, deferral, or removal.
+- Add convention and managed profiles, a deterministic structural/Git-range auditor, bounded evidence admission, and repository-instruction continuity.
+- Raise the 13-skill bundle ceiling proportionally to 4,400 words while keeping the always-loaded gate below 450 words.
+- Bound persistent goals with accepted outcomes, an automatic-execution boundary, verification cadence, and an explicit stopping condition.
+- Reuse one governing plan and resume at the first unfinished accepted outcome after compaction.
+- Use focused checks during implementation and broader suites at coherent milestones or final verification, reusing unchanged evidence.
+- Require fast-path automation omissions to be explained and reviewers to validate claims unsupported by supplied evidence.
+- Review coherent feature ranges, reuse implementer test evidence, and group final findings into one fix wave and scoped re-review.
+- Preserve unresolved blockers, external gates, accepted exclusions, pending outcomes, and material watch items when consolidating canonical records.
+- Prefer applicable repository abstractions over parallel low-level parsing, validation, mapping, configuration, command, or event paths.
+
 ## 0.2.1 - 2026-08-01
 
 - Reconcile material or resumable work into one repository-designated canonical progress record.

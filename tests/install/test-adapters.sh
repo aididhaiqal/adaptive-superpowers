@@ -19,7 +19,8 @@ bash "$ROOT/scripts/stage-adapter.sh" claude "$TMP_ROOT/claude"
 
 for stage in "$TMP_ROOT/codex" "$TMP_ROOT/claude"; do
   count="$(find "$stage/skills" -mindepth 2 -maxdepth 2 -name SKILL.md | wc -l | tr -d ' ')"
-  test "$count" -eq 12
+  test "$count" -eq 13
+  test -f "$stage/skills/managing-project-state/SKILL.md"
   test ! -e "$stage/skills/subagent-driven-development"
   test ! -e "$stage/skills/dispatching-parallel-agents"
   test ! -e "$stage/skills/writing-implementation-logs"

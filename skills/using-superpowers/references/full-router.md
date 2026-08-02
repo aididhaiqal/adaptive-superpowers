@@ -13,19 +13,19 @@ For direct completion reviews, supported Critical and Important findings block c
 
 Use the smallest sufficient planning surface. Precise work stays in the direct phases. Standard work uses brief inline outcomes and acceptance; use native session tracking when several dependent outcomes need coordination. Create a durable plan only when `writing-plans` independently matches. Escalate as uncertainty, dependency, risk, or interruption exposure grows. Do not invent microtasks, repeat acceptance at every update, or bind delegation to planning depth.
 
+For a persistent or open-ended goal, establish the accepted outcomes, automatic-execution boundary, verification cadence, and stopping condition once. Infer the stopping condition from the accepted request, governing plan, or canonical record when clear; do not ask merely to restate it. Ask one focused question only when materially different stopping conditions would change scope. Use `managing-project-state` when durable cross-turn storage is needed. On continuation or compaction, resume the first unfinished accepted outcome; completed work and optional recommendations do not create another outcome.
+
 The parent owns brainstorming, architecture, scope, and user decisions. A dispatched worker treats its bounded brief as approved, returns material ambiguity to the parent, and still tests and verifies its assignment. Explorers and reviewers stay read-only and do not broaden scope or delegate further.
+
+Give dispatched agents bounded file paths, ranges, interfaces, and decisions. For bulky inputs, pass a local artifact path instead of repeatedly pasting accumulated session history.
+
+## Repository fit
+
+Before adding boundary-handling code, identify whether the repository has an applicable canonical path for parsing, validation, mapping, configuration, commands, or events. Extend it instead of creating a parallel low-level implementation. Deviate only for a demonstrated constraint, keeping the exception explicit and local.
 
 ## Test retention
 
 Coverage is a completion requirement, not a universal TDD trigger. When a runnable automated test can protect new observable behavior or a confirmed regression, create or update it without waiting for the user to request tests; do not ask whether to add it. Manual verification alone is insufficient. Transient checks do not count as retained coverage. State why only when automation is genuinely infeasible.
-
-## Durable progress
-
-Live source, Git, test, deployment, and runtime evidence are authoritative. Plans and task reports remain intent or supporting evidence; they never override current evidence.
-
-At the start of material or resumable project work, identify any repository-designated canonical progress, roadmap, or status record. If none exists, use or create one `docs/progress.md` for material or resumable project work. Skip a durable record for routine isolated work.
-
-Before completion, reconcile that canonical record in the same change from the final diff and fresh evidence. Record the capability and owning area; whether it is implemented, tested, committed, pushed, merged, deployed, and runtime-verified; remaining stubs, compatibility paths, flags, exclusions, failures, blockers, and the next concrete step. Never copy stale counts forward or use an unqualified `Complete`. Do not create per-task implementation logs or duplicate ledgers.
 
 ## Checkout safety
 
@@ -34,6 +34,8 @@ Current installed skills and live repository state override stale session summar
 Before Material or High-risk plan execution, concurrent or resumable implementation, or an editing delegation, use `using-git-worktrees` unless the current checkout already provides appropriate isolation. Capture the repository root, worktree path, branch, HEAD, and status. Revalidate after a resume or compaction and before mutation, editing delegation, commit, or branch operations. Stop when checkout identity changed, unrelated work appeared, or ownership is unclear; preserve the live state and coordinate instead of switching or cleaning it.
 
 ## Verification and authority
+
+During implementation, use the narrowest check whose result can change the next edit. Run broader affected or full suites only at a coherent milestone or final gate, or after a change whose dependency surface requires them—not as routine per-outcome confirmation. Before rerunning a command, identify the relevant source, test, dependency, configuration, or environment change that invalidated its evidence; otherwise reuse the result. Do not rerun a known environment-blocked lane until relevant state changes. Prefer concise output for successful checks and verbose output for a specific failure.
 
 Broaden beyond fresh targeted verification only when repository policy, dependency impact, or named risk requires it. User silence never waives Standard. Files or tools alone never escalate. Native plans need no durable file.
 
