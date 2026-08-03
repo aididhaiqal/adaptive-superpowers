@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Scope worktrees to one attributable task, reject merged or wrong-base reuse, and record durable task, branch, base, ownership, and disposition identity.
+- After a verified local merge, retire the exact clean owned worktree and safely delete its fully merged feature branch; preserve PR, retained, failed-verification, dirty, inherited, detached, or ambiguous states.
+
 ## 0.3.0 - 2026-08-02
 
 - Add `managing-project-state` as the thirteenth conditional runtime skill inside Adaptive Superpowers.

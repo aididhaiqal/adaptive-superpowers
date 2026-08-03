@@ -7,12 +7,12 @@ description: Execute an existing plan when implementation is authorized and depe
 
 A plan does not authorize implementation. Without that authority, inspect and report only.
 
-1. Read the plan, nearest `AGENTS.md`, and relevant repository state. When `managing-project-state` applies, use its canonical current record. For Material or High-risk execution, concurrent or resumable work, or editing delegation, use `using-git-worktrees` unless already appropriately isolated. Capture the repository root, worktree path, branch, HEAD, and status.
+1. Read the plan, nearest `AGENTS.md`, and relevant repository state. When `managing-project-state` applies, use its canonical current record. For Material or High-risk execution, concurrent or resumable work, or editing delegation, use `using-git-worktrees` unless already appropriately isolated. Existing isolation is valid only for the same accepted task on its expected unmerged branch; a new task receives a dedicated worktree. Capture the repository root, worktree path, branch, intended base, HEAD, and status.
 2. Reconcile the plan, canonical record, Git, and live checkout after resume or compaction, then continue at the first unfinished accepted outcome. Do not repeat completed outcomes whose relevant state and evidence remain intact. Before tools, announce the first outcome; update the user only at material phase changes. Revalidate the live checkout identity before mutation, editing delegation, commit, or branch operations; stop on drift or unrelated work.
 3. Implement the minimum change per outcome; batch checks when they prove the same behavior.
 4. After the final change, run required technical checks.
 5. Reconcile applicable project state from the final diff and fresh evidence. Compare the complete result with the plan and surrounding integration; perform the final completion review after technical verification, resolve blocking findings, and preserve optional recommendations for the user.
-6. After the completion gate passes, use `finishing-a-development-branch` only when delivery is requested or already authorized.
+6. After the completion gate passes, use `finishing-a-development-branch` only when delivery is requested or already authorized. Distinguish local merge from PR or explicit retention; verified local merge retires the owned task worktree and fully merged feature branch by default.
 
 Treat the plan as an outcome contract, not a transcript. Adapt mechanics when repository reality differs while preserving scope and acceptance. Update a durable plan before continuing only when a material requirement, design, or verification strategy changes.
 

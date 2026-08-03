@@ -11,7 +11,7 @@ For read-only requests, inspect and report without changing artifacts.
 
 1. At the start of material or resumable work, identify the repository-designated canonical current record. If none exists, use or create one `docs/progress.md`. Do not create a parallel ledger.
 2. Choose the **Convention profile** when repository instructions already identify an unambiguous record. Choose the **Managed profile** only when the repository opts into `.superpowers/project-state.yaml` and deterministic CI checks.
-3. Store any durable goal contract in its governing plan or canonical current record. Record accepted outcomes, owner, current state, blockers, stopping condition, and only evidence that changes a claim.
+3. Store any durable goal contract in its governing plan or canonical current record. Record accepted outcomes, owner, current state, blockers, stopping condition, and only evidence that changes a claim. For task-scoped isolation, also record task, worktree path, branch, intended base and fork point, ownership, and disposition; reconcile or retire that identity with the task rather than creating a worktree registry.
 4. Reconcile at meaningful transitions, coherent milestones and completion—not after every edit, tool call, or test. Resume the first unfinished accepted outcome after checking live state.
 5. Keep implemented, tested, committed, pushed, merged, deployed, and runtime-verified distinct. Current source, Git, CI, deployment, and runtime evidence override summaries.
 6. Preserve protected commitments. Read [state-model.md](references/state-model.md) before deferring, reprioritizing, replacing, removing, resuming, or compacting tracked work.

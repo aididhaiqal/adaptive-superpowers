@@ -31,7 +31,7 @@ Coverage is a completion requirement, not a universal TDD trigger. When a runnab
 
 Current installed skills and live repository state override stale session summaries, prior plans, and progress artifacts. Removed workflows must not reactivate from memory.
 
-Before Material or High-risk plan execution, concurrent or resumable implementation, or an editing delegation, use `using-git-worktrees` unless the current checkout already provides appropriate isolation. Capture the repository root, worktree path, branch, HEAD, and status. Revalidate after a resume or compaction and before mutation, editing delegation, commit, or branch operations. Stop when checkout identity changed, unrelated work appeared, or ownership is unclear; preserve the live state and coordinate instead of switching or cleaning it.
+Before Material or High-risk plan execution, concurrent or resumable implementation, or an editing delegation, use `using-git-worktrees` unless the current checkout already provides appropriate same-task isolation. A linked checkout is not reusable merely because it is isolated: validate the accepted task, branch, intended base, and unmerged state, and create a dedicated worktree for a new task. Capture the repository root, worktree path, branch, HEAD, and status. Revalidate after a resume or compaction and before mutation, editing delegation, commit, or branch operations. Stop when checkout identity changed, unrelated work appeared, or ownership is unclear; preserve the live state and coordinate instead of switching or cleaning it.
 
 ## Verification and authority
 

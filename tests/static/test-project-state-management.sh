@@ -32,6 +32,7 @@ require_text "$STATE" 'implemented, tested, committed, pushed, merged, deployed,
 require_text "$STATE" 'Convention profile'
 require_text "$STATE" 'Managed profile'
 require_text "$STATE" 'Do not create a parallel ledger'
+require_text "$STATE" 'task, worktree path, branch, intended base and fork point, ownership, and disposition'
 require_text "$GATE" '`managing-project-state`'
 require_text "$GATE" 'repository-required canonical progress or status record'
 
