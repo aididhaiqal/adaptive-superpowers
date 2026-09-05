@@ -1,3 +1,5 @@
 # Claude Code adapter
 
-Claude Code loads the repository with `--plugin-dir`. The root `.claude-plugin/` manifest and `hooks/session-start` expose the canonical `skills/` tree and inject the shared router on startup. The adapter does not redefine workflow policy.
+Claude Code loads the repository with `--plugin-dir`. The root `.claude-plugin/` manifest exposes the canonical `skills/` tree. Its existing SessionStart hook explicitly selects Bash and dispatches `hooks/session-start` through `hooks/run-hook.cmd`, injecting the shared router without redefining workflow policy. The scripts retain LF endings for Git Bash. Native Windows requires Git for Windows and Claude Code 2.1.81 or later; the batch fallback returns the hook's exit status and reports missing Bash. POSIX dispatch is execution-tested; native Windows cases are retained in `tests/install/test_hook_dispatch.py` but remain unverified on this macOS host.
+
+Run `python3 scripts/check-installation.py --host claude` from the source repository to compare a discovered installed copy's skills, manifest, and hooks without loading or changing it. Pass `--claude-plugin /path/to/plugin` for an explicit copy or when registry discovery is ambiguous. The checker does not establish enablement or replace a fresh-session activation check, and it is not installed as a runtime hook.

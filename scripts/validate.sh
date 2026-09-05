@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 EXPECTED_SKILLS=13
-MAX_SKILL_WORDS=450
+MAX_SKILL_WORDS=500
 # This is a coarse anti-bloat ceiling, not a writing target.
 MAX_TOTAL_WORDS=4400
 

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Systematic Debugging"
+  short_description: "Trace unclear failures with focused evidence"

@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+- Repair Claude SessionStart shell dispatch on Windows with explicit Bash selection, a cross-platform wrapper, LF checkout rules, and visible failures. Preserve the existing gate payload/matcher and Codex's empty-hooks configuration. POSIX regression checks pass; native Windows runtime checks remain pending.
+
+- Add Codex presentation metadata to all 13 skills without changing runtime policy, implicit invocation, model/effort selection, or existing metadata.
+- Add an on-demand, read-only installation checker for Codex skill trees and Claude plugin copies, detecting content drift even when version labels match. Include fixture tests and adapter-copy verification; no startup hook, auto-update, or active-session claim.
+
+- Route routine continuations by remaining scope and risk after live-state revalidation, not by file count or compaction history.
+- Preserve existing sufficient test coverage; add independent-oracle and realistic-fault guidance without mandatory mutation jobs.
+- Replace blanket explorer/leaf limits with bounded native delegation, independent edit ownership, same-shape batching, implementer reuse, and duplicate-review prevention.
+- Carry existing specifications and binding constraints into plan/agent handoffs; preserve user authority and consequential decision gates.
+- Distinguish structural policy lint from consuming-agent behavior and add an executable existing-coverage continuation probe.
+- Allow up to 500 words per direct skill when safety detail needs it, retaining the 4,400-word bundle ceiling.
+
 - Scope worktrees to one attributable task, reject merged or wrong-base reuse, and record durable task, branch, base, ownership, and disposition identity.
 - After a verified local merge, retire the exact clean owned worktree and safely delete its fully merged feature branch; preserve PR, retained, failed-verification, dirty, inherited, detached, or ambiguous states.
 

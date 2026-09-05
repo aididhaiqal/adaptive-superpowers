@@ -7,6 +7,8 @@ description: "Resolve ambiguous work before implementation when interpretations 
 
 Scale depth to decision consequence. Skip repository-answerable questions.
 
+Already-clear requirements and authorized implementation do not need another design approval. Make routine implementation choices within those requirements; ask only about unresolved consequential choices. A feasibility probe produces evidence, not permission to turn throwaway code into a maintained feature.
+
 1. Inspect enough context to identify the goal, constraints, acceptance criteria, and safe assumptions.
 2. When one unanswered user decision controls the direction, ask one focused question before proposing a detailed design or implementing the affected behavior. Unrelated safe inspection may continue.
 3. For other ambiguity, ask when the answer would materially change the result; otherwise state the assumption you are making.

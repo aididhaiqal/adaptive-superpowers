@@ -1,0 +1,3 @@
+interface:
+  display_name: "Adaptive Router"
+  short_description: "Route work by scope and risk with the adaptive workflow"

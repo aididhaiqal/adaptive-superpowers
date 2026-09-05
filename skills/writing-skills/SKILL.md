@@ -12,3 +12,5 @@ description: Create, edit, or audit this adaptive Superpowers bundle; use the ho
 5. Run `bash scripts/validate.sh`, the affected repository tests, and `git diff --check`.
 
 Forward-test when inspection and validators cannot establish activation or behavior. Record the untreated baseline first, use the smallest discriminating scenario, do not leak the expected answer, and keep raw transcripts local. Report measured size, behavior changes, checks, and untested risk.
+
+Structural lint is not behavioral proof. Keep inventory, schema, link, and intentional wording checks, but evaluate routing and execution claims through fresh consuming-agent scenarios. An unchanged cross-model result does not transfer automatically to revised policy.

@@ -33,7 +33,7 @@ grep -Fq '~/.codex/agents/final-reviewer.toml' "$ROOT/README.md"
 grep -Fq 'These model assignments are an optional Codex POC profile' "$ROOT/README.md"
 grep -Fq 'Adaptive Superpowers does not set global thread or depth limits.' "$ROOT/README.md"
 grep -Fq 'Codex still applies its own defaults when those settings are absent.' "$ROOT/README.md"
-grep -Fq 'Explorers and reviewers remain leaf agents' "$ROOT/README.md"
+grep -Fq 'Delegation follows scope, independence, and host limits' "$ROOT/README.md"
 grep -Fq 'Task review is selective, not a per-task ceremony.' "$ROOT/README.md"
 grep -Fq 'Overall review is the integration gate for a substantial branch or release.' "$ROOT/README.md"
 if grep -Eq '^max_(threads|depth) = ' "$ROOT/README.md"; then

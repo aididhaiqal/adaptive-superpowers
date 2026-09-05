@@ -2,6 +2,14 @@
 
 Test observable production behavior. Use mocks and doubles only to control a necessary boundary, not as the subject of the test.
 
+## Make Coverage Discriminating
+
+- Identify a realistic defect the test catches: a wrong branch or argument, missing effect, broken boundary, or violated contract. Do not add a test merely because a file changed; sufficient existing coverage may stay unchanged.
+- Derive expected values independently of the implementation being checked. Do not compute the oracle through the same function or helper whose correctness is at issue. Use hand-checked fixtures or an independent contract.
+- Prefer behavior over change detectors: exercise retry limits rather than only asserting a constant's value. Exact values or text are legitimate assertions when they are themselves a promised external contract.
+- Use source-text checks for intentional structural or wording constraints, not as proof of execution. Run scripts against controlled inputs and check outputs, side effects, and exit status; evaluate agent instructions through representative consuming-agent behavior.
+- For nontrivial coverage, consider a representative wrong branch, argument, or missing effect: would the test fail? This is a lightweight falsifiability check, not a mandatory mutation-testing run. Execute a focused mutation only when it resolves meaningful doubt.
+
 ## Test Real Behavior
 
 - Assert public outputs, state, errors, or durable side effects.

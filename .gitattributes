@@ -1,0 +1,3 @@
+# Both files are consumed by Bash, including on Git for Windows.
+hooks/session-start text eol=lf
+hooks/run-hook.cmd text eol=lf

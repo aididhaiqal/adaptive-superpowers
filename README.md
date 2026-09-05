@@ -52,6 +52,8 @@ flowchart TB
 
 You need Git plus a current Codex or Claude Code installation. The commands below use Bash or zsh on macOS/Linux; Windows users should run them inside WSL.
 
+For native Windows Claude Code, the startup hook explicitly selects Git Bash (Claude Code 2.1.81 or later) and uses an extensionless script through `run-hook.cmd`. Install Git for Windows; missing Bash is reported rather than silently skipping the gate. This branch's Bash dispatch and packaging are tested on macOS, but native Windows runtime verification remains pending. The installation command snippets above/below are still Bash/WSL examples, not PowerShell commands.
+
 > [!IMPORTANT]
 > Do not enable Adaptive Superpowers alongside another Superpowers installation. Both can inject a `using-superpowers` startup policy. Remove or disable the old installation first. In Claude Code, if the official plugin is enabled, run `claude plugin disable superpowers@claude-plugins-official`.
 
@@ -136,6 +138,27 @@ claude plugin details adaptive-superpowers@adaptive-superpowers-dev
 
 The Claude output should show 13 skills and one `SessionStart` hook. Start a new Codex task or Claude session after installing or updating.
 
+For an on-demand, read-only consistency check (Python 3):
+
+```bash
+python3 "$REPO/scripts/check-installation.py" --host codex
+python3 "$REPO/scripts/check-installation.py" --host claude
+```
+
+Omit `--host` to check both; add `--json` for a machine-readable report. The checker compares on-disk skill files, references, and UI metadata—not just version labels, which can remain equal while a local clone changes. Claude's comparison also includes its plugin manifest and startup hooks. It does not execute plugins, contact a service, modify files, or update installations.
+
+`MATCH` means the selected files and available version labels agree with the reference checkout. `DRIFT` means a mismatch; `UNKNOWN` means the check lacks reliable input, such as an unversioned copy or ambiguous Claude installations. Exit codes are `0` for match, `1` for drift, and `2` for unknown/error. Comparing against an unpublished working copy will normally report drift.
+
+Codex defaults to `~/.agents/skills`; override with `--codex-skills /path/to/skills` for another location. Claude discovery uses the locally inspected v2 `installed_plugins.json` format under `${CLAUDE_CONFIG_DIR:-~/.claude}/plugins`; it is best-effort, not a stable host API. For multiple installations, another layout, or a temporary plugin, choose an explicit root:
+
+```bash
+python3 "$REPO/scripts/check-installation.py" --host claude --claude-plugin /path/to/plugin
+```
+
+Use `--source /path/to/reference-checkout` to compare against another revision. The checker inspects the selected paths only: it does **not** establish enablement, detect every duplicate/shadowing skill location, validate all host settings, or prove that an existing session loaded the same content. It ignores Python bytecode caches and `.DS_Store`. Explicitly selected root paths and Codex's top-level skill links are resolved; internal file/directory symlinks report `UNKNOWN` and require manual inspection. This is a snapshot check, not a security boundary against concurrent filesystem changes. No check is added to startup or tool-use hooks.
+
+All 13 skills include Codex UI labels and short descriptions. They keep native implicit invocation enabled and do not select a model, effort level, or new tool dependency.
+
 ### Update
 
 Update the shared clone without rewriting any Codex links:
@@ -180,7 +203,7 @@ These commands leave the clone intact. Delete it separately only if you no longe
 
 Capable coding models should not have to choose between speed and engineering evidence. Adaptive Superpowers fixes a small baseline for authorization, dirty-worktree safety, retained automated coverage when feasible, and evidence-backed completion. It adds process only when the request is ambiguous, broad, or risky.
 
-Precise work stays direct; consequential work receives proportional planning and safeguards. Material plan execution, concurrent or resumed implementation, and editing subagents use task-scoped isolation: new tasks receive dedicated worktrees, while only an attributable continuation may reuse its unmerged branch. After an authorized local merge and merged-result verification, the exact clean owned worktree and fully merged feature branch are retired by default; PR and explicit-retention outcomes preserve them. This is an experimental adaptation, not an official obra/superpowers distribution.
+Precise work stays direct; consequential work receives proportional planning and safeguards. Material plan execution, concurrent implementation, and editing subagents use task-scoped isolation: new material tasks receive dedicated worktrees, while only an attributable continuation may reuse its unmerged branch. Resume revalidates the checkout and remaining work; it does not make a routine fix material by itself. After an authorized local merge and merged-result verification, the exact clean owned worktree and fully merged feature branch are retired by default; PR and explicit-retention outcomes preserve them. This is an experimental adaptation, not an official obra/superpowers distribution.
 
 ## How it routes
 
@@ -192,7 +215,7 @@ flowchart TB
     G -->|"Inspect or explain"| RO["Read-only answer"]
     G -->|"Precise + low risk"| FP["Fast path"]
     G -->|"Unresolved choice"| Q["Ask one focused question"]
-    G -->|"Material, resumed, broad, or risky"| FR["Full router"]
+    G -->|"Material, broad, concurrent, or risky"| FR["Full router"]
     Q --> A["User decides"]
     A --> G
     FP --> C["Implementation + proof"]
@@ -235,12 +258,12 @@ The default Convention profile follows an existing repository ledger. Repositori
 
 ### The proof loop
 
-The route changes; the engineering finish line does not. Behavior-changing work keeps a runnable test when feasible, verification stays fresh, and supported blockers loop back into implementation.
+The route changes; the engineering finish line does not. Behavior-changing work keeps sufficient runnable coverage when feasible; existing tests may already provide it. Add tests for missing protection, not to satisfy a file-edit quota. Verification stays fresh, and supported blockers loop back into implementation.
 
 ```mermaid
 flowchart LR
     I["Inspect"] --> B["Implement"]
-    B --> T["Retain runnable test"]
+    B --> T["Retain sufficient coverage"]
     T --> V{"Targeted verification"}
     V -->|"Fails"| B
     V -->|"Passes"| CR{"Completion review"}
@@ -268,14 +291,14 @@ The core installation above does not require custom agents. Expand this section 
 
 <br>
 
-Adaptive Superpowers teaches the routing boundary: delegate one bounded read-only explorer only when bulky independent investigation would pollute the main context. Codex still owns orchestration and model selection. You can use its built-in agents without extra files, or make the explorer and reviewer deterministic with personal files under `~/.codex/agents/`. Project-only agents can instead live under `.codex/agents/` in that repository.
+Adaptive Superpowers delegates when independent work, specialist judgment, or bulky investigation justifies the coordination cost. Parallel implementation needs non-colliding ownership; small same-shape edits can share an owner and verification. Codex owns orchestration and model selection. You can use built-in agents without extra files, or configure personal roles under `~/.codex/agents/`. Project-only agents can instead live under `.codex/agents/` in that repository. Always check role/configuration support against your installed host version.
 
 ```mermaid
 flowchart TB
     P["Parent<br/>decisions · architecture · acceptance"]
-    P --> E["Explorer<br/>Terra High · read-only leaf"]
-    P --> F["Feature reviewer<br/>Terra XHigh · read-only leaf"]
-    P --> R["Final reviewer<br/>Sol High · read-only leaf"]
+    P --> E["Explorer<br/>Terra High · read-only"]
+    P --> F["Feature reviewer<br/>Terra XHigh · read-only"]
+    P --> R["Final reviewer<br/>Sol High · read-only"]
     E --> O["Evidence · findings · verdicts<br/>return to the parent"]
     F --> O
     R --> O
@@ -290,7 +313,7 @@ These model assignments are an optional Codex POC profile, not shared cross-host
 
 Adaptive Superpowers does not set global thread or depth limits. For the first POC, keep any existing `[agents]` values in `~/.codex/config.toml` unchanged and observe the host's native orchestration. Codex still applies its own defaults when those settings are absent. Omission therefore means host-managed rather than literally unlimited. Tune personal or project configuration only after measuring the actual workload instead of making a bundle-wide policy.
 
-Explorers and reviewers remain leaf agents because their instructions prohibit further delegation. Coordinators and workers may use deeper delegation when Codex and the user's configuration permit it.
+Delegation follows scope, independence, and host limits. Nested specialists need a distinct authorized question; read-only scope propagates to descendants, and the parent coordinates review ownership to avoid duplicate reviews. A host-provided role may still be leaf-only; the skill does not override that restriction.
 
 Create `~/.codex/agents/explorer.toml`:
 
@@ -307,7 +330,8 @@ Return concise evidence with file and symbol references plus explicit uncertaint
 Distinguish inspected code from commands or tests actually executed.
 Never claim runtime behavior from inspection alone.
 Mention at most one adjacent issue, only when it materially affects the request.
-Do not estimate elapsed time, propose unrelated work, edit files, or delegate further.
+Do not estimate elapsed time, propose unrelated work, or edit files.
+Any host-permitted delegation must have a distinct subquestion and remain read-only.
 """
 ```
 
@@ -332,7 +356,8 @@ Review the exact feature range, requirements, named risks, and targeted evidence
 Inspect affected callers, contracts, edge cases, regressions, and missing tests.
 Separate supported blocking findings from material recommendations.
 For each recommendation, cite evidence, expected value, and relevant cost or trade-off.
-Do not include generic praise, speculative scope expansion, edits, or further delegation.
+Do not include generic praise, speculative scope expansion, or edits.
+Any host-permitted specialist delegation needs a distinct question, stays read-only, and must not duplicate an assigned review.
 If no supported finding exists, say so plainly.
 """
 ```
@@ -353,7 +378,8 @@ Prioritize cross-feature interaction, security, data, concurrency, migration, pu
 Validate every finding against the final code and evidence; do not repeat resolved task-review findings.
 Separate supported blocking findings from material recommendations.
 For each recommendation, cite evidence, expected value, and relevant cost or trade-off.
-Do not include generic praise, speculative scope expansion, edits, or further delegation.
+Do not include generic praise, speculative scope expansion, or edits.
+Any host-permitted specialist delegation needs a distinct question, stays read-only, and must not duplicate an assigned review.
 If no supported finding exists, say so plainly.
 """
 ```
@@ -374,9 +400,10 @@ Subagents can reduce main-context pollution and wall time for independent work, 
 
 The latest precision cohort used the immediately preceding 333-word gate for
 feature runs; the final evaluated 347-word revision changes only the ambiguity
-guard and passed its focused Fable forward test. The current 423-word candidate
-adds unreleased persistent-goal and project-state routing and has not inherited
-those latency measurements. These are recorded results, not universal speed claims:
+guard and passed its focused Fable forward test. Version 0.3.0 subsequently added
+persistent-goal and project-state routing. The latest unreleased refinements target
+Astra, Sol, Fable, and Opus through shared policy, but have not inherited those
+cross-model latency measurements. These are recorded results, not universal speed claims:
 
 | Model | Cohort | Retained tests | Median |
 | --- | ---: | ---: | ---: |
@@ -397,7 +424,7 @@ for controls, ranges, token caveats, and the Fable before/after result.
 
 ## What remains mandatory
 
-Every task is classified to the highest applicable tier. Review-only and diagnosis-only requests are read-only; destructive or externally visible actions require authority. Behavior-changing work normally retains automated coverage for observable behavior, receives focused verification during implementation, broader verification at coherent milestones or the final gate, and then a proportional review before evidence-backed completion. Unchanged evidence is reused; known environment-blocked lanes wait for relevant state to change. Live checkout identity overrides stale summaries: the agent records task, base, repository root, worktree, branch, HEAD, and status, then revalidates after resume and before edits, editing delegation, commits, or branch operations. A merged, mismatched, or ambiguous worktree is preserved for reconciliation rather than reused for a new task.
+Every task is classified to the highest applicable tier. Review-only and diagnosis-only requests are read-only; destructive or externally visible actions require authority. Behavior-changing work normally retains automated coverage for observable behavior, receives focused verification during implementation, broader verification at coherent milestones or the final gate, and then a proportional review before evidence-backed completion. Unchanged evidence is reused; known environment-blocked lanes wait for relevant state to change. Live checkout identity overrides stale summaries: the agent records task, base, repository root, worktree, branch, HEAD, and status, then revalidates after resume, before editing batches or branch operations, and on external-change signals. Expected same-task edits do not require a Git identity ceremony before every patch. A merged, mismatched, or ambiguous worktree is preserved for reconciliation rather than reused for a new material task.
 
 The model may choose proportional planning, strict red-green TDD, a worktree, independent review, or delegation when those add value. It may not skip authorization boundaries, dirty-worktree protection, applicable automated coverage, or honest reporting of review independence.
 
@@ -448,5 +475,7 @@ The initial audit and implementation are pinned to:
 - official Superpowers 6.1.1: `d884ae04edebef577e82ff7c4e143debd0bbec99`
 - GPT-5.6 fork: `aa973775906c8761a78019aaa21e4f0ccd987925`
 - Superpowers eval harness: `58aaf6d118e4249eb0c9803e9f9d7df133b7639a`
+
+The September 2026 refinement also reviews official v6.3.0 at `b36e0829c6d0140e93cfef2ca599b1b07d4a7797`, selectively adapting test falsifiability, task batching, worker continuity, and requirements handoffs—not its universal approval gates or serial-only implementation workflow.
 
 Distributed under the [MIT License](LICENSE). “Superpowers” remains associated with its original project and authors; this experimental adaptation is not endorsed by them.

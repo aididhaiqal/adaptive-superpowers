@@ -5,7 +5,7 @@ description: "Create dedicated Git worktrees for new material tasks, or reuse an
 
 # Git Worktrees
 
-Unrelated changes mean the current checkout is not appropriate isolation for new material or resumable work. Material or High-risk plan execution, concurrent or resumable work, and use of an editing subagent require isolation.
+Unrelated changes mean the current checkout is not appropriate isolation for new material work. Material or High-risk plan execution, concurrent implementation, and use of an editing subagent require isolation. Resuming routine work requires revalidation, not automatic creation.
 
 A linked worktree is reusable only for the same accepted task, expected branch and base, while unmerged. Isolation alone is insufficient. Unassigned host-managed workspaces are inherited.
 
@@ -17,8 +17,8 @@ A linked worktree is reusable only for the same accepted task, expected branch a
 6. Run only documented setup; avoid blind installs or lockfile mutation.
 7. Run a cheap, relevant baseline check before implementation.
 
-Revalidate after resume or compaction and before mutation, editing delegation, commit, or branch operations. Stop if path, branch, HEAD, ownership, or related work changed. Live state overrides stale summaries.
+Revalidate after resume or compaction, before an editing batch, editing delegation, commit, or branch operations, and on evidence of external changes. Expected same-task edits are not identity drift. Stop on unexpected path, branch, HEAD, ownership, or unrelated changes. Live state overrides stale summaries.
 
 Dirty, untracked, inherited, detached, wrong-base, or ownership-ambiguous worktrees are quarantined when not attributable to the same active task: do not reuse or remove them. Resume same-task uncommitted work only with clear attribution. Do not edit `.gitignore` without authorization or silently work in place. Stop when overlap, permissions, conflicts, or baseline failures make attribution unsafe.
 
-Report task identity, disposition, path, branch, base, setup, baseline, existing failures, and confirmation that user work remains untouched.
+Record identity once in the governing record or task context. Report the path, branch, baseline result, and material exceptions; repeat identity details only when they change or delivery needs them.

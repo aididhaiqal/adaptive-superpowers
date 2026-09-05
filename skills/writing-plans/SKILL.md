@@ -9,7 +9,7 @@ Use a repository file only for High-risk work, cross-session survival, or materi
 
 1. Read the nearest `AGENTS.md`, requirements, relevant code, and repository documentation convention.
 2. One governing plan covers the authorized objective, outcomes, resumed turns, review fixes, and integration. Create another only for a separately authorized objective with independent acceptance or lifecycle. Otherwise follow repository convention, updating the existing plan or creating `docs/plans/YYYY-MM-DD-HHMMSS-01-plan-<slug>.md` with stable identity.
-3. Resolve material ambiguity, then record the smallest set of independently verifiable outcomes.
+3. Resolve material ambiguity, then record the smallest set of independently verifiable outcomes. Link the existing specification or accepted requirements when available; carry binding constraints and shared interfaces into handoffs. Do not create a separate spec just to fill a pointer.
 
 ```markdown
 # <Task title>

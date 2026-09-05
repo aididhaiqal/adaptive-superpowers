@@ -1,0 +1,39 @@
+# Adaptive model and upstream refinements
+
+**Goal:** Improve the shared workflow for Astra, Sol, Fable, and Opus using the accepted review and selective upstream v6.3 ideas, then study native host integration.
+**Why planning is required:** Coordinate shared routing, delegation, coverage, tests, documentation, and a separate integration study across resumable work.
+**Acceptance:** Keep 13 skills; preserve consequential decision, user-work, evidence, and protected-obligation gates; remove arbitrary fast-path/delegation constraints; accept sufficient existing tests; improve test falsifiability, worker continuity, and source-requirement handoffs. The later user request authorizes including the Windows hook repair in one combined local commit. Do not install, publish, push, merge, or change host configuration.
+**Sources:** This conversation's two approved reviews; upstream `b36e0829c6d0140e93cfef2ca599b1b07d4a7797`; Adaptive base `92356b097b9d0b244cf029bb15453a6398c21ea9`.
+**Isolation:** Task-owned branch `feat/adaptive-model-refinements`, worktree `/Users/wmaididhaiqal/Documents/Codex/2026-07-21/re/adaptive-superpowers-model-refinements`, intended base `main`, fork point `92356b0`. Disposition: retained after the combined local commit, unmerged; no cleanup authorized. The older staged `feat/upstream-v6.3-adoption` worktree is preserved and is not this task's checkout.
+
+### Outcome 1: Proportional shared policy with defensible coverage
+- Work: Refine the gate, conditional router/delegation guidance, testing reference, planning/execution/review handoffs, and affected docs/tests. Preserve existing host manifests and hook behavior.
+- Verify: Observe updated structural lint fail before policy changes; exercise retained behavioral fixtures; run `bash tests/run-all.sh`, `bash scripts/validate.sh`, and `git diff --check`. Review the complete uncommitted patch independently. Distinguish deterministic fixture checks, simulated model probes, and unrun cross-model evaluations.
+
+### Outcome 2: Native integration study
+- Work: After Outcome 1, inspect current official Codex and Claude documentation against our packaging, startup, subagents, state, and verification needs. Recommend supported native mechanisms without activating them.
+- Verify: Cite current primary documentation; distinguish host support from model capability and actual local installation state. Persist findings in one study document.
+
+The original stopping point was implementation, verification/review, and the integration study. Outcome 4 later extends authority to one combined local commit; remote delivery and live installation remain separate.
+
+### Outcome 3: Native discovery metadata and installation consistency
+- Authorized by the user's continuation after the native integration study. Continue in the same task-owned unmerged worktree.
+- Work: Add Codex UI metadata to the remaining skills, preserving implicit invocation and existing metadata. Add an on-demand, read-only Python installation checker for Codex skill links and Claude plugin copies, including content drift when version labels match. Document explicit path overrides and evidence limits.
+- Verify: Executable fixture tests cover matches, stale/missing files, same-version drift, malformed/ambiguous registry discovery, and no mutation. Check metadata shape, adapter staging, the repository suite, bundle validation, and the final diff; review the new surface independently.
+- Boundaries for this outcome: No runtime skill policy changes, new skills, roles, hooks, automatic checks, host settings, installation updates, version bump, commits, or delivery. Outcome 4 separately authorizes the hook repair and combined local commit. On-disk consistency does not prove enablement or active-session behavior.
+
+### Outcome 4: Include Windows hook repair in the combined commit
+- Authorized by the user's request to commit the fix together with the current work. Preserve the older staged draft unchanged; transfer only its Windows-dispatch intent, not its other workflow changes.
+- Work: Explicit Bash dispatch through a cross-platform wrapper, correct hook error propagation, visible missing-Bash failure, and LF checkout rules for Bash-consumed hook files. Keep the existing startup matcher, router payload, and Codex empty-hooks manifest unchanged.
+- Verify: First observe focused hook-contract failures, then execute configured dispatch from a path with spaces/parentheses, check payload and failure behavior, verify staged hook packaging and line-ending attributes, run the full repository suite, and review the combined result before commit. Native Windows checks are retained but cannot be claimed passed on macOS.
+- Stop after one local combined commit on the existing branch. No push, merge, install, tag, version bump, or worktree cleanup is authorized.
+
+## Result
+
+Implementation and local technical checks passed. The credit-blocked candidate probe resumed after user approval and passed its independent final-state checker. Independent source review found no supported policy/test blocker; its stale-status finding prompted reconciliation of this plan and the canonical record. The probe is not a speed comparison, real compaction test, or full model matrix.
+
+The native integration study now includes official Codex and Claude skill/agent/plugin documentation. Claude's native eval runner is locally early-access gated: even blank-template creation stopped without files or a model run, so only its case/grader schema remains unverified. Role packaging, additional lifecycle hooks, installation alignment, and remote delivery still require separate authority. Outcome 4 adds explicit authority for the existing Windows startup-hook repair and one local commit only. Preserve the earlier staged draft and all cross-model/lifecycle validation obligations in the canonical progress record.
+
+Outcome 3 was authorized separately and is complete locally: all 13 skills have presentation metadata, existing project-state metadata and implicit invocation are unchanged, and the read-only checker distinguishes content from version labels. New fixture tests and metadata checks failed before implementation, then passed; the full suite, adapter staging, bundle validator, and diff check passed. Independent review found an internal-file-symlink false-match path; executable fixtures reproduced it before the fix. Internal file/directory links now report unknown, while selected roots and Codex top-level skill links remain supported. All 13 CLI cases and the exact metadata-preservation assertion pass, and scoped re-review found no remaining blockers. The checker confirmed Codex matches local main while Claude differs in five workflow files despite the same version label; both installed copies differ from this unpublished candidate. No external benchmark runs, runtime-policy edits, installs, or delivery occurred in this follow-up.
+
+Outcome 4 is included with Outcomes 1–3 in this combined local commit. Six POSIX hook cases pass; three native Windows cases remain skipped on macOS. The full repository suite, adapter staging, bundle validator (13 skills / 4,357 direct words), and diff checks pass. Independent final integration review found no blocking findings and recommends native Windows execution before release or installation claims. The older staged draft remains unchanged. The task branch/worktree is retained; no push, merge, installation, version bump, tag, or cleanup occurred.

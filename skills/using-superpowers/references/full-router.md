@@ -4,7 +4,7 @@ Choose the highest tier. Escalate uncertainty only when it could change behavior
 
 - **Read-only:** answer or inspect without implementation artifacts; subject risk alone does not escalate.
 - **Mechanical:** provably non-behavioral changes without data, dependency, security, public-contract, or external-state impact. Inspect, edit, check, review the diff, report.
-- **Standard:** every non-mechanical implementation that does not meet the gate's precise low-risk predicate. Inspect state; state a brief plan and acceptance; implement minimally; add or update automated coverage for observable behavior changes unless infeasible; run the strongest focused checks; perform a final completion review after technical verification; report evidence. Review the final range against the request and surrounding integration for omissions, incorrect or incomplete behavior, and material recommendations. For material work, use `requesting-code-review`. For a confirmed bug, diagnose first and retain a focused failing regression before the fix when practical.
+- **Standard:** every non-mechanical implementation that does not meet the gate's precise low-risk predicate. Inspect state; state a brief plan and acceptance; implement minimally; retain sufficient automated coverage for observable behavior changes unless infeasible; run the strongest focused checks; perform a final completion review after technical verification; report evidence. Review the final range against the request and surrounding integration for omissions, incorrect or incomplete behavior, and material recommendations. For material work, use `requesting-code-review`. For a confirmed bug, diagnose first and retain a focused failing regression before the fix when practical.
 - **High-risk:** follow Standard. Security-sensitive, destructive, production-data, migration, public-contract, cross-system, or consequential external-state work requires `writing-plans` before implementation or consequential action and `verification-before-completion`.
 
 For direct completion reviews, supported Critical and Important findings block completion; recommendations remain optional and authorize no work. Require evidence, expected value, and relevant cost or trade-off; do not invent recommendations.
@@ -15,9 +15,11 @@ Use the smallest sufficient planning surface. Precise work stays in the direct p
 
 For a persistent or open-ended goal, establish the accepted outcomes, automatic-execution boundary, verification cadence, and stopping condition once. Infer the stopping condition from the accepted request, governing plan, or canonical record when clear; do not ask merely to restate it. Ask one focused question only when materially different stopping conditions would change scope. Use `managing-project-state` when durable cross-turn storage is needed. On continuation or compaction, resume the first unfinished accepted outcome; completed work and optional recommendations do not create another outcome.
 
-The parent owns brainstorming, architecture, scope, and user decisions. A dispatched worker treats its bounded brief as approved, returns material ambiguity to the parent, and still tests and verifies its assignment. Explorers and reviewers stay read-only and do not broaden scope or delegate further.
+Choose routine implementation details within accepted requirements without another approval cycle. Resolve mechanics against current repository evidence and the governing requirements; ask when a conflict changes accepted behavior, scope, authority, or a consequential user decision. Skill-required gates are defaults, not new authority and not a reason to disregard explicit user instructions.
 
-Give dispatched agents bounded file paths, ranges, interfaces, and decisions. For bulky inputs, pass a local artifact path instead of repeatedly pasting accumulated session history.
+## Delegation
+
+Use [delegation.md](delegation.md) when dispatching work. The parent owns integration and user decisions; workers own implementation choices within their bounded assignments. Explorers and reviewers remain read-only. Independent work may run in parallel when ownership and interfaces avoid collisions; delegation is not a mandatory phase or tied to planning depth.
 
 ## Repository fit
 
@@ -25,13 +27,13 @@ Before adding boundary-handling code, identify whether the repository has an app
 
 ## Test retention
 
-Coverage is a completion requirement, not a universal TDD trigger. When a runnable automated test can protect new observable behavior or a confirmed regression, create or update it without waiting for the user to request tests; do not ask whether to add it. Manual verification alone is insufficient. Transient checks do not count as retained coverage. State why only when automation is genuinely infeasible.
+Coverage is a completion requirement, not a universal TDD trigger. Run relevant retained tests; existing sufficient coverage satisfies it unchanged. Add or update tests for missing or incorrect behavioral coverage without waiting for the user; do not ask whether to add it. Manual verification alone is insufficient when automation is feasible. Transient checks do not count as retained coverage. State why only when automation is genuinely infeasible. For nontrivial test design or questionable coverage, read [testing-anti-patterns.md](../../test-driven-development/testing-anti-patterns.md) without activating strict TDD.
 
 ## Checkout safety
 
 Current installed skills and live repository state override stale session summaries, prior plans, and progress artifacts. Removed workflows must not reactivate from memory.
 
-Before Material or High-risk plan execution, concurrent or resumable implementation, or an editing delegation, use `using-git-worktrees` unless the current checkout already provides appropriate same-task isolation. A linked checkout is not reusable merely because it is isolated: validate the accepted task, branch, intended base, and unmerged state, and create a dedicated worktree for a new task. Capture the repository root, worktree path, branch, HEAD, and status. Revalidate after a resume or compaction and before mutation, editing delegation, commit, or branch operations. Stop when checkout identity changed, unrelated work appeared, or ownership is unclear; preserve the live state and coordinate instead of switching or cleaning it.
+Before Material or High-risk plan execution, concurrent implementation, or an editing delegation, use `using-git-worktrees` unless the current checkout already provides appropriate same-task isolation. A resume alone does not require new isolation for routine work. A linked checkout is not reusable merely because it is isolated: validate the accepted task, branch, intended base, and unmerged state, and create a dedicated worktree for a new material task. Capture the repository root, worktree path, branch, HEAD, and status. Revalidate after a resume or compaction and before an editing batch, editing delegation, commit, or branch operations; recheck sooner on evidence of external changes. Expected same-task edits do not require repeated identity checks before every patch. Stop when identity or ownership unexpectedly changes or unrelated work appears; preserve the live state and coordinate instead of switching or cleaning it.
 
 ## Verification and authority
 

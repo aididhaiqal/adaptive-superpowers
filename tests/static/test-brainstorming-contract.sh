@@ -29,7 +29,7 @@ require_text "$BRAINSTORM" 'When one unanswered user decision controls the direc
 require_text "$BRAINSTORM" 'Do not use reversibility, configuration, defaults, or parallel branches to choose a consequential outcome without approval.'
 require_text "$BRAINSTORM" 'Unrelated safe inspection may continue.'
 
-require_text "$GATE" 'The parent owns brainstorming, architecture, scope, acceptance criteria, and user decisions.'
+require_text "$GATE" 'The parent owns integration, accepted scope, and user decisions.'
 require_text "$GATE" 'Give dispatched agents bounded briefs.'
 require_text "$GATE" 'return material ambiguity to the parent'
 require_text "$GATE" 'test and verify their assigned work'

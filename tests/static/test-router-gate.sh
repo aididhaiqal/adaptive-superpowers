@@ -25,9 +25,8 @@ if [[ ! -f "$EXPLORER_HANDOFF" ]]; then
 fi
 
 require_text "$GATE" 'description: "Use when starting any conversation."'
-require_text "$GATE" 'runnable automated test file'
-require_text "$GATE" 'at most two production files plus tests'
-require_text "$GATE" 'When feasible'
+require_text "$GATE" 'Existing sufficient retained coverage counts'
+require_text "$GATE" 'understood local impact and focused verification'
 require_text "$GATE" 'fresh targeted verification'
 require_text "$GATE" 'For every fast-path implementation'
 require_text "$GATE" 'file contents'
@@ -35,11 +34,11 @@ require_text "$GATE" 'Before working, send one concise update.'
 require_text "$GATE" 'Do not send another pre-work update or restate the acceptance criteria.'
 require_text "$GATE" 'Repair failures before moving beyond verification'
 require_text "$GATE" 'references/full-router.md'
-require_text "$GATE" 'resumed or compacted'
+require_text "$GATE" 'After resume or compaction, revalidate'
 require_text "$GATE" 'concurrent or delegated editing'
-require_text "$GATE" 'For bulky independent investigation, use one available read-only explorer'
+require_text "$GATE" 'For bulky independent investigation, use available read-only explorers'
 require_text "$GATE" 'otherwise inspect locally'
-require_text "$GATE" 'Keep decisions and tightly coupled work in the parent context.'
+require_text "$GATE" 'Keep integration and user decisions in the parent context.'
 require_text "$GATE" 'references/explorer-handoff.md'
 require_text "$GATE" 'If a user choice could materially change the requested result, ask one focused question before making the affected changes'
 require_text "$GATE" 'do not bypass it with provisional defaults, configuration, or multiple implementations.'
@@ -48,7 +47,7 @@ require_text "$GATE" 'Offer material recommendations only when evidence supports
 require_text "$GATE" 'Recommendations do not authorize additional work.'
 require_text "$GATE" '`managing-project-state`'
 
-require_text "$EXPLORER_HANDOFF" 'Keep decisions and coupled implementation in the parent.'
+require_text "$EXPLORER_HANDOFF" 'Keep user decisions and coupled implementation with their owner.'
 require_text "$EXPLORER_HANDOFF" 'would materially burden the parent context'
 require_text "$EXPLORER_HANDOFF" 'Never claim runtime behavior from inspection alone.'
 require_text "$EXPLORER_HANDOFF" 'Measure elapsed time in the parent'
@@ -73,7 +72,7 @@ if grep -Eq '200-word([[:space:]]+adaptive)?[[:space:]]+gate' "$GATE" "$ROOT/REA
   exit 1
 fi
 
-require_text "$FULL_ROUTER" 'add or update automated coverage for observable behavior changes unless infeasible'
+require_text "$FULL_ROUTER" 'retain sufficient automated coverage for observable behavior changes unless infeasible'
 require_text "$FULL_ROUTER" 'verification-before-completion'
 require_text "$FULL_ROUTER" 'Manual verification alone is insufficient'
 require_text "$FULL_ROUTER" 'Preserve user work'

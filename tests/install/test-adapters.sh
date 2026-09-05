@@ -21,6 +21,7 @@ for stage in "$TMP_ROOT/codex" "$TMP_ROOT/claude"; do
   count="$(find "$stage/skills" -mindepth 2 -maxdepth 2 -name SKILL.md | wc -l | tr -d ' ')"
   test "$count" -eq 13
   test -f "$stage/skills/managing-project-state/SKILL.md"
+  diff -r "$ROOT/skills" "$stage/skills"
   test ! -e "$stage/skills/subagent-driven-development"
   test ! -e "$stage/skills/dispatching-parallel-agents"
   test ! -e "$stage/skills/writing-implementation-logs"
@@ -31,6 +32,8 @@ test ! -e "$TMP_ROOT/codex/hooks"
 test -f "$TMP_ROOT/claude/.claude-plugin/plugin.json"
 test -f "$TMP_ROOT/claude/hooks/hooks.json"
 test -f "$TMP_ROOT/claude/hooks/session-start"
+test -x "$TMP_ROOT/claude/hooks/run-hook.cmd"
+diff -r "$ROOT/hooks" "$TMP_ROOT/claude/hooks"
 
 mkdir -p "$TMP_ROOT/nonempty"
 touch "$TMP_ROOT/nonempty/stale"
