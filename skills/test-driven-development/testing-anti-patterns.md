@@ -15,6 +15,7 @@ Test observable production behavior. Use mocks and doubles only to control a nec
 - Assert public outputs, state, errors, or durable side effects.
 - Avoid assertions that merely prove a mock component exists or a stub returns its configured value.
 - Assert calls only when the interaction itself is a contract, such as sending one message or withholding a destructive operation.
+- Test the application's contract at dependency boundaries—registered routes, emitted queries, mapped payloads, or error handling—not framework internals already covered upstream. Keep focused integration or characterization tests where configuration, dependency interaction, or version-sensitive behavior could break that contract; upstream coverage does not prove our wiring.
 
 ```typescript
 test('rejects a duplicate server', async () => {

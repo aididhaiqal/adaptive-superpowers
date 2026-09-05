@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Stop worktree retirement on removal failure, preserve files and branch, inspect the refusal, and never automatically force removal. Clarify dependency-boundary testing without dropping useful integration or characterization coverage.
+
 - Repair Claude SessionStart shell dispatch on Windows with explicit Bash selection, a cross-platform wrapper, LF checkout rules, and visible failures. Preserve the existing gate payload/matcher and Codex's empty-hooks configuration. POSIX regression checks pass; native Windows runtime checks remain pending.
 
 - Add Codex presentation metadata to all 13 skills without changing runtime policy, implicit invocation, model/effort selection, or existing metadata.

@@ -22,9 +22,11 @@ Before retiring a locally merged worktree, revalidate from outside it that the e
 After those gates pass, remove only the exact task worktree and prune stale registrations:
 
 ```bash
-git worktree remove <exact-task-worktree-path>
+git worktree remove <exact-task-worktree-path> &&
 git worktree prune
 ```
+
+If worktree removal fails, stop retirement; preserve the worktree and branch. Inspect the error and `git -C <exact-task-worktree-path> status --porcelain -uall`. Never automatically retry with `--force`. Resolve only within existing authority; otherwise report the blocker and ask.
 
 After verified local merge and worktree removal, delete only that fully merged feature branch with `git branch -d <feature-branch>`. Preserve the branch if deletion is not proven safe or the user explicitly requested retention. Never force-delete through this path.
 
