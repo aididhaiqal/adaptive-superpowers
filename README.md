@@ -5,13 +5,13 @@
 <p align="center">
   <a href="CHANGELOG.md"><img alt="Version: v0.3.0 experimental" src="https://img.shields.io/badge/version-v0.3.0-b8a4ff?style=flat-square"></a>
   <img alt="Runtime skills: 13" src="https://img.shields.io/badge/runtime_skills-13-29185c?style=flat-square">
-  <img alt="Feature benchmark: 18 out of 18" src="https://img.shields.io/badge/feature_benchmark-18%2F18-168f83?style=flat-square">
+  <a href="#tested-models"><img alt="Benchmark evidence: results and limits" src="https://img.shields.io/badge/benchmark-results_%26_limits-168f83?style=flat-square"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-55506b?style=flat-square"></a>
 </p>
 
 Risk-adaptive engineering workflows optimized for GPT-5.6 and Claude 5.
 
-> Experimental 0.3.0: usable and tested across the target model matrix, but not an official obra/superpowers distribution.
+> Experimental 0.3.0—not an official obra/superpowers distribution. Benchmark evidence is revision-specific; the unreleased September candidate has mixed timing results and an unresolved cleanup-safety failure. See [tested models](#tested-models) before treating it as release-ready.
 
 **Small task? Stay direct. Big task? Add safeguards. Every task? Keep the proof.**
 
@@ -23,7 +23,7 @@ Installation follows the app that runs the agent, not the model name:
 
 | You use | Install through | Applies to |
 | --- | --- | --- |
-| Codex Desktop or Codex CLI | Codex user skills | GPT-5.6 Sol, Terra, and other Codex models |
+| Codex Desktop or Codex CLI | Codex user skills | Astra, GPT-5.6 Sol, Terra, and other Codex models |
 | Claude Code | Claude plugin marketplace | Claude Opus, Fable, and other Claude Code models |
 | Claude Code for one temporary run | `--plugin-dir` | Only that Claude process |
 
@@ -398,12 +398,53 @@ Subagents can reduce main-context pollution and wall time for independent work, 
 
 ## Tested models
 
-The latest precision cohort used the immediately preceding 333-word gate for
-feature runs; the final evaluated 347-word revision changes only the ambiguity
-guard and passed its focused Fable forward test. Version 0.3.0 subsequently added
-persistent-goal and project-state routing. The latest unreleased refinements target
-Astra, Sol, Fable, and Opus through shared policy, but have not inherited those
-cross-model latency measurements. These are recorded results, not universal speed claims:
+### September 2026: old Adaptive versus the current candidate
+
+The comparison pins old Adaptive `92356b0` against candidate `0be50a8`, at max
+effort. It uses explicit workflow loading, not native plugin activation. This is
+not a comparison with official Superpowers or no plugin, and does not test Fast.
+
+| Model | Feature checks, old → new | Clean median, old → new | Timing samples, old / new |
+| --- | --- | --- | --- |
+| GPT-5.6 Sol | 3/3 → 3/3 | 137.88s → 95.15s | 2 / 3 |
+| Claude Opus 5 | 3/3 → 3/3 | 85.25s → 72.76s | 3 / 3 |
+| Claude Fable 5 | 3/3 → 3/3 | 75.64s → 86.03s | 3 / 3 |
+
+Astra's separate approval-inclusive pilot passed its feature checks: baseline
+344.48s, candidate 379.77s. A second baseline passed in 333.84s; remaining feature
+repetitions were stopped or left unrun to bound the pilot. This is not a repeated
+speed comparison and is not pooled with the earlier driver-constrained attempts.
+
+Feature checks cover the requested behavior, passing retained tests, and rejection
+of one broken list-result implementation. Sol's excluded baseline timing hit a
+host reviewer-launch failure; do not mistake its waiting time for policy cost.
+Codex IDs are requested IDs through a local gateway, not independently verified
+backend identities. Claude traces confirm the primary models and standard tier.
+
+**Mixed result:** Opus was faster, Fable slower, Sol's clean subset was faster,
+and the single matched Astra pair was slower. Small samples, unequal clean subsets,
+and overlapping ranges do not establish a general speedup or equivalence.
+
+Continuation was more promising: each candidate passed with fewer tool calls.
+Astra improved from 178.94s to 67.82s; its baseline added a worktree and state files,
+failing the no-churn contract, while the candidate reused existing tests and stayed
+in place. These are single pairs, not stable latency estimates.
+
+**Safety finding:** Fable moved untracked notes out, then removed the now-clean
+worktree and branch instead of stopping. The notes survived, but the preservation contract
+failed. A repeat failed even after loading the finishing skill; an explicit-leaf
+probe passed. This candidate is not release-ready
+on the strength of its feature timings; the routing/authority failure needs
+resolution and fresh evidence. See the [full benchmark report](docs/evaluations/2026-09-05-shared-workflow-benchmark.md)
+for Astra, ranges, token counters, follow-up probes, and driver limitations.
+
+<details>
+<summary>Historical July 2026 precision benchmark, including Fast</summary>
+
+This earlier cohort used the 333-word gate for feature runs; the final evaluated
+347-word revision changed only the ambiguity guard and passed its focused Fable
+forward test. Version 0.3.0 later added persistent-goal and project-state routing.
+These historical results do not measure the September candidate:
 
 | Model | Cohort | Retained tests | Median |
 | --- | ---: | ---: | ---: |
@@ -422,11 +463,15 @@ tokens. See the
 [Opus 5 precision benchmark](docs/evaluations/2026-07-25-opus5-precision-benchmark.md)
 for controls, ranges, token caveats, and the Fable before/after result.
 
+</details>
+
 ## What remains mandatory
 
 Every task is classified to the highest applicable tier. Review-only and diagnosis-only requests are read-only; destructive or externally visible actions require authority. Behavior-changing work normally retains automated coverage for observable behavior, receives focused verification during implementation, broader verification at coherent milestones or the final gate, and then a proportional review before evidence-backed completion. Unchanged evidence is reused; known environment-blocked lanes wait for relevant state to change. Live checkout identity overrides stale summaries: the agent records task, base, repository root, worktree, branch, HEAD, and status, then revalidates after resume, before editing batches or branch operations, and on external-change signals. Expected same-task edits do not require a Git identity ceremony before every patch. A merged, mismatched, or ambiguous worktree is preserved for reconciliation rather than reused for a new material task.
 
 The model may choose proportional planning, strict red-green TDD, a worktree, independent review, or delegation when those add value. It may not skip authorization boundaries, dirty-worktree protection, applicable automated coverage, or honest reporting of review independence.
+
+Existing sufficient tests count; new tests should protect missing application behavior at dependency boundaries, not re-test a library's internals. Useful integration and configuration-sensitive coverage stays. If worktree removal is refused, the policy requires stopping retirement and preserving the worktree and branch—not forcing cleanup. The September benchmark shows that this written rule still needs better behavioral validation.
 
 ## Repository structure
 

@@ -14,6 +14,7 @@ Repository fixtures cover retained feature tests, confirmed-regression debugging
 
 Recorded evaluations:
 
+- [2026-09-05 shared workflow benchmark](evaluations/2026-09-05-shared-workflow-benchmark.md)
 - [2026-09-05 shared refinement validation](evaluations/2026-09-05-model-refinement-probe.md)
 - [2026-08-02 Atlas project-state convention audit](evaluations/2026-08-02-atlas-project-state-convention-audit.md)
 - [2026-07-25 Opus 5 precision benchmark](evaluations/2026-07-25-opus5-precision-benchmark.md)
