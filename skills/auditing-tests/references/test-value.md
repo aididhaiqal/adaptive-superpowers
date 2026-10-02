@@ -13,7 +13,7 @@ Before adding or changing a test, answer four questions:
 
 A missing answer means do not add it yet. Then check the test against every junk pattern; a match fails the gate unless the retention bar names the contract it independently guards. A test that would break under behavior-preserving refactoring asserts implementation; rewrite it at the owning boundary before landing it.
 
-Before relying on a new test, see it fail without the change: write it before the change, or run it against the pre-fix source in a scratch copy, never by discarding work in the live checkout. A bug regression test must fail on the pre-fix code for the intended reason and pass after the owner-boundary repair. A regression that never demonstrably failed proves the mock, not the fix. One regression at the owner boundary covers the bug; do not replay the same scenario at every layer it crosses.
+Before relying on a new test, see it fail without the change: write it before the change, or run it against the pre-fix source in a scratch copy, never by discarding work in the live checkout. For a test of existing behavior, break that behavior in a scratch copy and see the test fail; a test that survives the break protects nothing. A bug regression test must fail on the pre-fix code for the intended reason and pass after the owner-boundary repair. A regression that never demonstrably failed proves the mock, not the fix. One regression at the owner boundary covers the bug; do not replay the same scenario at every layer it crosses.
 
 ## Junk patterns
 

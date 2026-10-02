@@ -13,7 +13,7 @@ description: "Use when starting any conversation."
 For every fast-path implementation:
 
 1. Inspect the relevant file contents and repository status.
-2. Implement the accepted change. When feasible, create or update a runnable automated test file that protects observable behavior, fails without the change, and needs no test-only production seam or duplicate coverage; transient checks do not count. When automation is infeasible, state why.
+2. Implement the accepted change. When feasible, create or update a runnable automated test file that protects observable behavior, fails if that behavior breaks, and needs no test-only production seam or duplicate coverage; transient checks do not count. When automation is infeasible, state why.
 3. Run fresh targeted verification, reconcile any repository-required canonical progress or status record from final evidence, and review the final diff against the request and acceptance criteria. Repair failures before moving beyond verification. Supported Critical or Important findings block completion.
 
 Before working, send one concise update. Do not send another pre-work update or restate the acceptance criteria.

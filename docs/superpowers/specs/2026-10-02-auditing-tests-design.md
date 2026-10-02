@@ -23,7 +23,8 @@ The source of the method is the OpenClaw `test-audit` skill. Its value bar is ho
 | Owner | Responsibility |
 | --- | --- |
 | `auditing-tests` | Own the value bar in `references/test-value.md`; run read-only discovery and evidence-backed pruning of existing tests when asked. |
-| `using-superpowers` gate | Fast-path tests protect observable behavior, fail without the change, and need no test-only seam or duplicate coverage. |
+| `using-superpowers` gate | Fast-path tests protect observable behavior, fail if that behavior breaks, and need no test-only seam or duplicate coverage. |
+| `writing-plans` | Each outcome names one proof owner and the regression it catches. |
 | Full router | Work that adds or changes tests reads the reference and checks each new test before the completion review; test-suite audits route to `auditing-tests`. |
 | `test-driven-development` | Applies the authoring gate before a red test; keeps mock and double guidance in `testing-anti-patterns.md`. |
 | `systematic-debugging` | Places the one regression at the owner boundary. |
@@ -39,9 +40,10 @@ The description front-loads one discriminative branch, auditing, pruning, or ded
 
 The bar is enforced when a test is written, not only when it is audited or reviewed, because a model rarely doubts its own test:
 
-- The fast path carries the authoring gate as one clause: the test protects observable behavior, fails without the change, and needs no test-only production seam or duplicate coverage. Fast-path work does not load the reference.
+- Plans name one proof owner per outcome: the boundary that owns the test and the regression it catches. Another layer gets a test only for a risk the owner cannot reach, so duplication is not scheduled before any test exists.
+- The fast path carries the authoring gate as one clause: the test protects observable behavior, fails if that behavior breaks, and needs no test-only production seam or duplicate coverage. Fast-path work does not load the reference.
 - Standard and High-risk work that adds or changes tests reads `test-value.md` and checks each new test against the authoring gate and junk patterns before the completion review. TDD does the same for each red test. The reference is about 600 words; it loads only when tests change.
-- A test not seen failing without the change is not yet evidence. Seeing it fail means writing it first, or running it against the pre-fix source in a scratch copy, never discarding work in the live checkout.
+- A test not seen failing is not yet evidence. For a change, that means failing without the change: write it first, or run it against the pre-fix source in a scratch copy. For tests of existing behavior, where no change exists, break the protected behavior in a scratch copy and see the test fail. Never discard work in the live checkout to do either.
 - Review applies the same bar afterwards; it is the backstop, not the primary check.
 
 ## Authorization
@@ -54,4 +56,4 @@ The skill body stays under the per-skill ceiling, and the bundle stays under the
 
 ## Evaluation
 
-`adaptive-audit-keeps-contract-test` seeds one low-value test (asserting a stub's configured value), one duplicate, one test-only production export, and one source-inspection test that greps the configuration source for the public keys `docs/config.md` declares. A passing run removes the stub test, the duplicate, and the seam, and keeps the key guard or rewrites it as an equivalent behavioral check, with the suite green. `adaptive-regression-fails-without-fix` reports a quantity bug inside a private helper. A passing run fixes it, keeps the module's single export, and retains a regression through the public function that fails when run against the pre-fix source; exporting the helper to test it fails. Untreated baselines and live cross-model runs are owed for both; the repository contract validates the fixtures locally.
+`adaptive-audit-keeps-contract-test` seeds one low-value test (asserting a stub's configured value), one duplicate, one test-only production export, and one source-inspection test that greps the configuration source for the public keys `docs/config.md` declares. A passing run removes the stub test, the duplicate, and the seam, and keeps the key guard or rewrites it as an equivalent behavioral check, with the suite green. `adaptive-regression-fails-without-fix` reports a quantity bug inside a private helper. A passing run fixes it, keeps the module's single export, and retains a regression through the public function that fails when run against the pre-fix source; exporting the helper to test it fails. `adaptive-backfill-tests-detect-breakage` asks for tests of an untested module; a passing suite leaves the source unchanged and fails under each of four breakages of its documented behavior (rate, exemptions, rounding, negative-amount rejection). Untreated baselines and live cross-model runs are owed for all three; the repository contract validates the fixtures locally.

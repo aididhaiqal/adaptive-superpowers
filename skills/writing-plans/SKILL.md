@@ -21,10 +21,11 @@ Use a repository file only for High-risk work, cross-session survival, or materi
 ### Outcome N: <result>
 - Work: <requirements, named files/resources, state/data flow, and failure behavior>
 - Risks/open questions: <material privacy, security, or blocking unknowns; omit when none>
+- Proof: <the one boundary that owns the test and the regression it catches>
 - Verify: `<repo-specific command>`
 ```
 
-An outcome is an independently testable deliverable worth an independent review boundary. Fold setup, configuration, scaffolding, and documentation into it; split only when one outcome could be accepted while another is rejected. Keep outcomes ordered; omit code, routine mechanics, predicted output, and artificial microsteps. Update only for material requirement, scope, design, or verification changes.
+An outcome is an independently testable deliverable worth an independent review boundary. Fold setup, configuration, scaffolding, and documentation into it; split only when one outcome could be accepted while another is rejected. Keep outcomes ordered; omit code, routine mechanics, predicted output, and artificial microsteps. Name one proof owner per behavior; another layer gets a test only for a risk the owner cannot reach. Update only for material requirement, scope, design, or verification changes.
 
 Reconcile the plan with the original request and approved scope closure. Do not introduce an unapproved deferral, exclusion, or substitute outcome merely because it is easier to implement.
 

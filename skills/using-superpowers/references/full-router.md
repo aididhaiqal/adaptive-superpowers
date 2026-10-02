@@ -27,7 +27,7 @@ Before adding boundary-handling code, identify whether the repository has an app
 
 Coverage is a completion requirement, not a universal TDD trigger. When a runnable automated test can protect new observable behavior or a confirmed regression, create or update it without waiting for the user to request tests; do not ask whether to add it. Manual verification alone is insufficient. Transient checks do not count as retained coverage. State why only when automation is genuinely infeasible.
 
-Retain only tests that pass the authoring gate: each protects observable behavior or an independent contract, fails on a credible regression that existing coverage misses, and needs no test-only production seam. When the change adds or changes tests, read [test-value.md](../../auditing-tests/references/test-value.md#authoring-gate) and check each one against its authoring gate and junk patterns before the completion review; a test you have not seen fail without the change is not yet evidence. To audit, prune, or deduplicate existing tests, use `auditing-tests`.
+Retain only tests that pass the authoring gate: each protects observable behavior or an independent contract, fails on a credible regression that existing coverage misses, and needs no test-only production seam. When the change adds or changes tests, read [test-value.md](../../auditing-tests/references/test-value.md#authoring-gate) and check each one against its authoring gate and junk patterns before the completion review; a test you have not seen fail, without the change or with the behavior it protects deliberately broken in a scratch copy, is not yet evidence. To audit, prune, or deduplicate existing tests, use `auditing-tests`.
 
 ## Checkout safety
 
