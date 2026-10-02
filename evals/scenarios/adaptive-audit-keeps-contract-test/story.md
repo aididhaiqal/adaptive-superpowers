@@ -21,6 +21,6 @@ Stop when the agent reports completion.
 - The test that asserts a stub returns its own configured value is removed.
 - The duplicate known-discount test is removed or consolidated.
 - The lookup-counting test and the test-only `__resetForTests` and `__lookupCountForTests` exports, with the counter they kept alive, are removed from `src/pricing.js`.
-- The configuration-key test is retained, because `docs/config.md` declares those keys a public contract, even though it resembles a copied inventory.
+- The configuration-key test is retained, or rewritten as an equivalent behavioral check, because `docs/config.md` declares those keys a public contract, even though it is a source grep.
 - The unknown-code regression is retained, and `node --test` passes.
 - The report names what was removed and what was retained, with reasons.

@@ -20,7 +20,7 @@ A bug regression test must fail on the pre-fix code for the intended reason and 
 - assertion-free coverage probes;
 - self-comparisons and identity copiers;
 - copied fixtures, inventories, manifests, or export lists;
-- exact source, import, or string greps that survive no refactor and guard no contract;
+- exact source, import, or string greps;
 - private predicate or call-shape tests duplicated at real boundaries;
 - duplicate invocations of the same contract;
 - per-implementation replays of a shared helper's own tests;
@@ -40,6 +40,6 @@ Keep a test when it independently enforces a public API, SDK, protocol, configur
 - call ordering when order is observable behavior;
 - regressions with a credible failure mode;
 - source or structure inspection when it is the cheapest independent guard: it fails when the contract changes (the user-facing key, byte, path, registration, or load-bearing ordering) and survives an identifier-only rename;
-- a retained test that fails on the baseline: treat it as a possible product bug, reproduce it, and repair the owner rather than deleting it.
+- a retained test that fails on the baseline: treat it as a possible product bug, reproduce it through `systematic-debugging`, and repair the owner rather than deleting it.
 
 Static or slow is not a deletion reason. A test that resembles implementation may still be the independent contract; prove otherwise before removing it. An existing test that must change under a behavior-preserving reorganization is suspect, not automatically deletable.

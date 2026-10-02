@@ -145,7 +145,33 @@ REPO="$HOME/src/adaptive-superpowers"
 git -C "$REPO" pull --ff-only
 ```
 
-Codex follows the existing links automatically. For a persistent Claude installation, refresh the marketplace copy and plugin, then restart Claude Code:
+Codex follows the existing links automatically, but a skill added since your last update has no link yet. Link only the missing ones; an entry that is not this clone's link is refused before anything is created:
+
+```bash
+REPO="$HOME/src/adaptive-superpowers"
+# Link skills added since the last update.
+mkdir -p "$HOME/.agents/skills"
+
+for skill in "$REPO"/skills/*; do
+  test -f "$skill/SKILL.md" || continue
+  link="$HOME/.agents/skills/$(basename "$skill")"
+  if [[ -L "$link" && "$(readlink "$link")" = "$skill" ]]; then
+    continue
+  fi
+  if [[ -e "$link" || -L "$link" ]]; then
+    echo "Refusing to overwrite $(basename "$skill")" >&2
+    exit 1
+  fi
+done
+
+for skill in "$REPO"/skills/*; do
+  test -f "$skill/SKILL.md" || continue
+  link="$HOME/.agents/skills/$(basename "$skill")"
+  test -L "$link" || ln -s "$skill" "$link"
+done
+```
+
+For a persistent Claude installation, refresh the marketplace copy and plugin, then restart Claude Code:
 
 ```bash
 claude plugin marketplace update adaptive-superpowers-dev
@@ -375,7 +401,7 @@ Subagents can reduce main-context pollution and wall time for independent work, 
 The latest precision cohort used the immediately preceding 333-word gate for
 feature runs; the final evaluated 347-word revision changes only the ambiguity
 guard and passed its focused Fable forward test. The current 427-word gate
-adds persistent-goal, project-state, and test-value routing and has not inherited
+adds persistent-goal and project-state routing plus a no-duplicate-coverage test clause and has not inherited
 those latency measurements. These are recorded results, not universal speed claims:
 
 | Model | Cohort | Retained tests | Median |
@@ -413,7 +439,7 @@ profiles/               no model-specific overrides initially
 tests/                  static, packaging, and behavioral contracts
 ```
 
-There are 14 shared runtime skills. `skills/using-superpowers/SKILL.md` is the always-triggered gate; its full-router reference is loaded only when the fast-path predicate fails or scope grows. `skills/managing-project-state/SKILL.md` loads conditionally for durable work and owns canonical-state, protected-obligation, archival, and repository-instruction continuity. `skills/auditing-tests/SKILL.md` loads when existing tests are audited, pruned, or deduplicated; its test-value reference owns the authoring gate, junk patterns, and retention bar that the router, TDD, debugging, and review skills apply when they write or judge a test.
+There are 14 shared runtime skills. `skills/using-superpowers/SKILL.md` is the always-triggered gate; its full-router reference is loaded only when the fast-path predicate fails or scope grows. `skills/managing-project-state/SKILL.md` loads conditionally for durable work and owns canonical-state, protected-obligation, archival, and repository-instruction continuity. `skills/auditing-tests/SKILL.md` loads when existing tests are audited, pruned, or deduplicated; its test-value reference owns the authoring gate, junk patterns, and retention bar that the full router, TDD, and both review skills link when they write or judge a test.
 
 ## Development and verification
 

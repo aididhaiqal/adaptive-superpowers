@@ -1,6 +1,6 @@
 ---
 name: auditing-tests
-description: "Use when auditing, pruning, or deduplicating existing tests, or when judging whether a specific test or test-only production seam earns its maintenance cost."
+description: "Use when auditing, pruning, or deduplicating existing tests, or when judging whether a specific existing test or test-only production seam earns its maintenance cost."
 ---
 
 # Auditing Tests
@@ -9,7 +9,7 @@ Optimize for confidence, not deletion count. Loading this skill does not authori
 
 1. Read root and scoped repository instructions first: they name test commands, deliberate pinning tests, and known pre-existing failures.
 2. Discover read-only. For broad scope, split by owner area plus one cross-cutting pattern sweep, using an explorer only under the gate's rule. Prefer a few high-confidence candidates over a speculative inventory.
-3. For each candidate, read the complete test, its production owner, entry point, callers, overlapping tests, CI routing, and history; inspect the dependency when the test claims dependency behavior. Record:
+3. For each candidate, read the complete test, its production owner, entry point, callers, callees, sibling implementations, overlapping tests, CI routing, and history; inspect the dependency when the test claims dependency behavior. Record:
    - exact test name and location;
    - the failure it can actually detect;
    - non-test callers of the covered seam;
@@ -20,8 +20,8 @@ Optimize for confidence, not deletion count. Loading this skill does not authori
 
    A missing field means the candidate is not ready.
 4. Report candidates and retained false positives before editing.
-5. When authorized, edit one coherent owner-boundary batch. Delete low-value tests with the test-only exports, flags, wrappers, and dead production paths they kept alive; move retained regressions to their canonical owner; consolidate duplicates into one table-driven contract. Do not add replacement tests that restate the implementation or turn uncertain candidates into cleanup.
-6. Verify with the owner and sibling suites, the executable or dry run that owns any contract a removed inspection test claimed, and the repository's changed-path gate. A retained test failing on the baseline is a possible product bug: route it to `systematic-debugging`.
+5. When authorized, edit one coherent owner-boundary batch. Delete low-value tests with the test-only exports, flags, wrappers, and dead production paths they kept alive, without preserving aliases; move retained regressions to their canonical owner; consolidate duplicates into one table-driven contract. Prefer net-negative production lines. Do not add replacement tests that restate the implementation or turn uncertain candidates into cleanup.
+6. Verify with the owner and sibling suites, the executable or dry run that owns any contract a removed inspection test claimed, and the repository's changed-path gate. A retained test failing on the baseline follows the retention bar.
 7. Report removed categories, production simplifications, retained false positives with reasons, checks actually run, production versus test line counts, and follow-ups. Record deferred batches in the canonical record when `managing-project-state` applies.
 
 Continue a broad audit as separate batches; after each integrates, rediscover from current main instead of reusing a stale inventory.

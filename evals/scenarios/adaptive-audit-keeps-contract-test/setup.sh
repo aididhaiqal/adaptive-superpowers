@@ -87,10 +87,13 @@ JS
 cat > test/config-contract.test.js <<'JS'
 const test = require('node:test');
 const assert = require('node:assert');
-const { loadConfig } = require('../src/config.js');
+const fs = require('node:fs');
+const path = require('node:path');
 
-test('default configuration keys', () => {
-  assert.deepStrictEqual(Object.keys(loadConfig()).sort(), ['retryLimit', 'timeoutMs']);
+test('config source declares retryLimit and timeoutMs', () => {
+  const source = fs.readFileSync(path.join(__dirname, '../src/config.js'), 'utf8');
+  assert.match(source, /retryLimit:/);
+  assert.match(source, /timeoutMs:/);
 });
 JS
 

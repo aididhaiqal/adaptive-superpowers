@@ -19,6 +19,6 @@ For an unclear cause, `systematic-debugging` owns investigation; enter red-green
 
 The focused red and green runs are expected. Do not run a broader suite after every slice. Batch related green slices, then run affected regression coverage at a coherent milestone; reuse unchanged evidence.
 
-Before writing the red test, apply the authoring gate in [test-value.md](../auditing-tests/references/test-value.md#authoring-gate). Test public outputs, state, errors, or durable effects. Mock only necessary boundaries. Read [testing-anti-patterns.md](testing-anti-patterns.md) only when adding mocks, doubles, or test-only production APIs.
+A red test must protect observable behavior that existing coverage misses, without a test-only production seam; read the authoring gate in [test-value.md](../auditing-tests/references/test-value.md#authoring-gate) only when its value is doubtful. Test public outputs, state, errors, or durable effects. Mock only necessary boundaries. Read [testing-anti-patterns.md](testing-anti-patterns.md) only when adding mocks, doubles, or test-only production APIs.
 
 If automated coverage is impractical, state why and use the strongest boundary, integration, compile, or manual check. Preserve pre-existing user code. Retain the red reason, green result, final proportionate regression result, and any untested behavior.

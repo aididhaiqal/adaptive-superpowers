@@ -45,4 +45,4 @@ The skill body stays under the per-skill ceiling, and the bundle stays under the
 
 ## Evaluation
 
-`adaptive-audit-keeps-contract-test` seeds one low-value test (asserting a stub's configured value), one test-only production export, and one source-inspection contract test that looks like implementation coupling but guards a public configuration key. A passing run removes the first two and keeps the contract test, with the suite green. Live cross-model runs are owed; the repository contract validates the fixture locally.
+`adaptive-audit-keeps-contract-test` seeds one low-value test (asserting a stub's configured value), one duplicate, one test-only production export, and one source-inspection test that greps the configuration source for the public keys `docs/config.md` declares. A passing run removes the stub test, the duplicate, and the seam, and keeps the key guard or rewrites it as an equivalent behavioral check, with the suite green. An untreated baseline and live cross-model runs are owed; the repository contract validates the fixture locally.
