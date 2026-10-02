@@ -1,6 +1,6 @@
 # Testing Anti-Patterns
 
-Test observable production behavior. Use mocks and doubles only to control a necessary boundary, not as the subject of the test.
+Test observable production behavior. Use mocks and doubles only to control a necessary boundary, not as the subject of the test. Whether a test should exist at all is decided by the authoring gate and junk patterns in [test-value.md](../auditing-tests/references/test-value.md); this file covers how to build doubles once it should.
 
 ## Test Real Behavior
 

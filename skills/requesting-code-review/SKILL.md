@@ -11,7 +11,7 @@ Review at a coherent feature boundary after technical verification or before int
 
 1. Define the exact change range from a recorded base, merge base, staged diff, or named files. Never assume `HEAD~1` covers the work.
 2. Read the original request, acceptance, and named risks—not only the implementer's summary.
-3. Inspect the actual range, affected callers, tests, contracts, applicable repository abstractions, and surrounding integration far enough to find anything missing, incorrect, incomplete, or poorly integrated, including duplication.
+3. Inspect the actual range, affected callers, tests, contracts, applicable repository abstractions, and surrounding integration far enough to find anything missing, incorrect, incomplete, or poorly integrated, including duplication. Judge added or changed tests against the `auditing-tests` value bar.
 4. Validate every finding and recommendation against code and requirements.
 
 Keep the review read-only. Reuse fresh implementer evidence, but verify any claim its evidence does not support. Do not ask a reviewer to rerun tests against the same code. Return three sections:

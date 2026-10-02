@@ -3,6 +3,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 EXPECTED=(
+  auditing-tests
   brainstorming
   executing-plans
   finishing-a-development-branch

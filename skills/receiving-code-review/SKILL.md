@@ -15,7 +15,7 @@ Evaluation-only requests remain read-only.
 4. Push back on unsupported feedback with concise code or test evidence.
 5. When implementation is authorized, group supported fixes, preserve scope, and run the smallest combined relevant checks after the final change.
 
-Prioritize security, data loss, broken behavior, and contract violations before maintainability or polish. Do not add unused “professional” features without a demonstrated requirement.
+Prioritize security, data loss, broken behavior, and contract violations before maintainability or polish. Do not add unused “professional” features without a demonstrated requirement, or requested tests that fail the `auditing-tests` authoring gate.
 
 State what was verified, changed, rejected, or still needs a decision. Recheck only evidence affected by later edits.
 

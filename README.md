@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="CHANGELOG.md"><img alt="Version: v0.3.0 experimental" src="https://img.shields.io/badge/version-v0.3.0-b8a4ff?style=flat-square"></a>
-  <img alt="Runtime skills: 13" src="https://img.shields.io/badge/runtime_skills-13-29185c?style=flat-square">
+  <img alt="Runtime skills: 14" src="https://img.shields.io/badge/runtime_skills-14-29185c?style=flat-square">
   <img alt="Feature benchmark: 18 out of 18" src="https://img.shields.io/badge/feature_benchmark-18%2F18-168f83?style=flat-square">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-55506b?style=flat-square"></a>
 </p>
@@ -40,7 +40,7 @@ flowchart TB
     CT --> G["Same adaptive gate"]
     CS --> G
     T --> G
-    G --> S["13 shared runtime skills"]
+    G --> S["14 shared runtime skills"]
 
     classDef source fill:#29185c,stroke:#b8a4ff,color:#fff
     classDef host fill:#f4f1ff,stroke:#8f79dd,color:#241a43
@@ -134,7 +134,7 @@ For Claude Code, inspect the installed component inventory:
 claude plugin details adaptive-superpowers@adaptive-superpowers-dev
 ```
 
-The Claude output should show 13 skills and one `SessionStart` hook. Start a new Codex task or Claude session after installing or updating.
+The Claude output should show 14 skills and one `SessionStart` hook. Start a new Codex task or Claude session after installing or updating.
 
 ### Update
 
@@ -374,8 +374,8 @@ Subagents can reduce main-context pollution and wall time for independent work, 
 
 The latest precision cohort used the immediately preceding 333-word gate for
 feature runs; the final evaluated 347-word revision changes only the ambiguity
-guard and passed its focused Fable forward test. The current 423-word candidate
-adds unreleased persistent-goal and project-state routing and has not inherited
+guard and passed its focused Fable forward test. The current 427-word gate
+adds persistent-goal, project-state, and test-value routing and has not inherited
 those latency measurements. These are recorded results, not universal speed claims:
 
 | Model | Cohort | Retained tests | Median |
@@ -413,7 +413,7 @@ profiles/               no model-specific overrides initially
 tests/                  static, packaging, and behavioral contracts
 ```
 
-There are 13 shared runtime skills. `skills/using-superpowers/SKILL.md` is the always-triggered gate; its full-router reference is loaded only when the fast-path predicate fails or scope grows. `skills/managing-project-state/SKILL.md` loads conditionally for durable work and owns canonical-state, protected-obligation, archival, and repository-instruction continuity.
+There are 14 shared runtime skills. `skills/using-superpowers/SKILL.md` is the always-triggered gate; its full-router reference is loaded only when the fast-path predicate fails or scope grows. `skills/managing-project-state/SKILL.md` loads conditionally for durable work and owns canonical-state, protected-obligation, archival, and repository-instruction continuity. `skills/auditing-tests/SKILL.md` loads when existing tests are audited, pruned, or deduplicated; its test-value reference owns the authoring gate, junk patterns, and retention bar that the router, TDD, debugging, and review skills apply when they write or judge a test.
 
 ## Development and verification
 
@@ -437,7 +437,7 @@ The staging command refuses an existing destination and does not write to instal
 
 Candidate runs precede baseline spending. Each run records the candidate commit, adapter, model identifier, CLI version, scenario, duration, tests, tool calls, skill loads, duplicated explanation or verification, and deterministic result. Missing access, authentication failure, rate limiting, or transcript-capture failure is indeterminate rather than a behavioral failure.
 
-The repository-tracked executable scenarios are `adaptive-feature-retains-test`, `adaptive-bug-retains-regression`, `adaptive-resume-preserves-checkout`, `adaptive-persistent-goal-cadence`, `adaptive-routine-skips-project-state`, and `adaptive-protected-project-state`. The 2026-07-25 external benchmark additionally covers a blocking ambiguity choice. The persistent-goal and project-state fixtures await live cross-model Quorum runs; their repository contracts are validated locally. Read-only diagnosis and review, unavailable delegation, and evidence-backed completion remain planned broader coverage. Raw trajectories stay local; published summaries contain redacted evidence and aggregate metrics only. See [Architecture](docs/architecture.md), [Evaluation](docs/evaluation.md), and the [Opus 5 precision benchmark](docs/evaluations/2026-07-25-opus5-precision-benchmark.md).
+The repository-tracked executable scenarios are `adaptive-feature-retains-test`, `adaptive-bug-retains-regression`, `adaptive-resume-preserves-checkout`, `adaptive-persistent-goal-cadence`, `adaptive-routine-skips-project-state`, `adaptive-protected-project-state`, and `adaptive-audit-keeps-contract-test`. The 2026-07-25 external benchmark additionally covers a blocking ambiguity choice. The persistent-goal, project-state, and test-audit fixtures await live cross-model Quorum runs; their repository contracts are validated locally. Read-only diagnosis and review, unavailable delegation, and evidence-backed completion remain planned broader coverage. Raw trajectories stay local; published summaries contain redacted evidence and aggregate metrics only. See [Architecture](docs/architecture.md), [Evaluation](docs/evaluation.md), and the [Opus 5 precision benchmark](docs/evaluations/2026-07-25-opus5-precision-benchmark.md).
 
 ## Provenance and license
 

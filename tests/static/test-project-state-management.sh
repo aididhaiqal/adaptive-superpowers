@@ -49,7 +49,7 @@ require_text "$ARCHIVE" 'must not enumerate or load the evidence archive'
 require_text "$ARCHIVE" 'raw model trajectories'
 require_text "$ARCHIVE" 'not_evaluated'
 
-require_text "$ROOT/scripts/validate.sh" 'EXPECTED_SKILLS=13'
+require_text "$ROOT/scripts/validate.sh" 'EXPECTED_SKILLS=14'
 require_text "$ROOT/scripts/validate.sh" 'MAX_TOTAL_WORDS=4400'
 
 python3 "$AUDITOR" --help >/dev/null

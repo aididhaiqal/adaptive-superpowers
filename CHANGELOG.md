@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Add `auditing-tests` as the fourteenth conditional runtime skill: read-only discovery, per-candidate evidence, and owner-boundary pruning of low-value tests and the test-only production seams they keep alive. Adapted from the OpenClaw `test-audit` value bar without its host-specific tooling.
+- Make `auditing-tests/references/test-value.md` the single owner of the authoring gate, junk patterns, and retention bar; the gate, full router, TDD, debugging, and both review skills apply it by reference.
+- Fast-path tests protect observable behavior without duplicating existing coverage; regression tests must fail on the pre-fix code and live at the owner boundary.
+- Add the `adaptive-audit-keeps-contract-test` scenario: remove a self-asserting stub test, a duplicate, and a test-only seam while keeping a contract guard that resembles a copied inventory.
+
 ## 0.3.0 - 2026-08-02
 
 - Add `managing-project-state` as the thirteenth conditional runtime skill inside Adaptive Superpowers.
