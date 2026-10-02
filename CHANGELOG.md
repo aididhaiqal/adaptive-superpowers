@@ -3,8 +3,9 @@
 ## Unreleased
 
 - Add `auditing-tests` as the fourteenth conditional runtime skill: read-only discovery, per-candidate evidence, and owner-boundary pruning of low-value tests and the test-only production seams they keep alive. Adapted from the OpenClaw `test-audit` value bar without its host-specific tooling.
-- Make `auditing-tests/references/test-value.md` the single owner of the authoring gate, junk patterns, and retention bar; the full router, TDD, and both review skills link it, and the gate and debugging carry one-clause summaries.
-- Fast-path tests protect observable behavior without duplicating existing coverage; regression tests must fail on the pre-fix code and live at the owner boundary.
+- Make `auditing-tests/references/test-value.md` the single owner of the authoring gate, junk patterns, and retention bar; standard work that adds or changes tests reads it and checks each new test before the completion review, TDD checks each red test, both review skills judge against it, and the gate and debugging carry one-clause summaries.
+- Fast-path tests protect observable behavior, fail without the change, and need no test-only seam or duplicate coverage; a test is evidence only once seen failing without the change, and a bug's one regression lives at the owner boundary.
+- Add the `adaptive-regression-fails-without-fix` scenario: the retained regression must go through the public function, keep the module's single export, and fail against the pre-fix source.
 - Add the `adaptive-audit-keeps-contract-test` scenario: remove a self-asserting stub test, a duplicate, and a test-only seam while keeping a source-inspection guard that pins public configuration keys.
 - Document linking skills added since the last update for existing Codex installs.
 

@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 
-for scenario in adaptive-feature-retains-test adaptive-bug-retains-regression adaptive-resume-preserves-checkout adaptive-persistent-goal-cadence adaptive-routine-skips-project-state adaptive-protected-project-state adaptive-audit-keeps-contract-test; do
+for scenario in adaptive-feature-retains-test adaptive-bug-retains-regression adaptive-resume-preserves-checkout adaptive-persistent-goal-cadence adaptive-routine-skips-project-state adaptive-protected-project-state adaptive-audit-keeps-contract-test adaptive-regression-fails-without-fix; do
   dir="$ROOT/evals/scenarios/$scenario"
   test -f "$dir/story.md"
   test -x "$dir/setup.sh"
@@ -57,5 +57,9 @@ grep -Fq "file-contains 'test/config-contract.test.js' 'retryLimit'" \
   "$ROOT/evals/scenarios/adaptive-audit-keeps-contract-test/checks.sh"
 grep -Fq "not file-contains 'src/pricing.js' '__resetForTests'" \
   "$ROOT/evals/scenarios/adaptive-audit-keeps-contract-test/checks.sh"
+grep -Fq 'git show base:src/shipping.js > src/shipping.js && ! node --test' \
+  "$ROOT/evals/scenarios/adaptive-regression-fails-without-fix/checks.sh"
+grep -Fq 'k.length===1 && k[0]===' \
+  "$ROOT/evals/scenarios/adaptive-regression-fails-without-fix/checks.sh"
 
 echo 'scenario contract passed'

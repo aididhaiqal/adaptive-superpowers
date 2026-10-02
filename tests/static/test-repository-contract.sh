@@ -54,6 +54,7 @@ grep -Fq 'Project state without project-management theatre' "$ROOT/README.md"
 grep -Fq 'There are 14 shared runtime skills.' "$ROOT/README.md"
 grep -Fq '`skills/auditing-tests/SKILL.md` loads when existing tests are audited' "$ROOT/README.md"
 grep -Fq 'adaptive-audit-keeps-contract-test' "$ROOT/README.md"
+grep -Fq 'adaptive-regression-fails-without-fix' "$ROOT/README.md"
 grep -Fq 'Keep the runtime inventory at 14 skills' "$ROOT/AGENTS.md"
 test -f "$ROOT/docs/superpowers/specs/2026-10-02-auditing-tests-design.md"
 grep -Fq '**Status:** Approved for implementation on 2026-10-02.' \

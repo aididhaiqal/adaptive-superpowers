@@ -400,8 +400,8 @@ Subagents can reduce main-context pollution and wall time for independent work, 
 
 The latest precision cohort used the immediately preceding 333-word gate for
 feature runs; the final evaluated 347-word revision changes only the ambiguity
-guard and passed its focused Fable forward test. The current 427-word gate
-adds persistent-goal and project-state routing plus a no-duplicate-coverage test clause and has not inherited
+guard and passed its focused Fable forward test. The current 436-word gate
+adds persistent-goal and project-state routing plus a test-authoring clause and has not inherited
 those latency measurements. These are recorded results, not universal speed claims:
 
 | Model | Cohort | Retained tests | Median |
@@ -439,7 +439,7 @@ profiles/               no model-specific overrides initially
 tests/                  static, packaging, and behavioral contracts
 ```
 
-There are 14 shared runtime skills. `skills/using-superpowers/SKILL.md` is the always-triggered gate; its full-router reference is loaded only when the fast-path predicate fails or scope grows. `skills/managing-project-state/SKILL.md` loads conditionally for durable work and owns canonical-state, protected-obligation, archival, and repository-instruction continuity. `skills/auditing-tests/SKILL.md` loads when existing tests are audited, pruned, or deduplicated; its test-value reference owns the authoring gate, junk patterns, and retention bar that the full router, TDD, and both review skills link when they write or judge a test.
+There are 14 shared runtime skills. `skills/using-superpowers/SKILL.md` is the always-triggered gate; its full-router reference is loaded only when the fast-path predicate fails or scope grows. `skills/managing-project-state/SKILL.md` loads conditionally for durable work and owns canonical-state, protected-obligation, archival, and repository-instruction continuity. `skills/auditing-tests/SKILL.md` loads when existing tests are audited, pruned, or deduplicated; its test-value reference owns the authoring gate, junk patterns, and retention bar. Standard work that adds or changes tests checks each new test against it before completion, and both review skills judge tests against it; the fast-path gate carries the authoring gate as one clause.
 
 ## Development and verification
 
@@ -463,7 +463,7 @@ The staging command refuses an existing destination and does not write to instal
 
 Candidate runs precede baseline spending. Each run records the candidate commit, adapter, model identifier, CLI version, scenario, duration, tests, tool calls, skill loads, duplicated explanation or verification, and deterministic result. Missing access, authentication failure, rate limiting, or transcript-capture failure is indeterminate rather than a behavioral failure.
 
-The repository-tracked executable scenarios are `adaptive-feature-retains-test`, `adaptive-bug-retains-regression`, `adaptive-resume-preserves-checkout`, `adaptive-persistent-goal-cadence`, `adaptive-routine-skips-project-state`, `adaptive-protected-project-state`, and `adaptive-audit-keeps-contract-test`. The 2026-07-25 external benchmark additionally covers a blocking ambiguity choice. The persistent-goal, project-state, and test-audit fixtures await live cross-model Quorum runs; their repository contracts are validated locally. Read-only diagnosis and review, unavailable delegation, and evidence-backed completion remain planned broader coverage. Raw trajectories stay local; published summaries contain redacted evidence and aggregate metrics only. See [Architecture](docs/architecture.md), [Evaluation](docs/evaluation.md), and the [Opus 5 precision benchmark](docs/evaluations/2026-07-25-opus5-precision-benchmark.md).
+The repository-tracked executable scenarios are `adaptive-feature-retains-test`, `adaptive-bug-retains-regression`, `adaptive-resume-preserves-checkout`, `adaptive-persistent-goal-cadence`, `adaptive-routine-skips-project-state`, `adaptive-protected-project-state`, `adaptive-audit-keeps-contract-test`, and `adaptive-regression-fails-without-fix`. The 2026-07-25 external benchmark additionally covers a blocking ambiguity choice. The persistent-goal, project-state, test-audit, and regression fixtures await live cross-model Quorum runs; their repository contracts are validated locally. Read-only diagnosis and review, unavailable delegation, and evidence-backed completion remain planned broader coverage. Raw trajectories stay local; published summaries contain redacted evidence and aggregate metrics only. See [Architecture](docs/architecture.md), [Evaluation](docs/evaluation.md), and the [Opus 5 precision benchmark](docs/evaluations/2026-07-25-opus5-precision-benchmark.md).
 
 ## Provenance and license
 
