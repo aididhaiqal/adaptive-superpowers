@@ -20,3 +20,5 @@ Revalidate checkout identity after resume or compaction and before mutation, edi
 Do not edit `.gitignore` without authorization or silently work in place when isolation is required. Stop when overlapping changes, permissions, conflicts, or baseline failures make attribution unsafe; proceed with a known failure only when it is clearly unrelated and reported.
 
 Report the path, branch, setup, baseline result, pre-existing failures, and confirmation that the original checkout and user work remain untouched.
+
+A subagent leaves its worktree committed and clean; the parent integrates it in a batch (`finishing-a-development-branch`).

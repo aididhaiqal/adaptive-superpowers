@@ -15,6 +15,8 @@ Confirm the task diff is understood, relevant required checks are fresh for the 
 - In a detached or externally managed workspace, report the exact limitation and preserve the work for the host workflow.
 - Remove a worktree only when this session created it, the user authorized cleanup, and no required work remains inside it.
 
+**Delegated slices deliver in batches.** A subagent commits its slice on its own branch, marks it ready, and stops; it never merges into the shared base. The parent gathers what is ready, integrates the batch as one operation (the repository's wrapper, else one merge per slice recording branch and tip), verifies once, attributes a failure to the first slice it fails with, leaves that slice out with the failing check reported, and delivers the rest. A slice touching shared or tooling paths goes alone.
+
 If commit or push fails, preserve the verified state and report the original error. Do not pull, rebase, merge, or force without separate authority.
 
 Never offer discard routinely. If requested, show the exact branch, unique commits, uncommitted files, and worktree path at risk; require confirmation containing `discard` for that target.
