@@ -1,7 +1,7 @@
 {
   "name": "adaptive-superpowers",
   "description": "Risk-adaptive planning, testing, debugging, review, verification, and project-state skills.",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": {
     "name": "Adaptive Superpowers contributors"
   },

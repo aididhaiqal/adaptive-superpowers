@@ -17,7 +17,7 @@ For a persistent or open-ended goal, establish the accepted outcomes, automatic-
 
 The parent owns brainstorming, architecture, scope, and user decisions. A dispatched worker treats its bounded brief as approved, returns material ambiguity to the parent, and still tests and verifies its assignment. Explorers and reviewers stay read-only and do not broaden scope or delegate further.
 
-Give dispatched agents bounded file paths, ranges, interfaces, and decisions. For bulky inputs, pass a local artifact path instead of repeatedly pasting accumulated session history.
+Before any dispatch, read [delegation.md](delegation.md): children run on the parent's model and effort, briefed and proved. Give dispatched agents bounded file paths, ranges, interfaces, and decisions. For bulky inputs, pass a local artifact path instead of repeatedly pasting accumulated session history.
 
 ## Repository fit
 
