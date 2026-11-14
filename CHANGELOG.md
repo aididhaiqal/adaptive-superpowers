@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Repair repository consistency: the validator rejects skill text that names a missing `.sh` or `.py` script, the profile test requires all three plugin manifests to agree on one version instead of pinning a literal, the Codex manifest moves to 0.3.1 with the Claude manifests, and `root-cause-tracing.md` replaces the never-shipped `find-polluter.sh` with the one-file-at-a-time search it performed.
 - Delegated slices deliver in batches: a dispatched agent commits its slice on its own branch and stops; the parent gathers what is ready, integrates it as one batch through the repository's wrapper, verifies once, attributes a failing check to the first slice it fails with and delivers the rest (`finishing-a-development-branch`, `using-git-worktrees`, the gate's delegation rule). Plugin version 0.3.1 so installs refresh.
 - Add `auditing-tests` as the fourteenth conditional runtime skill: read-only discovery, per-candidate evidence, and owner-boundary pruning of low-value tests and the test-only production seams they keep alive. Adapted from the OpenClaw `test-audit` value bar without its host-specific tooling.
 - Make `auditing-tests/references/test-value.md` the single owner of the authoring gate, junk patterns, and retention bar; standard work that adds or changes tests reads it and checks each new test before the completion review, TDD checks each red test, both review skills judge against it, and the gate and debugging carry one-clause summaries.

@@ -66,12 +66,18 @@ grep -Fq 'Do not automatically run both reviews.' \
 grep -Fq 'Reuse fresh evidence' \
   "$ROOT/skills/verification-before-completion/SKILL.md"
 
-for manifest in \
-  "$ROOT/.claude-plugin/plugin.json" \
-  "$ROOT/.claude-plugin/marketplace.json" \
-  "$ROOT/.codex-plugin/plugin.json"; do
-  grep -Fq '"version": "0.3.0"' "$manifest"
-done
+python3 - "$ROOT" <<'PY'
+import json, pathlib, sys
+root = pathlib.Path(sys.argv[1])
+load = lambda path: json.loads((root / path).read_text())
+versions = {
+    ".claude-plugin/plugin.json": load(".claude-plugin/plugin.json")["version"],
+    ".claude-plugin/marketplace.json": load(".claude-plugin/marketplace.json")["plugins"][0]["version"],
+    ".codex-plugin/plugin.json": load(".codex-plugin/plugin.json")["version"],
+}
+if len(set(versions.values())) != 1:
+    sys.exit(f"plugin manifests disagree on version: {versions}")
+PY
 grep -Fq 'Experimental 0.3.0' "$ROOT/README.md"
 grep -Fq '## 0.3.0 - 2026-08-02' "$ROOT/CHANGELOG.md"
 

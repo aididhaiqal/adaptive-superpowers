@@ -38,13 +38,7 @@ Log only fields needed to identify the caller and value flow. Never log secrets,
 
 ## Find a Test Polluter
 
-Use `find-polluter.sh` only when a clean test run creates a persistent file or directory and the responsible test is unknown. Start from a state where the artifact does not exist, then provide the artifact path and test glob:
-
-```bash
-bash ./find-polluter.sh '.git' 'src/**/*.test.ts'
-```
-
-Inspect the first reported test, reproduce it alone, and trace the creating operation backward. Do not use the script for in-memory, timing-only, or cross-process pollution it cannot observe.
+When a clean test run creates a persistent file or directory and the responsible test is unknown, start from a state where the artifact does not exist, run the candidate test files one at a time with the repository's test command, and stop at the first run after which the artifact exists. Reproduce that test alone, then trace the creating operation backward. This search cannot observe in-memory, timing-only, or cross-process pollution.
 
 ## Evidence
 

@@ -36,6 +36,19 @@ for file in "${SKILL_FILES[@]}"; do
   done < <(grep -Eo '\]\([^):]+\.md(#[^)]*)?\)' "$file" | sed -E 's/^\]\(([^)]+)\)$/\1/' || true)
 done
 
+# A skill that tells the agent to run a script must ship it, beside the skill or at the repository root.
+while IFS= read -r doc; do
+  relative="${doc#"$ROOT/skills/"}"
+  skill_dir="$ROOT/skills/${relative%%/*}"
+  while IFS= read -r ref; do
+    ref="${ref#./}"
+    [[ -e "$skill_dir/$ref" || -e "$ROOT/$ref" ]] || {
+      echo "missing script reference: $doc -> $ref" >&2
+      exit 1
+    }
+  done < <(grep -Eow '[A-Za-z0-9_./-]+\.(sh|py)' "$doc" || true)
+done < <(find "$ROOT/skills" -name '*.md' -print | sort)
+
 if [[ "$total" -gt "$MAX_TOTAL_WORDS" ]]; then
   echo "runtime skill total exceeds $MAX_TOTAL_WORDS words: $total" >&2
   exit 1
