@@ -33,6 +33,13 @@ require_text "$DELEGATION" 'Pass both on every dispatch'
 require_text "$DELEGATION" "Never switch a running child's model"
 require_text "$DELEGATION" 'Say which pair each child got and why.'
 
+# Another provider's model: its own effort option, never its default effort, and its own record.
+require_text "$DELEGATION" "the effort option under the name that provider's catalog lists"
+require_text "$DELEGATION" "Never rely on a provider's default effort"
+require_text "$DELEGATION" '`reasoningEffort`'
+require_text "$DELEGATION" '`--codex <m> --expect-model <id>`'
+require_text "$DELEGATION" '`recentRuns[].executedModel`'
+
 # Channel, fan-out, briefing and waiting.
 require_text "$DELEGATION" 'Fan out only independent work'
 require_text "$DELEGATION" 'One writer per checkout'

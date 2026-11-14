@@ -11,9 +11,14 @@ subagents (<session>/subagents/*.jsonl) and compares each with the expected pair
                                              (never this session), checked against THIS session's pair
   check-children.py --session <id>           any session by id
   --expect-model <id> --expect-effort <lvl>  override the expected pair (the user named another)
+  check-children.py --codex <text> --expect-model <id>
+                                             a Codex delegate: the newest Codex session log whose first user
+                                             message holds <text>, checked against the named model and this
+                                             session's effort (or --expect-effort)
   --root <dir>                               transcripts root (default $CLAUDE_CONFIG_DIR/projects or ~/.claude/projects)
+  --codex-home <dir>                         Codex home (default $CODEX_HOME or ~/.codex)
 
-Claude Code only: other hosts keep no such record here.
+Claude Code transcripts and Codex session logs only; other hosts keep no such record here.
 
 Exit codes: 0 every checked agent matches; 1 one differs; 2 nothing was checked or the
 transcript was not found.
@@ -117,6 +122,96 @@ def created(path):
     return ""
 
 
+def codex_first_user_texts(path, limit=5):
+    """The first user messages of a Codex session: user response items (how a T3-started session
+    carries its brief) and user_message events; the injected AGENTS.md preamble counts as one."""
+    out = []
+    try:
+        with open(path, encoding="utf-8", errors="replace") as fh:
+            for line in fh:
+                if '"user' not in line:
+                    continue
+                try:
+                    rec = json.loads(line)
+                except ValueError:
+                    continue
+                payload = rec.get("payload") or {}
+                if rec.get("type") == "event_msg" and payload.get("type") == "user_message":
+                    out.append(str(payload.get("message") or ""))
+                elif (rec.get("type") == "response_item" and payload.get("type") == "message"
+                      and payload.get("role") == "user"):
+                    out.append(" ".join(c.get("text", "") for c in payload.get("content") or []
+                                        if isinstance(c, dict)))
+                else:
+                    continue
+                if len(out) >= limit:
+                    break
+    except OSError:
+        pass
+    return out
+
+
+def codex_wire(path):
+    """(model, effort) of every turn, from the turn_context records Codex writes."""
+    seen = collections.Counter()
+    try:
+        with open(path, encoding="utf-8", errors="replace") as fh:
+            for line in fh:
+                if '"turn_context"' not in line:
+                    continue
+                try:
+                    rec = json.loads(line)
+                except ValueError:
+                    continue
+                if rec.get("type") == "turn_context":
+                    payload = rec.get("payload") or {}
+                    seen[(payload.get("model"), payload.get("effort"))] += 1
+    except OSError:
+        pass
+    return seen
+
+
+def find_codex(marker, codex_home, since_hours):
+    cutoff = time.time() - since_hours * 3600
+    files = [f for f in glob.glob(os.path.join(codex_home, "sessions", "**", "rollout-*.jsonl"), recursive=True)
+             if os.path.getmtime(f) >= cutoff]
+    hits = [f for f in files if any(marker in t for t in codex_first_user_texts(f))]
+    if not hits:
+        return None
+    hits.sort(key=created, reverse=True)
+    if len(hits) > 1:
+        print(f"note: {len(hits)} Codex sessions start with the marker; took the newest", file=sys.stderr)
+    return hits[0]
+
+
+def check_codex(a, me):
+    codex_home = a.codex_home or os.environ.get("CODEX_HOME") or os.path.expanduser("~/.codex")
+    if not a.expect_model:
+        print("--codex needs --expect-model: another provider's model is always one the user named", file=sys.stderr)
+        return 2
+    mine = find_session(me) if me else None
+    effort = a.expect_effort or (main_pair(mine)[1] if mine else None)
+    if not effort:
+        print("expected effort unknown: pass --expect-effort", file=sys.stderr)
+        return 2
+    target = find_codex(a.codex, codex_home, a.since_hours)
+    if not target:
+        print(f"no Codex session in the last {a.since_hours:g} h starts with a message holding {a.codex!r}", file=sys.stderr)
+        return 2
+    turns = codex_wire(target)
+    print(f"codex {os.path.basename(target)[:-6]}  expected model={a.expect_model} effort={effort}")
+    bad = 0
+    for (model, eff), n in turns.items():
+        ok = (model, eff) == (a.expect_model, effort)
+        bad += 0 if ok else 1
+        print(f"  delegate {'same' if ok else 'DIFFERS':7} model={model} effort={eff}  ({n} turns)")
+    if not turns:
+        print("result: NOTHING CHECKED (the log has no turn yet)")
+        return 2
+    print(f"result: {len(turns)} checked, " + ("all match" if bad == 0 else f"{bad} differ"))
+    return 0 if bad == 0 else 1
+
+
 def find_delegate(marker, exclude, since_hours):
     # A brief that starts a delegate quotes the delegate's marker, so the briefing session can
     # match too; the delegate is always created after it, so the newest-created match wins.
@@ -142,11 +237,15 @@ def main():
     ap.add_argument("--expect-effort")
     ap.add_argument("--since-hours", type=float, default=48)
     ap.add_argument("--root")
+    ap.add_argument("--codex")
+    ap.add_argument("--codex-home")
     a = ap.parse_args()
     global ROOT
     ROOT = a.root or ROOT
 
     me = os.environ.get("CLAUDE_CODE_SESSION_ID")
+    if a.codex:
+        return check_codex(a, me)
     if a.delegate:
         target = find_delegate(a.delegate, me, a.since_hours)
         if not target:

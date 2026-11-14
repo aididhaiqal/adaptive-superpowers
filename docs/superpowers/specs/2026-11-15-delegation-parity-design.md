@@ -24,6 +24,10 @@ One conditional reference, `skills/using-superpowers/references/delegation.md`, 
 
 Every dispatch path reaches it: the gate's delegation rule (one imperative sentence, paid for by shortening five gate sentences without changing their meaning; a descriptive "children get this session's model and effort" was injected and ignored in both forward-test runs), the full router's delegation paragraph, and the explorer handoff.
 
+## Another provider's model (0.3.3)
+
+A model on another provider (a Codex `gpt-6.1-sol` from a Claude session) runs only when the user names it. Its effort option has the provider's own name (`reasoningEffort` for Codex, from `orchestrator_capabilities`). Its default can be `low` (`gpt-6.1-sol` in T3, 2026-11-15), so the child gets this session's level when offered, the nearest offered level otherwise. Codex writes `turn_context` records holding `model` and `effort` to `~/.codex/sessions/**/rollout-*.jsonl`, and a T3-started session carries its brief as a user response item, so `check-children.py --codex` proves such a child. A live T3 delegate on `gpt-6.1-sol` with `reasoningEffort: high` was checked this way on 2026-11-15 (`same model=gpt-6.1-sol effort=high`, exit 0; expecting `low` exits 1).
+
 ## Not adopted
 
 - No runtime skill: `dispatching-parallel-agents` and `subagent-driven-development` stay retired, and the reference covers only dispatch mechanics.

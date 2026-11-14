@@ -31,7 +31,7 @@ def write(path: Path, recs, meta=None):
         path.with_suffix(".meta.json").write_text(json.dumps(meta))
 
 
-class CheckChildrenContractTests(unittest.TestCase):
+class TranscriptCase(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.projects = Path(self.tmp.name) / "projects"
@@ -50,6 +50,8 @@ class CheckChildrenContractTests(unittest.TestCase):
         return subprocess.run([sys.executable, "-I", str(CHECKER), "--root", str(self.projects), *args],
                               capture_output=True, text=True, env=env)
 
+
+class CheckChildrenContractTests(TranscriptCase):
     def test_children_on_the_parent_pair_pass(self):
         self.child("agent-a", PARENT, "brief-a")
         self.child("agent-b", PARENT, "brief-b")
@@ -97,6 +99,49 @@ class CheckChildrenContractTests(unittest.TestCase):
         named = self.run_checker("--delegate", "brief-dx-2", "--expect-model", "claude-opus-5-5",
                                  "--expect-effort", "high")
         self.assertEqual(named.returncode, 0, named.stdout + named.stderr)
+
+
+def codex_rollout(path: Path, brief, pair, start="2026-11-14T11:00:00Z"):
+    recs = [
+        {"timestamp": start, "type": "session_meta", "payload": {"id": path.stem[-36:], "originator": "T3 Code"}},
+        {"type": "response_item", "payload": {"type": "message", "role": "user",
+                                             "content": [{"type": "input_text", "text": "# AGENTS.md instructions"}]}},
+        # A T3-started Codex session carries the brief as a user response item (seen 2026-11-15).
+        {"type": "response_item", "payload": {"type": "message", "role": "user",
+                                             "content": [{"type": "input_text", "text": "Act as the test sub-agent.\n\n" + brief}]}},
+    ]
+    recs += [{"type": "turn_context", "payload": {"model": pair[0], "effort": pair[1]}}] * 2
+    write(path, recs)
+
+
+class CodexDelegateContractTests(TranscriptCase):
+    """A delegate on another provider (Codex) is proved from its own session log."""
+
+    def setUp(self):
+        super().setUp()
+        self.codex = Path(self.tmp.name) / "codex"
+        self.sessions = self.codex / "sessions" / "2026" / "11" / "14"
+
+    def run_codex(self, marker, *args):
+        return self.run_checker("--codex", marker, "--codex-home", str(self.codex), *args)
+
+    def test_a_codex_delegate_at_the_requested_pair_passes(self):
+        codex_rollout(self.sessions / "rollout-2026-11-14T11-00-00-aaaa.jsonl", "brief-sol-1 go", ("gpt-6.1-sol", "max"))
+        done = self.run_codex("brief-sol-1", "--expect-model", "gpt-6.1-sol")
+        self.assertEqual(done.returncode, 0, done.stdout + done.stderr)
+        self.assertIn("model=gpt-6.1-sol effort=max", done.stdout)
+
+    def test_a_codex_delegate_left_on_the_provider_default_effort_fails(self):
+        # No effort named: the expected effort is this session's own (max), and the default low differs.
+        codex_rollout(self.sessions / "rollout-2026-11-14T11-00-00-bbbb.jsonl", "brief-sol-2 go", ("gpt-6.1-sol", "low"))
+        done = self.run_codex("brief-sol-2", "--expect-model", "gpt-6.1-sol")
+        self.assertEqual(done.returncode, 1, done.stdout + done.stderr)
+
+    def test_a_codex_check_needs_the_named_model_and_a_matching_log(self):
+        codex_rollout(self.sessions / "rollout-2026-11-14T11-00-00-cccc.jsonl", "brief-sol-3 go", ("gpt-6.1-sol", "max"))
+        self.assertEqual(self.run_codex("brief-sol-3").returncode, 2)
+        self.assertEqual(self.run_codex("brief-missing", "--expect-model", "gpt-6.1-sol").returncode, 2)
+
 
 
 if __name__ == "__main__":

@@ -11,8 +11,10 @@ Pass both on every dispatch. Host defaults differ from the parent: a built-in sp
 | host | pass the pair |
 |---|---|
 | Claude Code `Agent` tool | `model` (alias: `fable`, `opus`, `sonnet`, `haiku`) and `effort` (`low`..`max`); the session effort is `$CLAUDE_EFFORT`. A `fork` runs on the parent's pair. |
-| T3 Code `delegate_task` | `target.model` (exact ID) and `target.options.effort`; `orchestrator_capabilities` reports the inherited pair. |
+| T3 Code `delegate_task` | `target.providerInstanceId`, `target.model` (exact ID), and in `target.options` the effort option under the name that provider's catalog lists (`orchestrator_capabilities`, with `search` for a model it does not list): Claude `effort`, Codex `reasoningEffort`. Its `inheritedModel` and `inheritedOptions` are this session's pair. |
 | any other host | its model and effort parameters; when it has none, say the child runs on the host default. |
+
+A model on another provider (for example a Codex `gpt-6.1-sol` from a Claude session) runs only when the user names it. Give it this session's effort level when the provider offers it, the nearest offered level otherwise, and say which. Never rely on a provider's default effort: Codex models in T3 default as low as `low`.
 
 ## Channel
 
@@ -32,4 +34,4 @@ Do not poll: a background child's completion reaches the parent. Carry on with o
 
 ## Prove it
 
-Report the pair each child ran on from the host's own record, never from what was requested. On Claude Code, run `scripts/check-children.py` (beside this skill) after the children answer: no arguments checks this session and its native children, `--marker <m>` only the children whose brief holds it, `--delegate <m>` a T3 delegate against this session's pair, and `--expect-model`/`--expect-effort` a pair the user named. Exit 0 means every checked agent matched, 1 one differed, 2 nothing was checked, which is never a pass. Paste its lines into the report. On a host that records no model per child, report the pair as requested, not verified.
+Report the pair each child ran on from the host's own record, never from what was requested. On Claude Code, run `scripts/check-children.py` (beside this skill) after the children answer: no arguments checks this session and its native children, `--marker <m>` only the children whose brief holds it, `--delegate <m>` a Claude delegate started through T3, against this session's pair, and `--expect-model`/`--expect-effort` a pair the user named. Exit 0 means every checked agent matched, 1 one differed, 2 nothing was checked, which is never a pass. A Codex delegate is proved from its own session log with `--codex <m> --expect-model <id>` (effort defaults to this session's). Paste its lines into the report. Elsewhere in T3, a child thread's `recentRuns[].executedModel` (`t3_thread_read`) proves the model but not the effort. On a host that records no model per child, report the pair as requested, not verified.
