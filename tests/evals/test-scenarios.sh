@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 
-for scenario in adaptive-feature-retains-test adaptive-bug-retains-regression adaptive-resume-preserves-checkout adaptive-persistent-goal-cadence adaptive-routine-skips-project-state adaptive-protected-project-state adaptive-audit-keeps-contract-test adaptive-regression-fails-without-fix adaptive-backfill-tests-detect-breakage; do
+for scenario in adaptive-feature-retains-test adaptive-bug-retains-regression adaptive-resume-preserves-checkout adaptive-persistent-goal-cadence adaptive-routine-skips-project-state adaptive-protected-project-state adaptive-audit-keeps-contract-test adaptive-regression-fails-without-fix adaptive-backfill-tests-detect-breakage adaptive-log-wording-adds-no-test; do
   dir="$ROOT/evals/scenarios/$scenario"
   test -f "$dir/story.md"
   test -x "$dir/setup.sh"

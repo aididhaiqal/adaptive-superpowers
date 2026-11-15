@@ -76,6 +76,9 @@ fi
 require_text "$FULL_ROUTER" 'add or update the test the change owes (Test retention)'
 require_text "$FULL_ROUTER" 'verification-before-completion'
 require_text "$FULL_ROUTER" 'Manual verification alone is insufficient'
+require_text "$FULL_ROUTER" 'A confirmed bug that no test already fails on owes its regression.'
+require_text "$FULL_ROUTER" 'feasibility alone does not make one owed'
+require_text "$ROOT/skills/requesting-code-review/SKILL.md" 'Judge added, changed, or declined tests'
 require_text "$FULL_ROUTER" 'Preserve user work'
 
 require_text "$ROOT/skills/test-driven-development/SKILL.md" \

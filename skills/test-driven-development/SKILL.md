@@ -21,4 +21,4 @@ The focused red and green runs are expected. Do not run a broader suite after ev
 
 Check each red test against the authoring gate and junk patterns in [test-value.md](../auditing-tests/references/test-value.md#authoring-gate) before relying on it. Test public outputs, state, errors, or durable effects. Mock only necessary boundaries. Read [testing-anti-patterns.md](testing-anti-patterns.md) only when adding mocks, doubles, or test-only production APIs.
 
-If automated coverage is impractical, state why and use the strongest boundary, integration, compile, or manual check. Preserve pre-existing user code. Retain the red reason, green result, final proportionate regression result, and any untested behavior.
+If automated coverage is impractical, report `No new test: <reason>` and use the strongest boundary, integration, compile, or manual check. Preserve pre-existing user code. Retain the red reason, green result, final proportionate regression result, and any untested behavior.

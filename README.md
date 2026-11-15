@@ -261,12 +261,12 @@ The default Convention profile follows an existing repository ledger. Repositori
 
 ### The proof loop
 
-The route changes; the engineering finish line does not. Behavior-changing work keeps a runnable test when feasible, verification stays fresh, and supported blockers loop back into implementation.
+The route changes; the engineering finish line does not. Behavior-changing work keeps a test for each credible break no existing test catches (or says why none is owed), verification stays fresh, and supported blockers loop back into implementation.
 
 ```mermaid
 flowchart LR
     I["Inspect"] --> B["Implement"]
-    B --> T["Retain runnable test"]
+    B --> T["Retain owed test"]
     T --> V{"Targeted verification"}
     V -->|"Fails"| B
     V -->|"Passes"| CR{"Completion review"}
