@@ -27,7 +27,7 @@ fi
 require_text "$GATE" 'description: "Use when starting any conversation."'
 require_text "$GATE" 'runnable automated test file'
 require_text "$GATE" 'at most two production files plus tests'
-require_text "$GATE" 'When feasible'
+require_text "$GATE" 'When a credible behavior regression would escape existing tests'
 require_text "$GATE" 'fresh targeted verification'
 require_text "$GATE" 'For every fast-path implementation'
 require_text "$GATE" 'file contents'
@@ -73,7 +73,7 @@ if grep -Eq '200-word([[:space:]]+adaptive)?[[:space:]]+gate' "$GATE" "$ROOT/REA
   exit 1
 fi
 
-require_text "$FULL_ROUTER" 'add or update automated coverage for observable behavior changes unless infeasible'
+require_text "$FULL_ROUTER" 'add or update the test the change owes (Test retention)'
 require_text "$FULL_ROUTER" 'verification-before-completion'
 require_text "$FULL_ROUTER" 'Manual verification alone is insufficient'
 require_text "$FULL_ROUTER" 'Preserve user work'

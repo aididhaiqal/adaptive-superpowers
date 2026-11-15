@@ -21,7 +21,7 @@ Use a repository file only for High-risk work, cross-session survival, or materi
 ### Outcome N: <result>
 - Work: <requirements, named files/resources, state/data flow, and failure behavior>
 - Risks/open questions: <material privacy, security, or blocking unknowns; omit when none>
-- Proof: <the one boundary that owns the test and the regression it catches>
+- Proof: <the one boundary that owns the test and the regression it catches, or `none: <reason>`>
 - Verify: `<repo-specific command>`
 ```
 

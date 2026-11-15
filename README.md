@@ -204,7 +204,7 @@ These commands leave the clone intact. Delete it separately only if you no longe
 
 ## Why
 
-Capable coding models should not have to choose between speed and engineering evidence. Adaptive Superpowers fixes a small baseline for authorization, dirty-worktree safety, retained automated coverage when feasible, and evidence-backed completion. It adds process only when the request is ambiguous, broad, or risky.
+Capable coding models should not have to choose between speed and engineering evidence. Adaptive Superpowers fixes a small baseline for authorization, dirty-worktree safety, a retained test for each credible regression nothing else catches, and evidence-backed completion. It adds process only when the request is ambiguous, broad, or risky.
 
 Precise work stays direct; consequential work receives proportional planning and safeguards. Material plan execution, concurrent or resumed implementation, and editing subagents use an isolated worktree unless the current checkout is already isolated. This is an experimental adaptation, not an official obra/superpowers distribution.
 
@@ -423,7 +423,7 @@ for controls, ranges, token caveats, and the Fable before/after result.
 
 ## What remains mandatory
 
-Every task is classified to the highest applicable tier. Review-only and diagnosis-only requests are read-only; destructive or externally visible actions require authority. Behavior-changing work normally retains automated coverage for observable behavior, receives focused verification during implementation, broader verification at coherent milestones or the final gate, and then a proportional review before evidence-backed completion. Unchanged evidence is reused; known environment-blocked lanes wait for relevant state to change. Live checkout identity overrides stale summaries: the agent records repository root, worktree, branch, HEAD, and status, then revalidates after resume and before edits, editing delegation, commits, or branch operations.
+Every task is classified to the highest applicable tier. Review-only and diagnosis-only requests are read-only; destructive or externally visible actions require authority. Behavior-changing work retains a test for each credible regression in observable behavior that no existing test catches (or states why none is owed), receives focused verification during implementation, broader verification at coherent milestones or the final gate, and then a proportional review before evidence-backed completion. Unchanged evidence is reused; known environment-blocked lanes wait for relevant state to change. Live checkout identity overrides stale summaries: the agent records repository root, worktree, branch, HEAD, and status, then revalidates after resume and before edits, editing delegation, commits, or branch operations.
 
 The model may choose proportional planning, strict red-green TDD, a worktree, independent review, or delegation when those add value. It may not skip authorization boundaries, dirty-worktree protection, applicable automated coverage, or honest reporting of review independence.
 

@@ -23,7 +23,7 @@ require_text() {
 require_text "$GATE" 'Project state'
 require_text "$GATE" 'Infer the stopping condition'
 require_text "$GATE" 'optional recommendations do not extend the goal'
-require_text "$GATE" 'When automation is infeasible, state why.'
+require_text "$GATE" 'Otherwise add none and say why.'
 
 require_text "$ROUTER" 'applicable canonical path'
 require_text "$ROUTER" 'materially different stopping conditions'

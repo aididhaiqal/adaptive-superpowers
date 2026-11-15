@@ -44,11 +44,7 @@ done
 GATE="$ROOT/skills/using-superpowers/SKILL.md"
 FULL_ROUTER="$ROOT/skills/using-superpowers/references/full-router.md"
 
-grep -Fq 'runnable automated test file' "$GATE"
 grep -Fq 'transient checks do not count' "$GATE"
-grep -Fq 'add or update automated coverage for observable behavior changes unless infeasible' \
-  "$FULL_ROUTER"
-grep -Fq 'Manual verification alone is insufficient' "$FULL_ROUTER"
 grep -Fq 'do not ask whether to add it' "$FULL_ROUTER"
 grep -Fq 'confirmed regression' "$ROOT/skills/test-driven-development/SKILL.md"
 grep -Fq 'Evaluation-only requests remain read-only.' \

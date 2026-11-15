@@ -7,7 +7,7 @@ description: "Use when the user requests TDD or test-first work, when a confirme
 
 The user need not request TDD; loading it does not authorize implementation. Expected behavior must be clear. Auto-trigger only when a focused red test resolves material ambiguity between plausible implementations or captures a confirmed regression at a public boundary. Do not auto-trigger for a precise low-risk feature merely because a cheap test is possible.
 
-Coverage is broader than this workflow's trigger: an observable behavior change normally retains an automated test even when strict test-first execution adds no useful discrimination. This skill governs red-green order only when its trigger matches.
+Whether a test is owed is the gate's and router's decision, not this trigger's. This skill governs red-green order only when its trigger matches.
 
 For an unclear cause, `systematic-debugging` owns investigation; enter red-green only after the expected behavior and red signal are trustworthy. Skip documentation, configuration-only changes, generated code, prototypes, untestable behavior, and behavior-preserving refactors; check the last green before and after.
 

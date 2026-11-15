@@ -11,4 +11,4 @@ description: Create, edit, or audit this adaptive Superpowers bundle; use the ho
 4. Consult the current host's skill-authoring guidance when creating structure, changing metadata format, or resolving a validation question; routine wording revisions do not need its full guide reloaded.
 5. Run `bash scripts/validate.sh`, the affected repository tests, and `git diff --check`.
 
-Forward-test when inspection and validators cannot establish activation or behavior. Record the untreated baseline first, use the smallest discriminating scenario, do not leak the expected answer, and keep raw transcripts local. Report measured size, behavior changes, checks, and untested risk.
+Forward-test wording meant to change behavior; a phrase pin proves presence, not compliance. Record the untreated baseline first, use the smallest discriminating scenario, do not leak the expected answer, and keep raw transcripts local. Report measured size, behavior changes, checks, and untested risk.
